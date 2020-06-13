@@ -1,0 +1,1297 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/10/2019 7:02:57 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="KENYAHMIS"
+  DTS:CreatorName="KENYAHMIS\Administrator"
+  DTS:DTSID="{B9B0BC59-0BE9-4161-ACEB-E243BBF99C32}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="15.0.0900.40"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SSIS_StageAdverseEvents"
+  DTS:PackageType="5"
+  DTS:VersionBuild="22"
+  DTS:VersionGUID="{B55F547D-BC70-43E2-B8EA-510199710D6F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DWH-Dev.DWAPICentral_Staging.sa]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D2A222EE-8E2C-4507-824F-142FFEE50BB2}"
+      DTS:ObjectName="DWH-Dev.DWAPICentral_Staging.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FUTURESKE2\SQLSERVER.DWAPICentral.sa]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{8A4A7F8E-1EE9-45D7-9125-149016FDA2AC}"
+      DTS:ObjectName="FUTURESKE2\SQLSERVER.DWAPICentral.sa">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DWAPICentral;Integrated Security=True;Application Name=SSIS-Package1-{8A4A7F8E-1EE9-45D7-9125-149016FDA2AC}FUTURESKE2\SQLSERVER.DWAPICentral.sa;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.All_Staging_2016_2]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7C1E827E-845D-4109-ACAC-62BFD57F05BB}"
+      DTS:ObjectName="LocalHost.All_Staging_2016_2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{674F3C6A-EC8E-40F0-B3E4-509306E0D5A5}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\ADO NET Source 1"
+              componentClassID="DTS.ManagedComponentWrapper.3"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select 
+
+P.[PatientCccNumber] AS PatientID, 
+	  P.[PatientPID] AS PatientPK,
+	  F.Name AS FacilityName, 
+	  F.Code AS SiteCode,
+[AdverseEvent], [AdverseEventStartDate], [AdverseEventEndDate], 
+CASE [Severity]
+WHEN '1' THEN 'Mild'
+WHEN '2' THEN 'Moderate'
+WHEN '3' THEN 'Severe' ELSE [Severity] END AS [Severity] , [VisitDate], 
+PA.[EMR], PA.[Project], [AdverseEventCause], [AdverseEventRegimen], [AdverseEventActionTaken],
+[AdverseEventClinicalOutcome], [AdverseEventIsPregnant], 
+LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber])) +'-'+LTRIM(RTRIM(STR(P.[PatientPID]))) AS PKV
+
+
+FROM [dbo].[PatientExtract] P 
+INNER JOIN [dbo].PatientAdverseEventExtract PA ON PA.[PatientId]= P.ID AND PA.Voided=0
+INNER JOIN [dbo].[Facility] F ON P.[FacilityId] = F.Id AND F.Voided=0
+---LEFT JOIN All_Staging_2016_2.dbo.stg_Patients TPat ON TPat.PKV=LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber]))+'-'+LTRIM(RTRIM(STR(P.[PatientPID])))</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version= 11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter, Microsoft.SqlServer.ADONETSrc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter, Microsoft.SqlServer.ADONETSrc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\ADO NET Source 1.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[FUTURESKE2\SQLSERVER.DWAPICentral.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[FUTURESKE2\SQLSERVER.DWAPICentral.sa]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PatientID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PatientPK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PatientPK]"
+                      name="PatientPK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[FacilityName]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[SiteCode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[SiteCode]"
+                      name="SiteCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEvent]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEvent]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEvent]"
+                      name="AdverseEvent"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventStartDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventStartDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventStartDate]"
+                      name="AdverseEventStartDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventEndDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventEndDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventEndDate]"
+                      name="AdverseEventEndDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Severity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[Severity]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Severity]"
+                      name="Severity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[VisitDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[VisitDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[VisitDate]"
+                      name="VisitDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[EMR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[EMR]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[EMR]"
+                      name="EMR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Project]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[Project]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Project]"
+                      name="Project"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventCause]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventCause]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventCause]"
+                      name="AdverseEventCause"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventRegimen]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventRegimen]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventRegimen]"
+                      name="AdverseEventRegimen"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventActionTaken]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventActionTaken]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventActionTaken]"
+                      name="AdverseEventActionTaken"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventClinicalOutcome]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventClinicalOutcome]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventClinicalOutcome]"
+                      name="AdverseEventClinicalOutcome"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventIsPregnant]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventIsPregnant]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventIsPregnant]"
+                      name="AdverseEventIsPregnant"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PKV]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
+                      length="172"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PKV]"
+                      name="PKV"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
+                      dataType="wstr"
+                      length="150"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
+                      dataType="i4"
+                      name="PatientPK" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="150"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
+                      dataType="i4"
+                      name="SiteCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEvent]"
+                      dataType="wstr"
+                      length="150"
+                      name="AdverseEvent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventStartDate]"
+                      dataType="dbTimeStamp"
+                      name="AdverseEventStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventEndDate]"
+                      dataType="dbTimeStamp"
+                      name="AdverseEventEndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[Severity]"
+                      dataType="wstr"
+                      length="150"
+                      name="Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[VisitDate]"
+                      dataType="dbTimeStamp"
+                      name="VisitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[EMR]"
+                      dataType="wstr"
+                      length="150"
+                      name="EMR" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[Project]"
+                      dataType="wstr"
+                      length="150"
+                      name="Project" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventCause]"
+                      dataType="wstr"
+                      length="150"
+                      name="AdverseEventCause" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventRegimen]"
+                      dataType="wstr"
+                      length="150"
+                      name="AdverseEventRegimen" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventActionTaken]"
+                      dataType="wstr"
+                      length="150"
+                      name="AdverseEventActionTaken" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventClinicalOutcome]"
+                      dataType="wstr"
+                      length="150"
+                      name="AdverseEventClinicalOutcome" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[AdverseEventIsPregnant]"
+                      dataType="bool"
+                      name="AdverseEventIsPregnant" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
+                      dataType="wstr"
+                      length="172"
+                      name="PKV" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[PatientID]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[PatientPK]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[PatientPK]"
+                      name="PatientPK" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[SiteCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[SiteCode]"
+                      name="SiteCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEvent]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEvent]"
+                      name="AdverseEvent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventStartDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventStartDate]"
+                      name="AdverseEventStartDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventEndDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventEndDate]"
+                      name="AdverseEventEndDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[Severity]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[Severity]"
+                      name="Severity" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[VisitDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[VisitDate]"
+                      name="VisitDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[EMR]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[EMR]"
+                      name="EMR" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[Project]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[Project]"
+                      name="Project" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventCause]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventCause]"
+                      name="AdverseEventCause" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventRegimen]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventRegimen]"
+                      name="AdverseEventRegimen" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventActionTaken]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventActionTaken]"
+                      name="AdverseEventActionTaken" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventClinicalOutcome]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventClinicalOutcome]"
+                      name="AdverseEventClinicalOutcome" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventIsPregnant]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[AdverseEventIsPregnant]"
+                      name="AdverseEventIsPregnant" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[PKV]"
+                      dataType="wstr"
+                      length="172"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[PKV]"
+                      name="PKV" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Data Conversion"
+              componentClassID="DTSTransform.DataConvert.3"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PatientID]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="PatientID"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PatientID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[EMR]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="EMR"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[EMR]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Project]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Project"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Project]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[FacilityName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="FacilityName"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[AdverseEvent]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="AdverseEvent"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEvent]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Severity]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Severity"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Severity]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[AdverseEventCause]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="AdverseEventCause"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventCause]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[AdverseEventRegimen]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="AdverseEventRegimen"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventRegimen]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[AdverseEventActionTaken]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="AdverseEventActionTaken"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventActionTaken]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[AdverseEventClinicalOutcome]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="AdverseEventClinicalOutcome"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventClinicalOutcome]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PKV]"
+                      cachedDataType="wstr"
+                      cachedLength="172"
+                      cachedName="PKV"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PKV]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientID]"
+                      name="_PatientID"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PatientID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]"
+                      name="_Emr"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[EMR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Project]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Project]"
+                      name="_Project"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Project]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_FacilityName]"
+                      name="_FacilityName"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[FacilityName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEvent]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEvent]"
+                      name="_AdverseEvent"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEvent]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Severity]"
+                      name="_Severity"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[Severity]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventCause]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventCause]"
+                      name="_AdverseEventCause"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventCause]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventActionTaken]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventActionTaken]"
+                      name="_AdverseEventActionTaken"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventActionTaken]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventClinicalOutcome]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventClinicalOutcome]"
+                      name="_AdverseEventClinicalOutcome"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventClinicalOutcome]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventRegimen]"
+                      name="_AdverseEventRegimen"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventRegimen]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]"
+                      name="_PKV"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PKV]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination 1"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_AdverseEvents]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,ROWS_PER_BATCH = 100000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">100000</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DWH-Dev.DWAPICentral_Staging.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[DWH-Dev.DWAPICentral_Staging.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[PatientPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientPK"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Patientpk]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[PatientPK]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[SiteCode]"
+                      cachedDataType="i4"
+                      cachedName="SiteCode"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SiteCode]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[SiteCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[AdverseEventStartDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="AdverseEventStartDate"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventStartDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventStartDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[AdverseEventEndDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="AdverseEventEndDate"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventEndDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventEndDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[VisitDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="VisitDate"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[VisitDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[VisitDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[AdverseEventIsPregnant]"
+                      cachedDataType="bool"
+                      cachedName="AdverseEventIsPregnant"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventIsPregnant]"
+                      lineageId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[AdverseEventIsPregnant]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_PatientID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_PatientID"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_AdverseEvent]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_AdverseEvent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEvent]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEvent]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_Severity]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="_Severity"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Severity]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Severity]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_Emr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="_Emr"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EMR]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_AdverseEventCause]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_AdverseEventCause"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventCause]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventCause]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_AdverseEventActionTaken]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_AdverseEventActionTaken"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventActionTaken]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventActionTaken]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_AdverseEventClinicalOutcome]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_AdverseEventClinicalOutcome"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventClinicalOutcome]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventClinicalOutcome]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_Project]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="_Project"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Project]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_AdverseEventRegimen]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_AdverseEventRegimen"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventRegimen]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdverseEventRegimen]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].Columns[_PKV]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="_PKV"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PKV]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Patientpk]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="Patientpk" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[SiteCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="SiteCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEvent]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="AdverseEvent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventStartDate]"
+                      dataType="dbDate"
+                      name="AdverseEventStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventEndDate]"
+                      dataType="dbDate"
+                      name="AdverseEventEndDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Severity]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Severity" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[VisitDate]"
+                      dataType="dbDate"
+                      name="VisitDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[EMR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EMR" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Project" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventCause]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="AdverseEventCause" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="AdverseEventRegimen" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventActionTaken]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="AdverseEventActionTaken" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventClinicalOutcome]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="AdverseEventClinicalOutcome" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[dateimported]"
+                      dataType="dbDate"
+                      name="dateimported" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[AdverseEventIsPregnant]"
+                      dataType="bool"
+                      name="AdverseEventIsPregnant" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PKV]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="PKV" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input].ExternalColumns[PatientUID]"
+                      dataType="guid"
+                      name="PatientUID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[ADO NET Source Output]"
+              endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+              name="ADO NET Source Output"
+              startId="Package\Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task\OLE DB Destination 1.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="150.222222222223,41.7777777777778"
+          Id="Package\Data Flow Task"
+          TopLeft="127.428573598667,71.5764715920683" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="179.111111111112,41.7777777777778"
+          Id="Package\Data Flow Task\OLE DB Destination 1"
+          TopLeft="5.50000000000003,209.055555555556" />
+        <NodeLayout
+          Size="156,41.7777777777778"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="17.0555555555556,107.277777777778" />
+        <NodeLayout
+          Size="166.222222222223,41.7777777777778"
+          Id="Package\Data Flow Task\ADO NET Source 1"
+          TopLeft="11.9444444444445,5.50000000000002" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="95.0555555555556,47.2777777777778">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="95.0555555555556,149.055555555556">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\ADO NET Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
