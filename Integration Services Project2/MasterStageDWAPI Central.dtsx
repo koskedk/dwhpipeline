@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterStageDWAPI Central"
   DTS:PackageType="5"
-  DTS:VersionBuild="95"
-  DTS:VersionGUID="{011D4816-6681-4490-99FA-2364886AA7A6}">
+  DTS:VersionBuild="97"
+  DTS:VersionGUID="{427C096B-C8DF-4417-AF29-7347E2C229EB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -165,7 +165,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="AdverseEvents PKV UID"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -181,7 +181,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="ART Patients PKV_UID"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -197,7 +197,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Status PKV_UID"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -213,7 +213,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient WAB PKV_UID"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -343,7 +343,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Labs PKV_UID"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -359,7 +359,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Pharmacy PKV_UID"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -375,7 +375,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Visits PKV_UID"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -590,65 +590,65 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="169.142857142858,42.2857142857143"
+          Size="169,42"
           Id="Package\Disable Constraints"
           TopLeft="406.388888888889,209.055555555556" />
         <NodeLayout
-          Size="165.714285714286,42.2857142857143"
+          Size="166,42"
           Id="Package\Enable Constraints"
           TopLeft="407.5,1128.61111111111" />
         <NodeLayout
-          Size="178.857142857143,42.2857142857143"
+          Size="179,42"
           Id="Package\Fix ECARE PID issues"
           TopLeft="401.055555555556,1230.38888888889" />
         <NodeLayout
-          Size="141.714285714286,42.2857142857143"
+          Size="142,42"
           Id="Package\HTS and CBR"
           TopLeft="418.54761902239,1432.97550031996" />
         <NodeLayout
-          Size="157.142857142858,42.2857142857143"
+          Size="157,42"
           Id="Package\Patient PKV_UID"
           TopLeft="412.166666666667,412.611111111111" />
         <NodeLayout
-          Size="169.714285714286,42.2857142857143"
+          Size="170,42"
           Id="Package\Post Import Scripts"
           TopLeft="406.388888888889,1332.16666666667" />
         <NodeLayout
-          Size="170.857142857143,42.2857142857143"
+          Size="171,42"
           Id="Package\Reclaim HDD Space"
           TopLeft="405.055555555556,3.50766276973041" />
         <NodeLayout
-          Size="189.714285714286,42.2857142857143"
+          Size="190,42"
           Id="Package\Sequence -\AdverseEvents PKV UID"
           TopLeft="501.5,107.277777777778" />
         <NodeLayout
-          Size="184,42.2857142857143"
+          Size="184,42"
           Id="Package\Sequence -\ART Patients PKV_UID"
           TopLeft="256.611111111111,107.277777777778" />
         <NodeLayout
-          Size="189.714285714286,42.2857142857143"
+          Size="190,42"
           Id="Package\Sequence -\Patient Status PKV_UID"
           TopLeft="5.49999999999997,107.277777777778" />
         <NodeLayout
-          Size="181.714285714286,42.2857142857143"
+          Size="182,42"
           Id="Package\Sequence -\Patient WAB PKV_UID"
           TopLeft="763.5,107.277777777778" />
         <NodeLayout
-          Size="173.714285714286,42.2857142857143"
+          Size="174,42"
           Id="Package\Sequence -\Stage Patient Status"
           TopLeft="13.7222222222222,5.50000000000002" />
         <NodeLayout
-          Size="173.714285714286,42.2857142857143"
+          Size="174,42"
           Id="Package\Sequence -\StageAdverseEvents"
           TopLeft="509.5,5.49999999999991" />
         <NodeLayout
-          Size="189.714285714286,42.2857142857143"
+          Size="190,42"
           Id="Package\Sequence -\StagePatientARTExtract"
           TopLeft="253.722222222222,5.50000000000002" />
         <NodeLayout
-          Size="220,42.2857142857143"
+          Size="220,42"
           Id="Package\Sequence -\Start Patient Baseline Extracts"
           TopLeft="744.611111111111,5.49999999999991" />
         <EdgeLayout
@@ -656,7 +656,7 @@
           TopLeft="348.611111111111,47.2777777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -678,7 +678,7 @@
           TopLeft="596.611111111111,47.2777777777777">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -700,7 +700,7 @@
           TopLeft="854.611111111111,47.2777777777777">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -722,7 +722,7 @@
           TopLeft="100.611111111111,47.2777777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -742,32 +742,32 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="970.285714285715,204"
-          Size="970.285714285715,246.857142857143"
+          PanelSize="970,204"
+          Size="970,247"
           Id="Package\Sequence -"
           TopLeft="5.50000000000006,514.388888888889" />
         <NodeLayout
-          Size="181.714285714286,42.2857142857143"
+          Size="182,42"
           Id="Package\Sequence Container\Patient Labs PKV_UID"
           TopLeft="517.5,107.277777777778" />
         <NodeLayout
-          Size="205.714285714286,42.2857142857143"
+          Size="206,42"
           Id="Package\Sequence Container\Patient Pharmacy PKV_UID"
           TopLeft="5.50000000000003,107.277777777778" />
         <NodeLayout
-          Size="185.142857142858,42.2857142857143"
+          Size="185,42"
           Id="Package\Sequence Container\Patient Visits PKV_UID"
           TopLeft="272.166666666667,107.277777777778" />
         <NodeLayout
-          Size="169.142857142858,42.2857142857143"
+          Size="169,42"
           Id="Package\Sequence Container\Stage Patient Labs"
           TopLeft="524.388888888889,5.49999999999991" />
         <NodeLayout
-          Size="189.714285714286,42.2857142857143"
+          Size="190,42"
           Id="Package\Sequence Container\Stage Patient Pharmacy"
           TopLeft="13.5,5.50000000000002" />
         <NodeLayout
-          Size="170.857142857143,42.2857142857143"
+          Size="171,42"
           Id="Package\Sequence Container\Stage Patient Visits"
           TopLeft="279.055555555556,5.49999999999991" />
         <EdgeLayout
@@ -775,7 +775,7 @@
           TopLeft="608.611111111111,47.2777777777777">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -797,7 +797,7 @@
           TopLeft="108.611111111111,47.2777777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -819,7 +819,7 @@
           TopLeft="364.611111111111,47.2777777777777">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -839,16 +839,16 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="705.142857142858,204"
-          Size="705.142857142858,246.857142857143"
+          PanelSize="705,204"
+          Size="705,247"
           Id="Package\Sequence Container"
           TopLeft="137.944444444445,821.500000000001" />
         <NodeLayout
-          Size="177.142857142858,42.2857142857143"
+          Size="177,42"
           Id="Package\Stage Patient Extract"
           TopLeft="401.944444444444,310.833333333333" />
         <NodeLayout
-          Size="150.857142857143,42.2857142857143"
+          Size="151,42"
           Id="Package\Truncate tables"
           TopLeft="415.055555555556,107.277777777778" />
         <EdgeLayout
@@ -856,7 +856,7 @@
           TopLeft="490.611111111111,1068.61111111111">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -878,7 +878,7 @@
           TopLeft="490.611111111111,1170.38888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -900,7 +900,7 @@
           TopLeft="490.722222222223,45.2854405475082">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,61.9923372302698"
               Start="0,0"
               End="0,54.4923372302698">
@@ -919,18 +919,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 17]"
-          TopLeft="490.325396812782,1374.45238095238">
+          TopLeft="490.46825395564,1374.16666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,58.5231193675759"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.8088336532901"
               Start="0,0"
-              End="0,51.0231193675759">
+              End="0,51.3088336532901">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,51.0231193675759" />
+                    End="0,51.3088336532901" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -944,7 +944,7 @@
           TopLeft="490.611111111111,761.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000002"
               Start="0,0"
               End="0,52.5000000000002">
@@ -966,7 +966,7 @@
           TopLeft="490.611111111111,149.055555555556">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -988,7 +988,7 @@
           TopLeft="490.611111111111,352.611111111111">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -1010,7 +1010,7 @@
           TopLeft="490.611111111111,454.388888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000002"
               Start="0,0"
               End="0,52.5000000000002">
@@ -1032,7 +1032,7 @@
           TopLeft="490.611111111111,250.833333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -1054,7 +1054,7 @@
           TopLeft="490.86507936508,1272.6746031746">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,59.4920634920657"
               Start="0,0"
               End="0,51.9920634920657">
