@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientVisits"
   DTS:PackageType="5"
-  DTS:VersionBuild="74"
-  DTS:VersionGUID="{E72F1C3B-F9E6-411D-B0DA-B2D157B3A239}">
+  DTS:VersionBuild="76"
+  DTS:VersionGUID="{BEB2AE18-8E43-4EA3-A8C5-F85BE9AC4012}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -168,7 +168,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]"
                       name="PatientID"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       dataType="i4"
@@ -177,7 +177,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       name="PatientPK"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       dataType="wstr"
@@ -187,7 +187,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       name="FacilityName"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       dataType="i4"
@@ -196,7 +196,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       name="SiteCode"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitId]"
                       dataType="i4"
@@ -205,7 +205,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[VisitId]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitId]"
                       name="VisitId"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitDate]"
                       dataType="dbTimeStamp"
@@ -214,7 +214,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[VisitDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitDate]"
                       name="VisitDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Service]"
                       dataType="wstr"
@@ -224,7 +224,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Service]"
                       name="Service"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitType]"
                       dataType="wstr"
@@ -234,7 +234,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitType]"
                       name="VisitType"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[WHOStage]"
                       dataType="i4"
@@ -243,7 +243,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[WHOStage]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[WHOStage]"
                       name="WHOStage"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[WABStage]"
                       dataType="wstr"
@@ -253,7 +253,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[WABStage]"
                       name="WABStage"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Pregnant]"
                       dataType="wstr"
@@ -263,7 +263,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Pregnant]"
                       name="Pregnant"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[LMP]"
                       dataType="dbTimeStamp"
@@ -272,7 +272,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[LMP]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[LMP]"
                       name="LMP"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EDD]"
                       dataType="dbTimeStamp"
@@ -281,7 +281,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EDD]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EDD]"
                       name="EDD"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Height]"
                       dataType="numeric"
@@ -292,7 +292,7 @@ WHERE p.gender!='Unknown'</property>
                       name="Height"
                       precision="18"
                       scale="2"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Weight]"
                       dataType="numeric"
@@ -303,7 +303,7 @@ WHERE p.gender!='Unknown'</property>
                       name="Weight"
                       precision="18"
                       scale="2"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[BP]"
                       dataType="wstr"
@@ -313,7 +313,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[BP]"
                       name="BP"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OI]"
                       dataType="wstr"
@@ -323,7 +323,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OI]"
                       name="OI"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OIDate]"
                       dataType="dbTimeStamp"
@@ -332,7 +332,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OIDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OIDate]"
                       name="OIDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionFirstlineRegimenDate]"
                       dataType="dbTimeStamp"
@@ -341,7 +341,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SubstitutionFirstlineRegimenDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionFirstlineRegimenDate]"
                       name="SubstitutionFirstlineRegimenDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionFirstlineRegimenReason]"
                       dataType="wstr"
@@ -351,7 +351,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionFirstlineRegimenReason]"
                       name="SubstitutionFirstlineRegimenReason"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionSecondlineRegimenDate]"
                       dataType="dbTimeStamp"
@@ -360,7 +360,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SubstitutionSecondlineRegimenDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionSecondlineRegimenDate]"
                       name="SubstitutionSecondlineRegimenDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionSecondlineRegimenReason]"
                       dataType="wstr"
@@ -370,7 +370,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SubstitutionSecondlineRegimenReason]"
                       name="SubstitutionSecondlineRegimenReason"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SecondlineRegimenChangeDate]"
                       dataType="dbTimeStamp"
@@ -379,7 +379,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SecondlineRegimenChangeDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SecondlineRegimenChangeDate]"
                       name="SecondlineRegimenChangeDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SecondlineRegimenChangeReason]"
                       dataType="wstr"
@@ -389,7 +389,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SecondlineRegimenChangeReason]"
                       name="SecondlineRegimenChangeReason"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Adherence]"
                       dataType="wstr"
@@ -399,7 +399,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Adherence]"
                       name="Adherence"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[AdherenceCategory]"
                       dataType="wstr"
@@ -409,7 +409,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[AdherenceCategory]"
                       name="AdherenceCategory"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FamilyPlanningMethod]"
                       dataType="wstr"
@@ -419,7 +419,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FamilyPlanningMethod]"
                       name="FamilyPlanningMethod"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PwP]"
                       dataType="wstr"
@@ -429,7 +429,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PwP]"
                       name="PwP"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[GestationAge]"
                       dataType="numeric"
@@ -440,7 +440,7 @@ WHERE p.gender!='Unknown'</property>
                       name="GestationAge"
                       precision="18"
                       scale="2"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NextAppointmentDate]"
                       dataType="dbTimeStamp"
@@ -449,7 +449,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NextAppointmentDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NextAppointmentDate]"
                       name="NextAppointmentDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       dataType="wstr"
@@ -459,7 +459,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       name="Emr"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       dataType="wstr"
@@ -469,7 +469,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       name="Project"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       dataType="bool"
@@ -478,7 +478,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       name="Voided"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StabilityAssessment]"
                       dataType="wstr"
@@ -488,7 +488,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StabilityAssessment]"
                       name="StabilityAssessment"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DifferentiatedCare]"
                       dataType="wstr"
@@ -498,7 +498,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DifferentiatedCare]"
                       name="DifferentiatedCare"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PopulationType]"
                       dataType="wstr"
@@ -508,7 +508,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PopulationType]"
                       name="PopulationType"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[KeyPopulationType]"
                       dataType="wstr"
@@ -518,7 +518,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[KeyPopulationType]"
                       name="KeyPopulationType"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       dataType="bool"
@@ -527,7 +527,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Processed]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       name="Processed"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       dataType="dbTimeStamp"
@@ -536,7 +536,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       name="Created"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       dataType="wstr"
@@ -546,7 +546,7 @@ WHERE p.gender!='Unknown'</property>
                       length="172"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       name="PKV"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[knockout]"
                       dataType="i4"
@@ -555,7 +555,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[knockout]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[knockout]"
                       name="knockout"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientUID]"
                       dataType="i4"
@@ -564,7 +564,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientUID]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientUID]"
                       name="PatientUID"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1232,7 +1232,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientID]"
                       name="_PatientID"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1254,7 +1254,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_ FacilityName]"
                       name="_ FacilityName"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1276,7 +1276,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Service]"
                       name="_Service"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1298,7 +1298,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_VisitType]"
                       name="_VisitType"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1320,7 +1320,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_WABStage]"
                       name="_WABStage"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1342,7 +1342,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Pregnant]"
                       name="_Pregnant"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1364,7 +1364,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_BP]"
                       name="_BP"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1386,7 +1386,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_OI]"
                       name="_OI"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1408,7 +1408,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_SubstitutionFirstlineRegimenReason]"
                       name="_SubstitutionFirstlineRegimenReason"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1430,7 +1430,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_SubstitutionSecondlineRegimenReason]"
                       name="_SubstitutionSecondlineRegimenReason"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1452,7 +1452,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_SecondlineRegimenChangeReason]"
                       name="_SecondlineRegimenChangeReason"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1474,7 +1474,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Adherence]"
                       name="_Adherence"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1496,7 +1496,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_AdherenceCategory]"
                       name="_AdherenceCategory"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1518,7 +1518,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_FamilyPlanningMethod]"
                       name="_FamilyPlanningMethod"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1540,7 +1540,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PwP]"
                       name="_PwP"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1562,7 +1562,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]"
                       name="_Emr"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1584,7 +1584,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Project]"
                       name="_Project"
-                      truncationRowDisposition="RedirectRow">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1606,7 +1606,7 @@ WHERE p.gender!='Unknown'</property>
                       length="250"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]"
                       name="_PKV"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1628,7 +1628,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_WHOStage]"
                       name="_WHOStage"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1650,7 +1650,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_SiteCode]"
                       name="_SiteCode"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1672,7 +1672,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientPK]"
                       name="_PatientPK"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1694,7 +1694,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_VisitId]"
                       name="_VisitId"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1714,7 +1714,7 @@ WHERE p.gender!='Unknown'</property>
                       errorRowDisposition="FailComponent"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_VisitDate]"
                       name="_VisitDate"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1736,7 +1736,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_LMP]"
                       name="_LMP"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1758,7 +1758,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_EDD]"
                       name="_EDD"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1780,7 +1780,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Height]"
                       name="_Height"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1802,7 +1802,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Weight]"
                       name="_Weight"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1822,7 +1822,7 @@ WHERE p.gender!='Unknown'</property>
                       errorRowDisposition="FailComponent"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_OIDate]"
                       name="_OIDate"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1844,7 +1844,7 @@ WHERE p.gender!='Unknown'</property>
                       length="50"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_GestationAge]"
                       name="_GestationAge"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -1864,7 +1864,7 @@ WHERE p.gender!='Unknown'</property>
                       errorRowDisposition="FailComponent"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_NextAppointmentDate]"
                       name="_NextAppointmentDate"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -4125,13 +4125,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[WABStage]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="250"
                       name="WABStage" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Pregnant]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="250"
                       name="Pregnant" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[LMP]"
@@ -4161,13 +4161,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[BP]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="250"
                       name="BP" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OI]"
                       codePage="1252"
                       dataType="str"
-                      length="400"
+                      length="250"
                       name="OI" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OIDate]"
@@ -4177,25 +4177,25 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Adherence]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="250"
                       name="Adherence" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[AdherenceCategory]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="250"
                       name="AdherenceCategory" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[FamilyPlanningMethod]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="250"
                       name="FamilyPlanningMethod" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PwP]"
                       codePage="1252"
                       dataType="str"
-                      length="400"
+                      length="250"
                       name="PwP" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[GestationAge]"
@@ -4217,7 +4217,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SubstitutionFirstLineRegReason]"
                       codePage="1252"
                       dataType="str"
-                      length="400"
+                      length="250"
                       name="SubstitutionFirstLineRegReason" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SubstitutionSecondLineReg]"
@@ -4229,7 +4229,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SubstitutionSecondLineRegReason]"
                       codePage="1252"
                       dataType="str"
-                      length="400"
+                      length="250"
                       name="SubstitutionSecondLineRegReason" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SecondLineRegChange]"
@@ -4241,19 +4241,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SecondLineRegChangeReason]"
                       codePage="1252"
                       dataType="str"
-                      length="400"
+                      length="250"
                       name="SecondLineRegChangeReason" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Emr]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="100"
                       name="Emr" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Project]"
                       codePage="1252"
                       dataType="str"
-                      length="150"
+                      length="100"
                       name="Project" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DateImported]"
@@ -4280,22 +4280,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[StabilityAssessment]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="StabilityAssessment" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[DifferentiatedCare]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="DifferentiatedCare" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PopulationType]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="PopulationType" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[KeyPopulationType]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="KeyPopulationType" />
                   </externalMetadataColumns>
                 </input>
@@ -8308,7 +8308,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="150.857142857143,42.2857142857143"
+          Size="151,42"
           Id="Package\Data Flow Task"
           TopLeft="5.5,5.5" />
       </GraphLayout>
@@ -8320,267 +8320,57 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="204.571428571429,42.2857142857143"
-          Id="Package\Data Flow Task\Union All- After Adherence"
-          TopLeft="158.388888888889,616.166666666667" />
-        <NodeLayout
-          Size="274.285714285715,42.2857142857143"
-          Id="Package\Data Flow Task\Derived Column - Shorten Some Columns"
-          TopLeft="183.5,1023.27777777778" />
-        <NodeLayout
-          Size="156,42.2857142857143"
-          Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="410.166666666667,310.833333333333" />
-        <NodeLayout
-          Size="184,42.2857142857143"
-          Id="Package\Data Flow Task\Split-Check Adherence"
-          TopLeft="168.166666666667,412.611111111111" />
-        <NodeLayout
-          Size="212,42.2857142857143"
-          Id="Package\Data Flow Task\Union All - After WHO Stage"
-          TopLeft="154.388888888889,921.5" />
-        <NodeLayout
-          Size="156,42.2857142857143"
-          Id="Package\Data Flow Task\DataReaderDest"
-          TopLeft="412.833333333333,412.611111111111" />
-        <NodeLayout
-          Size="162.285714285715,42.2857142857143"
-          Id="Package\Data Flow Task\lkp_WHOMapping"
-          TopLeft="321.055555555556,819.722222222223" />
-        <NodeLayout
-          Size="193.142857142858,42.2857142857143"
-          Id="Package\Data Flow Task\lkp_AdhereanceMapping"
-          TopLeft="5.50000000000013,514.388888888889" />
-        <NodeLayout
-          Size="228,42.2857142857143"
-          Id="Package\Data Flow Task\Remove  Duplicate Visit Entries"
-          TopLeft="374.166666666667,107.277777777778" />
-        <NodeLayout
-          Size="204,42.2857142857143"
+          Size="204,42"
           Id="Package\Data Flow Task\Split - Check WHO Staging"
           TopLeft="158.166666666667,717.944444444445" />
         <NodeLayout
-          Size="188,42.2857142857143"
+          Size="156,42"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="410.166666666667,310.833333333333" />
+        <NodeLayout
+          Size="188,42"
           Id="Package\Data Flow Task\SQL Server Destination"
           TopLeft="166.611111111111,1125.05555555556" />
         <NodeLayout
-          Size="152,42.2857142857143"
+          Size="152,42"
           Id="Package\Data Flow Task\Knockout Rows"
           TopLeft="411.944444444445,209.055555555556" />
         <NodeLayout
-          Size="157.714285714286,42.2857142857143"
+          Size="205,42"
+          Id="Package\Data Flow Task\Union All- After Adherence"
+          TopLeft="158.388888888889,616.166666666667" />
+        <NodeLayout
+          Size="274,42"
+          Id="Package\Data Flow Task\Derived Column - Shorten Some Columns"
+          TopLeft="183.5,1023.27777777778" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Data Flow Task\Split-Check Adherence"
+          TopLeft="168.166666666667,412.611111111111" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Data Flow Task\lkp_WHOMapping"
+          TopLeft="321.055555555556,819.722222222223" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\Data Flow Task\Union All - After WHO Stage"
+          TopLeft="154.388888888889,921.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data Flow Task\DataReaderDest"
+          TopLeft="412.833333333333,412.611111111111" />
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Data Flow Task\Remove  Duplicate Visit Entries"
+          TopLeft="374.166666666667,107.277777777778" />
+        <NodeLayout
+          Size="158,42"
           Id="Package\Data Flow Task\ADO NET Source"
           TopLeft="408.611111111111,5.50000000000002" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Keep In Pipeline]"
-          TopLeft="488.055555555556,251.34126984127">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.4920634920627"
-              Start="0,0"
-              End="0,51.9920634920627">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,51.9920634920627" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-36.25634765625,20.1913442460313,72.5126953125,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="320.642857142857,1065.56349206349">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-60.0317460317461,59.4920634920657"
-              Start="0,0"
-              End="-60.0317460317461,51.9920634920657">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.7460317460328" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.7460317460328"
-                    Point2="0,29.7460317460328"
-                    Point3="-4,29.7460317460328" />
-                  <mssgle:LineSegment
-                    End="-56.0317460317461,29.7460317460328" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-56.0317460317461,29.7460317460328"
-                    Point2="-60.0317460317461,29.7460317460328"
-                    Point3="-60.0317460317461,33.7460317460328" />
-                  <mssgle:LineSegment
-                    End="-60.0317460317461,51.9920634920657" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="463.5,353.119047619047">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-203.333333333333,59.4920634920637"
-              Start="0,0"
-              End="-203.333333333333,51.9920634920637">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.1592136008381" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.1592136008381"
-                    Point2="0,24.1592136008381"
-                    Point3="-4,24.1592136008381" />
-                  <mssgle:LineSegment
-                    End="-199.333333333333,24.1592136008381" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-199.333333333333,24.1592136008381"
-                    Point2="-203.333333333333,24.1592136008381"
-                    Point3="-203.333333333333,28.1592136008381" />
-                  <mssgle:LineSegment
-                    End="-203.333333333333,51.9920634920637" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Error Output]"
-          TopLeft="512.833333333334,353.119047619047">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-22.0000000000007,59.4920634920637"
-              Start="0,0"
-              End="-22.0000000000007,51.9920634920637">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.1592136008381" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.1592136008381"
-                    Point2="0,24.1592136008381"
-                    Point3="-4,24.1592136008381" />
-                  <mssgle:LineSegment
-                    End="-18.0000000000007,24.1592136008381" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-18.0000000000007,24.1592136008381"
-                    Point2="-22.0000000000007,24.1592136008381"
-                    Point3="-22.0000000000007,28.1592136008381" />
-                  <mssgle:LineSegment
-                    End="-22.0000000000007,51.9920634920637" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-77.0863867187504,29.1592136008381,132.1727734375,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
-          TopLeft="487.888888888889,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,59.777777777778"
-              Start="0,0"
-              End="0,52.277777777778">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.277777777778" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Adherence Not Null]"
-          TopLeft="230.833333333333,454.388888888889">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-128.666666666667,60.0000000000001"
-              Start="0,0"
-              End="-128.666666666667,52.5000000000001">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.3103448275862" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20.3103448275862"
-                    Point2="0,24.3103448275862"
-                    Point3="-4,24.3103448275862" />
-                  <mssgle:LineSegment
-                    End="-124.666666666667,24.3103448275862" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-124.666666666667,24.3103448275862"
-                    Point2="-128.666666666667,24.3103448275862"
-                    Point3="-128.666666666667,28.3103448275862" />
-                  <mssgle:LineSegment
-                    End="-128.666666666667,52.5000000000001" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-107.618528645833,29.3103448275862,86.570390625,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Adherence Is Null]"
-          TopLeft="291.468253968254,454.896825396825">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,161.269841269842"
-              Start="0,0"
-              End="0,153.769841269842">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,153.769841269842" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-39.6601953125,72.0104089161709,79.320390625,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Data Flow Task\lkp_AdhereanceMapping"
+          TopLeft="5.50000000000013,514.388888888889" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[WHO Stage NULL]"
           TopLeft="226.870370370371,759.722222222223">
@@ -8791,9 +8581,227 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Keep In Pipeline]"
+          TopLeft="488.055555555556,251.34126984127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.4920634920627"
+              Start="0,0"
+              End="0,51.9920634920627">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.9920634920627" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-36.25634765625,20.1913442460313,72.5126953125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="320.642857142857,1065.56349206349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-60.0317460317461,59.4920634920657"
+              Start="0,0"
+              End="-60.0317460317461,51.9920634920657">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.7460317460328" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.7460317460328"
+                    Point2="0,29.7460317460328"
+                    Point3="-4,29.7460317460328" />
+                  <mssgle:LineSegment
+                    End="-56.0317460317461,29.7460317460328" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-56.0317460317461,29.7460317460328"
+                    Point2="-60.0317460317461,29.7460317460328"
+                    Point3="-60.0317460317461,33.7460317460328" />
+                  <mssgle:LineSegment
+                    End="-60.0317460317461,51.9920634920657" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="463.5,353.119047619047">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-203.333333333333,59.4920634920637"
+              Start="0,0"
+              End="-203.333333333333,51.9920634920637">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1592136008381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1592136008381"
+                    Point2="0,24.1592136008381"
+                    Point3="-4,24.1592136008381" />
+                  <mssgle:LineSegment
+                    End="-199.333333333333,24.1592136008381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-199.333333333333,24.1592136008381"
+                    Point2="-203.333333333333,24.1592136008381"
+                    Point3="-203.333333333333,28.1592136008381" />
+                  <mssgle:LineSegment
+                    End="-203.333333333333,51.9920634920637" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Error Output]"
+          TopLeft="512.833333333334,353.119047619047">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-22.0000000000007,59.4920634920637"
+              Start="0,0"
+              End="-22.0000000000007,51.9920634920637">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1592136008381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1592136008381"
+                    Point2="0,24.1592136008381"
+                    Point3="-4,24.1592136008381" />
+                  <mssgle:LineSegment
+                    End="-18.0000000000007,24.1592136008381" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.0000000000007,24.1592136008381"
+                    Point2="-22.0000000000007,24.1592136008381"
+                    Point3="-22.0000000000007,28.1592136008381" />
+                  <mssgle:LineSegment
+                    End="-22.0000000000007,51.9920634920637" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-77.0863867187504,29.1592136008381,132.1727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="487.888888888889,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.777777777778"
+              Start="0,0"
+              End="0,52.277777777778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.277777777778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Adherence Not Null]"
+          TopLeft="230.833333333333,454.388888888889">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-128.666666666667,60.0000000000001"
+              Start="0,0"
+              End="-128.666666666667,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.3103448275862" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.3103448275862"
+                    Point2="0,24.3103448275862"
+                    Point3="-4,24.3103448275862" />
+                  <mssgle:LineSegment
+                    End="-124.666666666667,24.3103448275862" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-124.666666666667,24.3103448275862"
+                    Point2="-128.666666666667,24.3103448275862"
+                    Point3="-128.666666666667,28.3103448275862" />
+                  <mssgle:LineSegment
+                    End="-128.666666666667,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-107.618528645833,29.3103448275862,86.570390625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Adherence Is Null]"
+          TopLeft="291.468253968254,454.896825396825">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,161.269841269842"
+              Start="0,0"
+              End="0,153.769841269842">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,153.769841269842" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-39.6601953125,72.0104089161709,79.320390625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\lkp_WHOMapping">
     <Properties>
@@ -8818,6 +8826,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\lkp_AdhereanceMapping">
     <Properties>
       <Property>
@@ -8835,22 +8851,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         <Value
           type="q4:string">0</Value>
       </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\SQL Server Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\ADO NET Source">
-    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

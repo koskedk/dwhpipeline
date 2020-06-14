@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientLaboratory"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{FCCF8417-4895-4A14-A210-BC9F4CDF6DD0}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{9F96D139-7B9C-487A-AB01-DB9E3DEA2E34}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -144,7 +144,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]"
                       name="PatientID"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       dataType="i4"
@@ -153,7 +153,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       name="PatientPK"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       dataType="wstr"
@@ -163,7 +163,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       name="FacilityName"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       dataType="i4"
@@ -172,7 +172,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       name="SiteCode"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitId]"
                       dataType="i4"
@@ -181,7 +181,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[VisitId]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitId]"
                       name="VisitId"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderedByDate]"
                       dataType="dbTimeStamp"
@@ -190,7 +190,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OrderedByDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OrderedByDate]"
                       name="OrderedByDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ReportedByDate]"
                       dataType="dbTimeStamp"
@@ -199,7 +199,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ReportedByDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ReportedByDate]"
                       name="ReportedByDate"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TestName]"
                       dataType="wstr"
@@ -209,7 +209,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TestName]"
                       name="TestName"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TestResult]"
                       dataType="wstr"
@@ -219,7 +219,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TestResult]"
                       name="TestResult"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       dataType="wstr"
@@ -229,7 +229,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       name="Emr"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       dataType="wstr"
@@ -239,7 +239,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       name="Project"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       dataType="bool"
@@ -248,7 +248,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       name="Voided"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       dataType="bool"
@@ -257,7 +257,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Processed]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       name="Processed"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EnrollmentTest]"
                       dataType="i4"
@@ -266,7 +266,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EnrollmentTest]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EnrollmentTest]"
                       name="EnrollmentTest"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       dataType="dbTimeStamp"
@@ -275,7 +275,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       name="Created"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Reason]"
                       dataType="wstr"
@@ -285,7 +285,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Reason]"
                       name="Reason"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       dataType="wstr"
@@ -295,7 +295,7 @@ WHERE p.gender!='Unknown'</property>
                       length="172"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       name="PKV"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[KnockOutRecord]"
                       dataType="i4"
@@ -304,7 +304,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[KnockOutRecord]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[KnockOutRecord]"
                       name="KnockOutRecord"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -811,7 +811,7 @@ WHERE p.gender!='Unknown'</property>
                       length="250"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]"
                       name="_PKV"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -833,7 +833,7 @@ WHERE p.gender!='Unknown'</property>
                       length="250"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Reason]"
                       name="_Reason"
-                      truncationRowDisposition="FailComponent">
+                      truncationRowDisposition="IgnoreFailure">
                       <properties>
                         <property
                           containsID="true"
@@ -2330,7 +2330,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="150.857142857143,42.2857142857143"
+          Size="151,42"
           Id="Package\Data Flow Task"
           TopLeft="5.5,5.5" />
       </GraphLayout>
@@ -2342,23 +2342,23 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==]]></arrayElement>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="164,42.2857142857143"
+          Size="164,42"
           Id="Package\Data Flow Task\Script Component"
           TopLeft="9.05555555555559,209.055555555556" />
         <NodeLayout
-          Size="171.428571428572,42.2857142857143"
+          Size="171,42"
           Id="Package\Data Flow Task\OLE DB Destination"
           TopLeft="5.50000000000006,514.388888888889" />
         <NodeLayout
-          Size="156.571428571429,42.2857142857143"
+          Size="157,42"
           Id="Package\Data Flow Task\Data Conversion"
           TopLeft="13.0555555555556,107.277777777778" />
         <NodeLayout
-          Size="157.714285714286,42.2857142857143"
+          Size="158,42"
           Id="Package\Data Flow Task\ADO NET Source"
           TopLeft="12.1666666666667,5.50000000000002" />
         <NodeLayout
-          Size="154.857142857143,42.2857142857143"
+          Size="155,42"
           Id="Package\Data Flow Task\Conditional Split"
           TopLeft="13.7222222222223,310.833333333333" />
         <EdgeLayout

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientExtract"
   DTS:PackageType="5"
-  DTS:VersionBuild="37"
-  DTS:VersionGUID="{857E1741-0E3B-41E8-9A11-6A5E2E5EEF69}">
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{F0C87955-8DDC-44A1-8B4F-B760C51AA553}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -173,199 +173,207 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Id]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Id]"
                       name="Id"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]"
                       name="PatientID"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Gender]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Gender]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Gender]"
                       name="Gender"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DOB]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DOB]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DOB]"
                       name="DOB"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationDate]"
                       name="RegistrationDate"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationAtCCC]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationAtCCC]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationAtCCC]"
                       name="RegistrationAtCCC"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationATPMTCT]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationATPMTCT]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationATPMTCT]"
                       name="RegistrationATPMTCT"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationAtTBClinic]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationAtTBClinic]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationAtTBClinic]"
                       name="RegistrationAtTBClinic"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientSource]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientSource]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientSource]"
                       name="PatientSource"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Region]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Region]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Region]"
                       name="Region"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[District]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[District]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[District]"
                       name="District"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Village]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Village]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Village]"
                       name="Village"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ContactRelation]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ContactRelation]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ContactRelation]"
                       name="ContactRelation"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[LastVisit]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[LastVisit]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[LastVisit]"
                       name="LastVisit"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[MaritalStatus]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[MaritalStatus]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[MaritalStatus]"
                       name="MaritalStatus"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EducationLevel]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EducationLevel]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EducationLevel]"
                       name="EducationLevel"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DateConfirmedHIVPositive]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DateConfirmedHIVPositive]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DateConfirmedHIVPositive]"
                       name="DateConfirmedHIVPositive"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PreviousARTExposure]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PreviousARTExposure]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PreviousARTExposure]"
                       name="PreviousARTExposure"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PreviousARTStartDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PreviousARTStartDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PreviousARTStartDate]"
                       name="PreviousARTStartDate"
-                      truncationRowDisposition="FailComponent" />
+                      scale="7"
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Emr]"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       name="Emr"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Project]"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       name="Project"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       dataType="bool"
@@ -374,7 +382,7 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       name="Voided"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       dataType="i4"
@@ -383,7 +391,7 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       name="PatientPK"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       dataType="bool"
@@ -392,37 +400,37 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Processed]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       name="Processed"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtCCC]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[StatusAtCCC]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtCCC]"
                       name="StatusAtCCC"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtPMTCT]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[StatusAtPMTCT]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtPMTCT]"
                       name="StatusAtPMTCT"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtTBClinic]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[StatusAtTBClinic]"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtTBClinic]"
                       name="StatusAtTBClinic"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       dataType="dbTimeStamp"
@@ -431,7 +439,7 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       name="Created"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       dataType="i4"
@@ -440,7 +448,7 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       name="SiteCode"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       dataType="wstr"
@@ -450,26 +458,26 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       name="FacilityName"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
+                      errorRowDisposition="IgnoreFailure"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
-                      length="172"
+                      length="122"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       name="PKV"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[knockout]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
+                      errorRowDisposition="IgnoreFailure"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[knockout]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[knockout]"
                       name="knockout"
-                      truncationRowDisposition="FailComponent" />
+                      truncationRowDisposition="IgnoreFailure" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -480,94 +488,102 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       name="PatientID" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Gender]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="Gender" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DOB]"
-                      dataType="dbTimeStamp"
-                      name="DOB" />
+                      dataType="dbTimeStamp2"
+                      name="DOB"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationDate]"
-                      dataType="dbTimeStamp"
-                      name="RegistrationDate" />
+                      dataType="dbTimeStamp2"
+                      name="RegistrationDate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationAtCCC]"
-                      dataType="dbTimeStamp"
-                      name="RegistrationAtCCC" />
+                      dataType="dbTimeStamp2"
+                      name="RegistrationAtCCC"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationATPMTCT]"
-                      dataType="dbTimeStamp"
-                      name="RegistrationATPMTCT" />
+                      dataType="dbTimeStamp2"
+                      name="RegistrationATPMTCT"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RegistrationAtTBClinic]"
-                      dataType="dbTimeStamp"
-                      name="RegistrationAtTBClinic" />
+                      dataType="dbTimeStamp2"
+                      name="RegistrationAtTBClinic"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientSource]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="PatientSource" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Region]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="Region" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[District]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="District" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Village]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="Village" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ContactRelation]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="ContactRelation" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[LastVisit]"
-                      dataType="dbTimeStamp"
-                      name="LastVisit" />
+                      dataType="dbTimeStamp2"
+                      name="LastVisit"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[MaritalStatus]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="MaritalStatus" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EducationLevel]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="EducationLevel" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DateConfirmedHIVPositive]"
-                      dataType="dbTimeStamp"
-                      name="DateConfirmedHIVPositive" />
+                      dataType="dbTimeStamp2"
+                      name="DateConfirmedHIVPositive"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PreviousARTExposure]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="PreviousARTExposure" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PreviousARTStartDate]"
-                      dataType="dbTimeStamp"
-                      name="PreviousARTStartDate" />
+                      dataType="dbTimeStamp2"
+                      name="PreviousARTStartDate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Emr]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       name="Emr" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Project]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       name="Project" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
@@ -584,17 +600,17 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[StatusAtCCC]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="StatusAtCCC" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[StatusAtPMTCT]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="StatusAtPMTCT" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[StatusAtTBClinic]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       name="StatusAtTBClinic" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
@@ -612,7 +628,7 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
                       dataType="wstr"
-                      length="172"
+                      length="122"
                       name="PKV" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[knockout]"
@@ -633,113 +649,121 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientID]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientID]"
                       name="PatientID" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Gender]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Gender]"
                       name="Gender" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DOB]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DOB]"
-                      name="DOB" />
+                      name="DOB"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationDate]"
-                      name="RegistrationDate" />
+                      name="RegistrationDate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationAtCCC]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationAtCCC]"
-                      name="RegistrationAtCCC" />
+                      name="RegistrationAtCCC"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationATPMTCT]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationATPMTCT]"
-                      name="RegistrationATPMTCT" />
+                      name="RegistrationATPMTCT"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationAtTBClinic]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RegistrationAtTBClinic]"
-                      name="RegistrationAtTBClinic" />
+                      name="RegistrationAtTBClinic"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientSource]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientSource]"
                       name="PatientSource" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Region]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Region]"
                       name="Region" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[District]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[District]"
                       name="District" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Village]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Village]"
                       name="Village" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ContactRelation]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ContactRelation]"
                       name="ContactRelation" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[LastVisit]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[LastVisit]"
-                      name="LastVisit" />
+                      name="LastVisit"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[MaritalStatus]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[MaritalStatus]"
                       name="MaritalStatus" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EducationLevel]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EducationLevel]"
                       name="EducationLevel" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DateConfirmedHIVPositive]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DateConfirmedHIVPositive]"
-                      name="DateConfirmedHIVPositive" />
+                      name="DateConfirmedHIVPositive"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PreviousARTExposure]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PreviousARTExposure]"
                       name="PreviousARTExposure" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PreviousARTStartDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PreviousARTStartDate]"
-                      name="PreviousARTStartDate" />
+                      name="PreviousARTStartDate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Emr]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Emr]"
                       name="Emr" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Project]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Project]"
                       name="Project" />
                     <outputColumn
@@ -760,19 +784,19 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[StatusAtCCC]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[StatusAtCCC]"
                       name="StatusAtCCC" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[StatusAtPMTCT]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[StatusAtPMTCT]"
                       name="StatusAtPMTCT" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[StatusAtTBClinic]"
                       dataType="wstr"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[StatusAtTBClinic]"
                       name="StatusAtTBClinic" />
                     <outputColumn
@@ -794,7 +818,7 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PKV]"
                       dataType="wstr"
-                      length="172"
+                      length="122"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PKV]"
                       name="PKV" />
                     <outputColumn
@@ -1712,7 +1736,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                     <inputColumn
                       refId="Package\Data Flow Task\Check for Duplicate PKVs in Pipeline.Inputs[Input 0].Columns[PKV]"
                       cachedDataType="wstr"
-                      cachedLength="172"
+                      cachedLength="122"
                       cachedName="PKV"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]" />
                     <inputColumn
@@ -1749,91 +1773,91 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PatientID]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="100"
                       cachedName="PatientID"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Gender]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="Gender"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Gender]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PatientSource]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="PatientSource"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientSource]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Region]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="Region"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Region]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[District]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="District"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[District]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Village]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="Village"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Village]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[ContactRelation]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="ContactRelation"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ContactRelation]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[MaritalStatus]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="MaritalStatus"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[MaritalStatus]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[EducationLevel]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="EducationLevel"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EducationLevel]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PreviousARTExposure]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="PreviousARTExposure"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PreviousARTExposure]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Emr]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="100"
                       cachedName="Emr"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Project]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="100"
                       cachedName="Project"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[StatusAtCCC]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="StatusAtCCC"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtCCC]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[StatusAtPMTCT]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="StatusAtPMTCT"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtPMTCT]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[StatusAtTBClinic]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="StatusAtTBClinic"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[StatusAtTBClinic]" />
                     <inputColumn
@@ -1845,7 +1869,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PKV]"
                       cachedDataType="wstr"
-                      cachedLength="172"
+                      cachedLength="122"
                       cachedName="PKV"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]" />
                   </inputColumns>
@@ -1975,7 +1999,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="150"
+                      length="250"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Village]"
                       name="_Village"
                       truncationRowDisposition="IgnoreFailure">
@@ -2085,7 +2109,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      length="50"
+                      length="150"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]"
                       name="_Emr"
                       truncationRowDisposition="IgnoreFailure">
@@ -3190,7 +3214,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                     <inputColumn
                       refId="Package\Data Flow Task\NewPatientUIDs.Inputs[Input 0].Columns[PatientID]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="100"
                       cachedName="PatientID"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]" />
                     <inputColumn
@@ -3293,50 +3317,58 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                   <inputColumns>
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DOB]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="DOB"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DOB]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DOB]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RegistrationDate]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="RegistrationDate"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationDate]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RegistrationAtCCC]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="RegistrationAtCCC"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationAtCCC]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationAtCCC]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RegistrationATPMTCT]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="RegistrationATPMTCT"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationAtPMTCT]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationATPMTCT]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RegistrationAtTBClinic]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="RegistrationAtTBClinic"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationAtTBClinic]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RegistrationAtTBClinic]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastVisit]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="LastVisit"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastVisit]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[LastVisit]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateConfirmedHIVPositive]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="DateConfirmedHIVPositive"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateConfirmedHIVPositive]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DateConfirmedHIVPositive]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PreviousARTStartDate]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="PreviousARTStartDate"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousARTStartDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PreviousARTStartDate]" />
                     <inputColumn
@@ -3395,7 +3427,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_Village]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="150"
+                      cachedLength="250"
                       cachedName="_Village"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Village]"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Village]" />
@@ -3435,7 +3467,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_Emr]"
                       cachedCodepage="1252"
                       cachedDataType="str"
-                      cachedLength="50"
+                      cachedLength="150"
                       cachedName="_Emr"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Emr]"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]" />
@@ -3476,7 +3508,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="100"
                       name="PatientID" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientPK]"
@@ -3500,7 +3532,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="Gender" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DOB]"
@@ -3528,31 +3560,31 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientSource]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
+                      length="250"
                       name="PatientSource" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="Region" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[District]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="District" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Village]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="Village" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContactRelation]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="ContactRelation" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastVisit]"
@@ -3562,13 +3594,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MaritalStatus]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="MaritalStatus" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EducationLevel]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="EducationLevel" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateConfirmedHIVPositive]"
@@ -3578,7 +3610,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousARTExposure]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="PreviousARTExposure" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PreviousARTStartDate]"
@@ -3588,13 +3620,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Emr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="100"
                       name="Emr" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
+                      length="100"
                       name="Project" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateImported]"
@@ -3618,6 +3650,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationYear]"
                       dataType="i4"
                       name="RegistrationYear" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MPIPKV]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="MPIPKV" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3709,7 +3747,7 @@ where [refTable].[PKV] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Data Flow Task\1004:invalid};</property>
+                  name="ParameterMap">#{Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MPIPKV]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -3735,7 +3773,7 @@ where [refTable].[PKV] = ?</property>
                     <inputColumn
                       refId="Package\Data Flow Task\PatientUID Exists.Inputs[Lookup Input].Columns[PKV]"
                       cachedDataType="wstr"
-                      cachedLength="172"
+                      cachedLength="122"
                       cachedName="PKV"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]">
                       <properties>
@@ -3961,10 +3999,6 @@ where [refTable].[PKV] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="160,42"
-          Id="Package\Data Flow Task\PatientUID Exists"
-          TopLeft="49.5000000000001,412.611111111111" />
-        <NodeLayout
           Size="155,42"
           Id="Package\Data Flow Task\NewPatientUIDs"
           TopLeft="51.9444444444445,514.388888888889" />
@@ -3973,13 +4007,13 @@ where [refTable].[PKV] = ?</property>
           Id="Package\Data Flow Task\OLE DB Destination"
           TopLeft="43.9444444444445,616.166666666667" />
         <NodeLayout
-          Size="248,42"
-          Id="Package\Data Flow Task\Check for Duplicate PKVs in Pipeline"
-          TopLeft="5.50000000000003,107.277777777778" />
-        <NodeLayout
           Size="190,42"
           Id="Package\Data Flow Task\Remove Duplicate PKVs"
           TopLeft="34.3888888888889,209.055555555556" />
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Data Flow Task\Check for Duplicate PKVs in Pipeline"
+          TopLeft="5.50000000000003,107.277777777778" />
         <NodeLayout
           Size="156,42"
           Id="Package\Data Flow Task\Data Conversion"
@@ -3988,6 +4022,10 @@ where [refTable].[PKV] = ?</property>
           Size="158,42"
           Id="Package\Data Flow Task\ADO NET Source"
           TopLeft="50.3888888888889,5.50000000000002" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Data Flow Task\PatientUID Exists"
+          TopLeft="49.5000000000001,412.611111111111" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Output 01]"
           TopLeft="129.5,556.166666666667">
@@ -4128,6 +4166,27 @@ where [refTable].[PKV] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\PatientUID Exists">
     <Properties>
       <Property>
@@ -4145,27 +4204,6 @@ where [refTable].[PKV] = ?</property>
         <Value
           type="q4:string">0</Value>
       </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\ADO NET Source">
-    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
