@@ -8,12 +8,12 @@
   DTS:Description="Import HTS Client Data to Staging"
   DTS:DTSID="{6415242D-2494-4813-A524-0FA28DB3DD0A}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.0900.40"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="SSIS_StageHTS"
-  DTS:VersionBuild="56"
-  DTS:VersionGUID="{9EFD8C7D-BFC8-4997-9D68-AB502F8AA24B}">
+  DTS:VersionBuild="57"
+  DTS:VersionGUID="{83125274-59E9-4C15-8CA3-B2038C8CB950}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -7381,7 +7381,7 @@ where [refTable].[SiteCode] = ? and [refTable].[PatientPK] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Load HTS Linkage Extracts\1006:invalid};#{Package\Load HTS Linkage Extracts\1007:invalid};</property>
+                  name="ParameterMap">#{Package\Load HTS Linkage Extracts\378:invalid};#{Package\Load HTS Linkage Extracts\379:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -8971,55 +8971,55 @@ FROM ClientPartners</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="220.888888888889,41.7777777777778"
+          Size="221,42"
           Id="Package\Delete Duplicate Client Entries"
           TopLeft="281.5,107.1" />
         <NodeLayout
-          Size="191.111111111112,41.7777777777778"
+          Size="191,42"
           Id="Package\Delete Duplicate Entries"
           TopLeft="10.3000000000001,414.3" />
         <NodeLayout
-          Size="185.777777777778,41.7777777777778"
+          Size="186,42"
           Id="Package\Foreach HTS CLient File\Load HTSCLientExtract"
           TopLeft="5.5,5.49999999999995" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="196.888888888889,103.111111111112"
-          Size="196.888888888889,145.777777777778"
+          PanelSize="197,103"
+          Size="197,146"
           Id="Package\Foreach HTS CLient File"
           TopLeft="7.50000000000009,208.7" />
         <NodeLayout
-          Size="190.222222222223,41.7777777777778"
+          Size="190,42"
           Id="Package\ForEachHTS Linkage File\LoadHTSLinkageExtract"
           TopLeft="5.5,5.49999999999995" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="200.888888888889,103.111111111112"
-          Size="200.888888888889,145.777777777778"
+          PanelSize="201,103"
+          Size="201,146"
           Id="Package\ForEachHTS Linkage File"
           TopLeft="5.50000000000014,515.9" />
         <NodeLayout
-          Size="217.777777777778,41.7777777777778"
+          Size="218,42"
           Id="Package\Load HTS Clients HTS Central"
           TopLeft="283.1,5.49999999999995" />
         <NodeLayout
-          Size="204,41.7777777777778"
+          Size="204,42"
           Id="Package\Load HTS Linkage Extracts"
           TopLeft="289.9,260.7" />
         <NodeLayout
-          Size="259.111111111112,41.7777777777778"
+          Size="259,42"
           Id="Package\Load HTS Partner Notification Services"
           TopLeft="262.3,414.3" />
         <NodeLayout
-          Size="196.888888888889,41.7777777777778"
+          Size="197,42"
           Id="Package\stg_HTS_PositivePatients"
           TopLeft="293.5,533.641175990121" />
         <NodeLayout
-          Size="308,41.7777777777778"
+          Size="308,42"
           Id="Package\Truncate Table HTS Partner Notification Services"
           TopLeft="416.571435665598,331.576471737924" />
         <EdgeLayout
@@ -9027,7 +9027,7 @@ FROM ClientPartners</property>
           TopLeft="105.9,354.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -9049,7 +9049,7 @@ FROM ClientPartners</property>
           TopLeft="105.9,455.9">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -9068,18 +9068,18 @@ FROM ClientPartners</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="391.9,47.1">
+          TopLeft="392.05,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
-              EndConnector="0,59.9999999999999"
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.6"
               Start="0,0"
-              End="0,52.4999999999999">
+              End="0,52.1">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.4999999999999" />
+                    End="0,52.1" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -9093,7 +9093,7 @@ FROM ClientPartners</property>
           TopLeft="391.9,148.7">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,112"
               Start="0,0"
               End="0,104.5">
@@ -9115,7 +9115,7 @@ FROM ClientPartners</property>
           TopLeft="391.9,455.9">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,77.741175990121"
               Start="0,0"
               End="0,70.241175990121">
@@ -9137,7 +9137,7 @@ FROM ClientPartners</property>
           TopLeft="570.571435665598,373.176471737924">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="-136.804768998931,41.1235282620757"
               Start="0,0"
               End="-136.804768998931,33.6235282620757">
@@ -9171,7 +9171,7 @@ FROM ClientPartners</property>
           TopLeft="424.566666666667,302.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="146.004768998931,29.2764717379243"
               Start="0,0"
               End="146.004768998931,21.7764717379243">
@@ -9553,17 +9553,17 @@ FROM ClientPartners</property>
     design-time-name="Package\Load HTS Clients HTS Central">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="169.777777777778,41.7777777777778"
+          Size="170,42"
           Id="Package\Load HTS Clients HTS Central\OLE DB Destination"
           TopLeft="345.844448440163,294.755554415531" />
         <NodeLayout
-          Size="112.888888888889,41.7777777777778"
+          Size="113,42"
           Id="Package\Load HTS Clients HTS Central\Lookup"
           TopLeft="448.8,182.4" />
         <NodeLayout
-          Size="150.222222222223,41.7777777777778"
+          Size="150,42"
           Id="Package\Load HTS Clients HTS Central\OLE DB Source"
           TopLeft="424.8,57.6" />
         <EdgeLayout
@@ -9571,7 +9571,7 @@ FROM ClientPartners</property>
           TopLeft="502.4,99.2">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,83.2"
               Start="0,0"
               End="0,75.7">
@@ -9593,7 +9593,7 @@ FROM ClientPartners</property>
           TopLeft="505.244444444444,224.177777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="-74.5111071153925,70.5777766377533"
               Start="0,0"
               End="-74.5111071153925,63.0777766377533">
