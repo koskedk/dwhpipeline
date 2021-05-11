@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientPharmacy"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{AF62BCE4-9CD3-4507-BA5A-FEDBDA4C07BF}">
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{9D3A7AB9-E7AC-4745-80F5-17E20709486F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -4655,6 +4655,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       cachedName="_PKV"
                       externalMetadataColumnId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[PKV]"
                       lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[_PKV]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].Columns[_RegimenLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_RegimenLine"
+                      externalMetadataColumnId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[RegimenLine]"
+                      lineageId="Package\Data Flow Task\Union All.Outputs[Union All Output 1].Columns[_RegimenLine]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -4712,7 +4720,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[TreatmentType]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="250"
                       name="TreatmentType" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[PeriodTaken]"
@@ -4730,13 +4738,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[Emr]"
                       codePage="1252"
                       dataType="str"
-                      length="50"
+                      length="100"
                       name="Emr" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
                       codePage="1252"
                       dataType="str"
-                      length="255"
+                      length="100"
                       name="Project" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[DateImported]"
@@ -4760,6 +4768,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[DeletedFlag]"
                       dataType="bool"
                       name="DeletedFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\stg_Pharmacy destination.Inputs[OLE DB Destination Input].ExternalColumns[RegimenLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="RegimenLine" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
