@@ -7,12 +7,12 @@
   DTS:CreatorName="DWH-DEV\Admin"
   DTS:DTSID="{0042FABF-4621-4A86-A7AF-D33120721E7F}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterStageDWAPI Central"
   DTS:PackageType="5"
-  DTS:VersionBuild="143"
-  DTS:VersionGUID="{B45907D9-74F2-4261-87AE-40B55332AF24}">
+  DTS:VersionBuild="150"
+  DTS:VersionGUID="{E0D698B3-D39C-4305-B04E-970FEA208762}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,6 +23,8 @@
       DTS:ObjectName="LocalHost.All_Staging_2016_2">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -87,7 +89,6 @@
       DTS:refId="Package\HTS and CBR"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{2DDB65E2-ABD5-4477-86C3-58EEAED3EE5D}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -205,7 +206,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Status PKV_UID"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -221,7 +222,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient WAB PKV_UID"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -627,7 +628,7 @@
           Id="Package\Patient PKV_UID"
           TopLeft="412.166666666667,412.611111111111" />
         <NodeLayout
-          Size="170,42"
+          Size="169,42"
           Id="Package\Post Import Scripts"
           TopLeft="405.388888888889,1332.16666666667" />
         <NodeLayout
@@ -934,7 +935,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 17]"
-          TopLeft="489.96825395564,1374.16666666667">
+          TopLeft="489.71825395564,1374.16666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1066,7 +1067,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="490.472222222223,1272.38888888889">
+          TopLeft="490.222222222223,1272.38888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

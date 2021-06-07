@@ -7,12 +7,12 @@
   DTS:CreatorName="DWH-DEV\Admin"
   DTS:DTSID="{0042FABF-4621-4A86-A7AF-D33120721E7F}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterStageDWAPI Central"
   DTS:PackageType="5"
-  DTS:VersionBuild="142"
-  DTS:VersionGUID="{56C7D510-FF51-4FA6-BF55-9766D5A4A0F9}">
+  DTS:VersionBuild="150"
+  DTS:VersionGUID="{E0D698B3-D39C-4305-B04E-970FEA208762}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,6 +23,8 @@
       DTS:ObjectName="LocalHost.All_Staging_2016_2">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -51,6 +53,7 @@
       DTS:refId="Package\Enable Constraints"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{FEAA3DE3-0AFE-4169-AD68-A1F558FDA821}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -68,6 +71,7 @@
       DTS:refId="Package\Fix ECARE PID issues"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{140C451D-4C36-4B5F-908A-F91E25FFE09C}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -119,6 +123,7 @@
       DTS:refId="Package\Post Import Scripts"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
       DTS:DTSID="{918C00E8-99B7-49B3-8516-010252EF7498}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -333,6 +338,7 @@
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
+      DTS:Disabled="True"
       DTS:DTSID="{BD9A076D-55FF-4D39-BDA1-E36ACC7A2233}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -622,7 +628,7 @@
           Id="Package\Patient PKV_UID"
           TopLeft="412.166666666667,412.611111111111" />
         <NodeLayout
-          Size="170,42"
+          Size="169,42"
           Id="Package\Post Import Scripts"
           TopLeft="405.388888888889,1332.16666666667" />
         <NodeLayout
@@ -929,7 +935,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 17]"
-          TopLeft="489.96825395564,1374.16666666667">
+          TopLeft="489.71825395564,1374.16666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1061,7 +1067,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="490.472222222223,1272.38888888889">
+          TopLeft="490.222222222223,1272.38888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
