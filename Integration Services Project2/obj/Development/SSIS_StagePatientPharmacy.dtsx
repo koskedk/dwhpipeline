@@ -7,7 +7,7 @@
   DTS:CreatorName="DWH-DEV\Admin"
   DTS:DTSID="{C36E6893-2C17-4A9E-B34D-A92CA7394F87}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientPharmacy"
   DTS:PackageType="5"
@@ -23,6 +23,8 @@
       DTS:ObjectName="DWH-Dev.DWAPICentral_Staging.sa">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -33,6 +35,8 @@
       DTS:ObjectName="DWH-Dev.DWAPICentral_Staging.sa 1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>

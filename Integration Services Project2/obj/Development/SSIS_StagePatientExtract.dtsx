@@ -7,7 +7,7 @@
   DTS:CreatorName="DWH-DEV\Admin"
   DTS:DTSID="{24F562EE-DF7D-4901-A6C7-EAB1C65FEDD9}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientExtract"
   DTS:PackageType="5"
@@ -23,6 +23,8 @@
       DTS:ObjectName="DWH-Dev.DWAPICentral_Staging.sa">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -38,7 +40,7 @@
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LocalHost.MPI]"
-      DTS:CreationName="ADO.Net:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
       DTS:DTSID="{A1530721-727C-4CBB-8F9C-159B98B9D2E7}"
       DTS:ObjectName="LocalHost.MPI">
       <DTS:ObjectData>
@@ -53,6 +55,8 @@
       DTS:ObjectName="LocalHost.MPI1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=MPI;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>

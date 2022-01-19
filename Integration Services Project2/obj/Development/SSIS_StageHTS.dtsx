@@ -8,7 +8,7 @@
   DTS:Description="Import HTS Client Data to Staging"
   DTS:DTSID="{6415242D-2494-4813-A524-0FA28DB3DD0A}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="SSIS_StageHTS"
@@ -24,6 +24,8 @@
       DTS:ObjectName="DestinationConnectionOLEDB">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -647,7 +649,7 @@
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[localhost.HTSCentral]"
-      DTS:CreationName="ADO.Net:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
       DTS:DTSID="{1C29CC3B-34B0-4814-91FE-E6382A97796D}"
       DTS:ObjectName="localhost.HTSCentral">
       <DTS:ObjectData>
@@ -662,6 +664,8 @@
       DTS:ObjectName="LocalHost.HTSCentral1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=HTSCentral;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -7381,7 +7385,7 @@ where [refTable].[SiteCode] = ? and [refTable].[PatientPK] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Load HTS Linkage Extracts\378:invalid};#{Package\Load HTS Linkage Extracts\379:invalid};</property>
+                  name="ParameterMap">#{Package\Load HTS Linkage Extracts\1231:invalid};#{Package\Load HTS Linkage Extracts\1232:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."

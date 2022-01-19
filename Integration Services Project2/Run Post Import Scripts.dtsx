@@ -7,12 +7,12 @@
   DTS:CreatorName="NASCOP\mgitonga"
   DTS:DTSID="{31CC7BEE-6FCB-47BE-9049-A9D1392414C7}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
   DTS:LocaleID="1033"
   DTS:ObjectName="Run Post Import Scripts"
   DTS:PackageType="5"
-  DTS:VersionBuild="194"
-  DTS:VersionGUID="{B11F6E22-4F96-4CDE-AFAD-34180713AA1E}">
+  DTS:VersionBuild="211"
+  DTS:VersionGUID="{A9B757D9-B91A-4D45-AA37-59ED1E3AEDB4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,6 +23,8 @@
       DTS:ObjectName="All_Staging_2016_2_deduplicateLargerTables">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -43,6 +45,8 @@
       DTS:ObjectName="LocalHost.All_Staging_2016_2">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -53,6 +57,8 @@
       DTS:ObjectName="LocalHost.Cohort_2018">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=Cohort_2018;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -260,7 +266,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate  ART Patient Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -277,7 +283,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Baseline Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -294,7 +300,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Patient Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -311,7 +317,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Status Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -342,7 +348,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Lab Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -360,7 +366,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Pharmacy Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -378,7 +384,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Visit Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -395,7 +401,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Disable Lab Table Indexes"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -412,7 +418,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Disable Pharmacy Tables Indexes"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -429,7 +435,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Disable Visit Table Indexes"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -446,7 +452,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Enable Lab Table indexes"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -463,7 +469,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Enable Pharmacy Table Indexes"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -480,7 +486,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Enable Visit Table Indexes"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -610,7 +616,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="AdverseEvents PKV UID"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -626,7 +632,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="ART Patients PKV_UID"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -642,7 +648,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Labs PKV_UID"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -658,7 +664,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Pharmacy PKV_UID"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -690,7 +696,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Status PKV_UID"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -706,7 +712,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Visits PKV_UID"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -722,7 +728,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient WAB PKV_UID"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -867,6 +873,7 @@
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:DelayValidation="True"
       DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
       DTS:DTSID="{1CF18BFC-95D1-4E01-ABBD-D9D5FD3A2F7B}"
       DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
@@ -4295,28 +4302,6 @@
                       name="StabilityAssessment"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestPregnancy]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestPregnancy]"
-                      length="250"
-                      lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestPregnancy]"
-                      name="LatestPregnancy"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestFPMethod]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestFPMethod]"
-                      length="250"
-                      lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestFPMethod]"
-                      name="LatestFPMethod"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[oARTstat3m]"
                       codePage="1252"
                       dataType="str"
@@ -4458,6 +4443,28 @@
                       length="250"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[BaselineVL_Reason]"
                       name="BaselineVL_Reason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestPregnancy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestPregnancy]"
+                      length="250"
+                      lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestPregnancy]"
+                      name="LatestPregnancy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestFPMethod]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestFPMethod]"
+                      length="250"
+                      lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LatestFPMethod]"
+                      name="LatestFPMethod"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
@@ -4634,20 +4641,24 @@
                       name="dtlastapt" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dtARTstop]"
-                      dataType="dbDate"
-                      name="dtARTstop" />
+                      dataType="dbTimeStamp2"
+                      name="dtARTstop"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dtTO]"
-                      dataType="dbDate"
-                      name="dtTO" />
+                      dataType="dbTimeStamp2"
+                      name="dtTO"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dtLTFU]"
-                      dataType="dbDate"
-                      name="dtLTFU" />
+                      dataType="dbTimeStamp2"
+                      name="dtLTFU"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dtDead]"
-                      dataType="dbDate"
-                      name="dtDead" />
+                      dataType="dbTimeStamp2"
+                      name="dtDead"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CD4befART]"
                       dataType="r8"
@@ -4812,80 +4823,67 @@
                       name="StartARTDate" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat6m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat6m" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat1yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat1yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat2yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat2yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat3yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat3yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat4yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat4yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat5yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat5yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat6yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat6yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat7yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat7yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat8yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat8yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat9yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat9yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat10yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat10yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ARTOutcome]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="ARTOutcome" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NewARTOutcome]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="NewARTOutcome" />
                     <externalMetadataColumn
@@ -4964,74 +4962,62 @@
                       name="preARTfuYrs" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[m6PreARTStatus]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="m6PreARTStatus" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat1yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat1yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat2yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat2yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat3yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat3yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat4yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat4yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat5yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat5yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat6yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat6yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat7yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat7yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat8yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat8yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat9yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat9yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat10yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat10yr" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PreARTOutcome]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="PreARTOutcome" />
                     <externalMetadataColumn
@@ -5132,14 +5118,12 @@
                       name="CT Partner" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTStat18m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTStat18m" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[preARTstat18m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       name="preARTstat18m" />
                     <externalMetadataColumn
@@ -5200,14 +5184,12 @@
                       name="24MonthVLSup" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ARTOutcome_7days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="ARTOutcome_7days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[duARTOutcome_7days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="duARTOutcome_7days" />
                     <externalMetadataColumn
@@ -5237,69 +5219,48 @@
                       length="250"
                       name="StabilityAssessment" />
                     <externalMetadataColumn
-                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestPregnancy]"
-                      codePage="1252"
-                      dataType="str"
-                      length="250"
-                      name="LatestPregnancy" />
-                    <externalMetadataColumn
-                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestFPMethod]"
-                      codePage="1252"
-                      dataType="str"
-                      length="250"
-                      name="LatestFPMethod" />
-                    <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[oARTstat3m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="oARTstat3m" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ARTOutcome_0Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="ARTOutcome_0Days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ARTOutcome_14Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="ARTOutcome_14Days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ARTOutcome_30Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="ARTOutcome_30Days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ARTOutcome_90Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="ARTOutcome_90Days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[duARTOutcome_0Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="duARTOutcome_0Days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[duARTOutcome_14Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="duARTOutcome_14Days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[duARTOutcome_30Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="duARTOutcome_30Days" />
                     <externalMetadataColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[duARTOutcome_90Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       name="duARTOutcome_90Days" />
                     <externalMetadataColumn
@@ -5326,6 +5287,18 @@
                       dataType="str"
                       length="250"
                       name="BaselineVL_Reason" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestPregnancy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="LatestPregnancy" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LatestFPMethod]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="LatestFPMethod" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -5542,24 +5515,28 @@
                       name="dtlastapt" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtARTstop]"
-                      dataType="dbDate"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtARTstop]"
-                      name="dtARTstop" />
+                      name="dtARTstop"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtTO]"
-                      dataType="dbDate"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtTO]"
-                      name="dtTO" />
+                      name="dtTO"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtLTFU]"
-                      dataType="dbDate"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtLTFU]"
-                      name="dtLTFU" />
+                      name="dtLTFU"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtDead]"
-                      dataType="dbDate"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dtDead]"
-                      name="dtDead" />
+                      name="dtDead"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CD4befART]"
                       dataType="r8"
@@ -5760,176 +5737,151 @@
                       name="StartARTDate" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat3m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat3m]"
                       name="oARTstat3m" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat6m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat6m]"
                       name="oARTstat6m" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat1yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat1yr]"
                       name="oARTstat1yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTStat18m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTStat18m]"
                       name="oARTStat18m" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat2yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat2yr]"
                       name="oARTstat2yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat3yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat3yr]"
                       name="oARTstat3yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat4yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat4yr]"
                       name="oARTstat4yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat5yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat5yr]"
                       name="oARTstat5yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat6yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat6yr]"
                       name="oARTstat6yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat7yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat7yr]"
                       name="oARTstat7yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat8yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat8yr]"
                       name="oARTstat8yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat9yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat9yr]"
                       name="oARTstat9yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat10yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[oARTstat10yr]"
                       name="oARTstat10yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome]"
                       name="ARTOutcome" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NewARTOutcome]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NewARTOutcome]"
                       name="NewARTOutcome" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_0Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_0Days]"
                       name="ARTOutcome_0Days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_7days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_7days]"
                       name="ARTOutcome_7days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_14Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_14Days]"
                       name="ARTOutcome_14Days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_30Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_30Days]"
                       name="ARTOutcome_30Days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_90Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ARTOutcome_90Days]"
                       name="ARTOutcome_90Days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_0Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_0Days]"
                       name="duARTOutcome_0Days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_7days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_7days]"
                       name="duARTOutcome_7days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_14Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_14Days]"
                       name="duARTOutcome_14Days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_30Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_30Days]"
                       name="duARTOutcome_30Days" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_90Days]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="2"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[duARTOutcome_90Days]"
                       name="duARTOutcome_90Days" />
@@ -6030,92 +5982,79 @@
                       name="preARTfuYrs" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[m6PreARTStatus]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[m6PreARTStatus]"
                       name="m6PreARTStatus" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat1yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat1yr]"
                       name="preARTstat1yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat18m]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat18m]"
                       name="preARTstat18m" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat2yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat2yr]"
                       name="preARTstat2yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat3yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat3yr]"
                       name="preARTstat3yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat4yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat4yr]"
                       name="preARTstat4yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat5yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat5yr]"
                       name="preARTstat5yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat6yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat6yr]"
                       name="preARTstat6yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat7yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat7yr]"
                       name="preARTstat7yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat8yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat8yr]"
                       name="preARTstat8yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat9yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat9yr]"
                       name="preARTstat9yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat10yr]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[preARTstat10yr]"
                       name="preARTstat10yr" />
                     <outputColumn
                       refId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreARTOutcome]"
-                      codePage="1252"
-                      dataType="str"
+                      dataType="wstr"
                       length="1"
                       lineageId="Package\Populate Transfer Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PreARTOutcome]"
                       name="PreARTOutcome" />
@@ -6414,7 +6353,7 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
           SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="&#xA;&#xA;PRINT ('Dropping table')&#xA;IF OBJECT_ID ('PatientBaselines') IS NOT NULL &#xA;DROP TABLE PatientBaselines&#xA;go&#xA;PRINT ('CReating Mirror table')&#xA;go&#xA;--CReate A mirror table &#xA;SELECT  * INTO PatientBaselines FROM stg_PatientsWABWHOCD4 &#xA;go&#xA;--delete &#xA;PRINT ('Cleaning Mirror table')&#xA;go&#xA;DELETE FROM PatientBaselines&#xA;go&#xA;--&#xA;PRINT ('Seeding Mirror table with Patients with CD4 Results')&#xA;go&#xA;INSERT PatientBaselines (PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported) &#xA;SELECT A.PatientID,A.FacilityName, A.SiteCode,A.PatientPK, A.Emr,A.Project,A.DateImported  FROM stg_ARTPatients A&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = A.PatientID and C.PatientPK=A.PatientPK and C.SiteCode=A.SiteCode&#xA;GO&#xA;&#xA;PRINT ('Seeding Mirror Table With WHO data')&#xA;go&#xA;UPDATE PB &#xA;SET &#xA;PB.bWHO= ST.bWHO,PB.bWHODate=ST.bWHODate,PB.eWHO=ST.eWHO,PB.eWHODate=ST.eWHODate,PB.lastWHO=ST.lastWHO,PB.lastWHODate=ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;INNER JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA; go&#xA;&#xA;PRINT ('Seeding Mirror Table with WHO data only where Patient did not have CD4 data')&#xA;go&#xA;INSERT PatientBaselines ( PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported,bWHO,bWHODate,eWHO,eWHODate,lastWHO,lastWHODate)&#xA;SELECT ST.PatientID, ST.FacilityID, ST.SiteCode,ST.PatientPK, ST.Emr, &#xA;ST.Project, ST.DateImported,ST.bWHO,ST.bWHODate,ST.eWHO,ST.eWHODate,ST.lastWHO,ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;RIGHT JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA;WHERE PB.PatientID is NULL&#xA;go&#xA;&#xA;&#xA;&#xA;PRINT ('Dropping Duplicated Seed Records')&#xA;go&#xA;DELETE M &#xA;FROM PatientBaselines M&#xA;INNER JOIN &#xA;(&#xA;SELECT ROW_NUMBER() OVER (PARTITION BY  PatientID, FacilityID, SiteCode,PatientPK ORDER BY  PatientID, FacilityID, SiteCode,PatientPK ASC) AS NUM,  &#xA;PatientID, FacilityID, SiteCode,PatientPK, Ident&#xA;FROM PatientBaselines ) B&#xA;ON  M.Ident = B.Ident WHERE B.NUM &gt; 1&#xA;go&#xA;&#xA;&#xA;Print ('UPDATING CD4 Baseline Data. This will take some time.....')&#xA;go&#xA;&#xA;&#xA;&#xA;&#xA;----CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollment=TestResult,CD4atEnrollment_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA;----% CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollmentPercent=cast(TestResult as float),CD4atEnrollmentPercent_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA;&#xA;-----Last CD4 AfterART Start&#xA;--UPDATE CW &#xA;--SET CW.LastCD4AfterARTStart = D.TestResult, CW.LastCD4AfterARTStart_Date=d.OrderedbyDate&#xA;--FROM &#xA;--(&#xA;--SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;--INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;--INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;--inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;--GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA;--) C&#xA;--INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;--inner join  vw_GetCD4Counts D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;--go&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;---Last CD4 Percent AfterART Start&#xA;UPDATE CW &#xA;SET CW.LastCD4AfterARTStartPercent = D.TestResult, CW.LastCD4AfterARTStartPercent_Date=d.OrderedbyDate&#xA;FROM &#xA;(&#xA;SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA;) C&#xA;INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;inner join  vw_GetCD4Percent D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;&#xA;go&#xA;&#xA;&#xA;&#xA;&#xA;---6month cd4&#xA;UPDATE W SET  W.[6MonthCD4]=TestResult, w.[6MonthCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA;&#xA;&#xA;&#xA;---6month cd4Percent&#xA;UPDATE W SET  W.[6MonthCD4Percent]=TestResult, w.[6MonthCD4Percent_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA;--12month cd4&#xA;UPDATE W SET W.[12MonthCD4]= TestResult,W.[12MonthCD4_Date]= OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 11 AND 13&#xA;go&#xA;&#xA;&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.eCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.bCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;&#xA;----LStickCD4 beforARTSTart&#xA;UPDATE W SET W.[LstickBaselineCD4]=TestResult,W.[LstickBaselineCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -122 AND 92&#xA;go&#xA;&#xA;--- 6m Viral Load&#xA;UPDATE W SET W.[6MonthVL]=CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,W.[6MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 3 AND 9&#xA;&#xA;go&#xA;&#xA;--- 12m Viral Load&#xA;UPDATE W SET W.[12MonthVL]=CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,W.[12MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 9 AND 15&#xA;&#xA;--- 18mViral Load&#xA;UPDATE W SET W.[18MonthVL]=CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,W.[18MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 16 AND 20&#xA;&#xA;go&#xA;--- 24mViral Load&#xA;UPDATE W SET W.[24MonthVL]=CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,W.[24MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 21 AND 26" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="PRINT ('Dropping table')&#xA;IF OBJECT_ID ('PatientBaselines') IS NOT NULL &#xA;DROP TABLE PatientBaselines&#xA;go&#xA;PRINT ('CReating Mirror table')&#xA;go&#xA;--CReate A mirror table &#xA;SELECT  * INTO PatientBaselines FROM stg_PatientsWABWHOCD4 &#xA;go&#xA;--delete &#xA;PRINT ('Cleaning Mirror table')&#xA;go&#xA;DELETE FROM PatientBaselines&#xA;go&#xA;--&#xA;PRINT ('Seeding Mirror table with Patients with CD4 Results')&#xA;go&#xA;INSERT PatientBaselines (PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported) &#xA;SELECT A.PatientID,A.FacilityName, A.SiteCode,A.PatientPK, A.Emr,A.Project,A.DateImported  FROM stg_ARTPatients A&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = A.PatientID and C.PatientPK=A.PatientPK and C.SiteCode=A.SiteCode&#xA;GO&#xA;&#xA; &#xA;&#xA;PRINT ('Seeding Mirror Table With WHO data')&#xA;go&#xA;UPDATE PB &#xA;SET &#xA;PB.bWHO= ST.bWHO,PB.bWHODate=ST.bWHODate,PB.eWHO=ST.eWHO,PB.eWHODate=ST.eWHODate,PB.lastWHO=ST.lastWHO,PB.lastWHODate=ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;INNER JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA; go&#xA;&#xA; &#xA;PRINT ('Seeding Mirror Table with WHO data only where Patient did not have CD4 data')&#xA;go&#xA;INSERT PatientBaselines ( PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported,bWHO,bWHODate,eWHO,eWHODate,lastWHO,lastWHODate)&#xA;SELECT ST.PatientID, ST.FacilityID, ST.SiteCode,ST.PatientPK, ST.Emr, &#xA;ST.Project, ST.DateImported,ST.bWHO,ST.bWHODate,ST.eWHO,ST.eWHODate,ST.lastWHO,ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;RIGHT JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA;WHERE PB.PatientID is NULL&#xA;go&#xA;&#xA;PRINT ('Dropping Duplicated Seed Records')&#xA;go&#xA;DELETE M &#xA;FROM PatientBaselines M&#xA;INNER JOIN &#xA;(&#xA;SELECT ROW_NUMBER() OVER (PARTITION BY  PatientID, FacilityID, SiteCode,PatientPK ORDER BY  PatientID, FacilityID, SiteCode,PatientPK ASC) AS NUM,  &#xA;PatientID, FacilityID, SiteCode,PatientPK, Ident&#xA;FROM PatientBaselines ) B&#xA;ON  M.Ident = B.Ident WHERE B.NUM &gt; 1&#xA;go&#xA;&#xA; &#xA;Print ('UPDATING CD4 Baseline Data. This will take some time.....')&#xA;go&#xA;&#xA;----CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollment=TestResult,CD4atEnrollment_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA;----% CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollmentPercent=cast(TestResult as float),CD4atEnrollmentPercent_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA; -----Last CD4 AfterART Start&#xA;--UPDATE CW &#xA;--SET CW.LastCD4AfterARTStart = D.TestResult, CW.LastCD4AfterARTStart_Date=d.OrderedbyDate&#xA;--FROM &#xA;--(&#xA;--SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;--INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;--INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;--inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;--GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;--) C&#xA;--INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;--inner join  vw_GetCD4Counts D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;--go&#xA;&#xA;&#xA;---Last CD4 Percent AfterART Start&#xA;UPDATE CW &#xA;SET CW.LastCD4AfterARTStartPercent = D.TestResult, CW.LastCD4AfterARTStartPercent_Date=d.OrderedbyDate&#xA;FROM &#xA;(&#xA;SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;) C&#xA;INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;inner join  vw_GetCD4Percent D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;&#xA; &#xA;&#xA;go&#xA;&#xA;---6month cd4&#xA;UPDATE W SET  W.[6MonthCD4]=TestResult, w.[6MonthCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA; &#xA;&#xA;&#xA;---6month cd4Percent&#xA;UPDATE W SET  W.[6MonthCD4Percent]=TestResult, w.[6MonthCD4Percent_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;--12month cd4&#xA;UPDATE W SET W.[12MonthCD4]= TestResult,W.[12MonthCD4_Date]= OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 11 AND 13&#xA;go&#xA;&#xA; &#xA;&#xA;&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.eCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.bCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;----LStickCD4 beforARTSTart&#xA;UPDATE W SET W.[LstickBaselineCD4]=TestResult,W.[LstickBaselineCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -122 AND 92&#xA;go&#xA;&#xA;--Update by MM 17th March 2021 for inclusion of non numeric true VL results (Undetectable/NotDetected/LDL)&#xA;--Update by MM 17th March 2021: Changed the period to +-2 from +-3 as advised by Dr Muthoka&#xA;&#xA;--- 6m Viral Load&#xA;UPDATE W SET W.[6MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[6MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 4 AND 8&#xA;go&#xA;&#xA; &#xA;&#xA;--- 12m Viral Load&#xA;UPDATE W SET W.[12MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[12MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 10 AND 14&#xA;&#xA; &#xA;&#xA;--- 18mViral Load&#xA;UPDATE W SET &#xA;W.[18MonthVL]= CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[18MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 16 AND 20&#xA;&#xA; &#xA;&#xA;go&#xA;--- 24mViral Load&#xA;UPDATE W SET W.[24MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[24MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 22 AND 26" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -6518,7 +6457,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Patient Pharmacy"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6536,7 +6475,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Patient Status"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6570,7 +6509,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Visits"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6586,7 +6525,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - WABWHO"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6602,7 +6541,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="VL Lookup"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6642,6 +6581,7 @@
       DTS:refId="Package\Truncate Transfer Table"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{E019585A-FF59-433A-8A8B-1DFD5AA8C6D2}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -6837,7 +6777,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="128" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        Capacity="128" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
         <NodeLayout
           Size="224,42"
           Id="Package\Back Up Database - All Staging"
@@ -6930,7 +6870,7 @@
           TopLeft="654.5,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -6952,7 +6892,7 @@
           TopLeft="654.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -6974,7 +6914,7 @@
           TopLeft="378.5,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -6996,7 +6936,7 @@
           TopLeft="378.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -7018,7 +6958,7 @@
           TopLeft="105.111111111111,47.2777777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60.2222222222222"
               Start="0,0"
               End="0,52.7222222222222">
@@ -7040,7 +6980,7 @@
           TopLeft="105.222222222222,149.277777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60.2222222222222"
               Start="0,0"
               End="0,52.7222222222222">
@@ -7117,7 +7057,7 @@
           TopLeft="791.625,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-691.125,60.0000000000001"
               Start="0,0"
               End="-691.125,52.5000000000001">
@@ -7151,7 +7091,7 @@
           TopLeft="810.25,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-461.75,60"
               Start="0,0"
               End="-461.75,52.5">
@@ -7185,7 +7125,7 @@
           TopLeft="847.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -7207,7 +7147,7 @@
           TopLeft="1106.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-237.875,60"
               Start="0,0"
               End="-237.875,52.5">
@@ -7241,7 +7181,7 @@
           TopLeft="1353.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-463.75,60.0000000000001"
               Start="0,0"
               End="-463.75,52.5000000000001">
@@ -7275,7 +7215,7 @@
           TopLeft="1597.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-686.625,60.0000000000001"
               Start="0,0"
               End="-686.625,52.5000000000001">
@@ -7309,7 +7249,7 @@
           TopLeft="828.875,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-236.375,60"
               Start="0,0"
               End="-236.375,52.5">
@@ -7343,7 +7283,7 @@
           TopLeft="847.5,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -7365,7 +7305,7 @@
           TopLeft="866.125,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="240.375,60"
               Start="0,0"
               End="240.375,52.5">
@@ -7399,7 +7339,7 @@
           TopLeft="884.75,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="468.75,59.9999999999999"
               Start="0,0"
               End="468.75,52.4999999999999">
@@ -7433,7 +7373,7 @@
           TopLeft="903.375,47.4999999999999">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="694.125,59.9999999999999"
               Start="0,0"
               End="694.125,52.4999999999999">
@@ -7467,7 +7407,7 @@
           TopLeft="100.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="683.625,59.9999999999999"
               Start="0,0"
               End="683.625,52.4999999999999">
@@ -7501,7 +7441,7 @@
           TopLeft="348.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="456.75,60"
               Start="0,0"
               End="456.75,52.5">
@@ -7535,7 +7475,7 @@
           TopLeft="592.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="233.875,60"
               Start="0,0"
               End="233.875,52.5">
@@ -7628,7 +7568,7 @@
           TopLeft="822,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -7665,7 +7605,7 @@
           TopLeft="733.030854803054,412.118133891667">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="668.339515567316,207.381866108333"
               Start="0,0"
               End="668.339515567316,199.881866108333">
@@ -7699,7 +7639,7 @@
           TopLeft="1428,865.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,59"
               Start="0,0"
               End="0,51.5">
@@ -7721,7 +7661,7 @@
           TopLeft="1430,1462.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-29,81"
               Start="0,0"
               End="-29,73.5">
@@ -7755,7 +7695,7 @@
           TopLeft="1428,762.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,61"
               Start="0,0"
               End="0,53.5">
@@ -7777,7 +7717,7 @@
           TopLeft="1757.6110980312,527.738096872154">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-301.870357290463,91.7619031278456"
               Start="0,0"
               End="-301.870357290463,84.2619031278456">
@@ -7811,7 +7751,7 @@
           TopLeft="1428.75,1789.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -7833,7 +7773,7 @@
           TopLeft="1428.5,2402.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -7855,7 +7795,7 @@
           TopLeft="1428,661.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,59"
               Start="0,0"
               End="0,51.5">
@@ -7877,7 +7817,7 @@
           TopLeft="1428.47222222222,2300.38888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60.1111111111113"
               Start="0,0"
               End="0,52.6111111111113">
@@ -7899,7 +7839,7 @@
           TopLeft="1395.37037037037,149.277777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-662.339515567316,117.062578336111"
               Start="0,0"
               End="-662.339515567316,109.562578336111">
@@ -7933,7 +7873,7 @@
           TopLeft="1461.74074074074,149.277777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="295.870357290463,28.2380968721544"
               Start="0,0"
               End="295.870357290463,20.7380968721544">
@@ -7967,7 +7907,7 @@
           TopLeft="1428.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -7989,7 +7929,7 @@
           TopLeft="1185,1176.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-10.5,61"
               Start="0,0"
               End="-10.5,53.5">
@@ -8023,7 +7963,7 @@
           TopLeft="1255.1111211188,1634.26916029001">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="76.3888788811951,32.3736968528508"
               Start="0,0"
               End="68.8888788811951,32.3736968528508">
@@ -8057,7 +7997,7 @@
           TopLeft="1670,1176.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-242.5,60"
               Start="0,0"
               End="-242.5,52.5">
@@ -8091,7 +8031,7 @@
           TopLeft="1428.52777777778,1891.27777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60.2222222222222"
               Start="0,0"
               End="0,52.7222222222222">
@@ -8113,7 +8053,7 @@
           TopLeft="1174.5,1279.78571428571">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="223.52380952381,59.7142857142858"
               Start="0,0"
               End="223.52380952381,52.2142857142858">
@@ -8147,7 +8087,7 @@
           TopLeft="1427.42857142857,1278.78571428571">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="32.1190476190477,60.7142857142858"
               Start="0,0"
               End="32.1190476190477,53.2142857142858">
@@ -8181,7 +8121,7 @@
           TopLeft="1342,1564.64285714286">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-86.8888788811951,63.9120174328634"
               Start="0,0"
               End="-79.3888788811951,63.9120174328634">
@@ -8215,7 +8155,7 @@
           TopLeft="1428.75,1687.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -8237,7 +8177,7 @@
           TopLeft="1429.5,1381.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,39"
               Start="0,0"
               End="0,31.5">
@@ -8276,7 +8216,7 @@
     design-time-name="Package\Populate Transfer Table">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="150,42"
           Id="Package\Populate Transfer Table\OLE DB Source"
@@ -8316,7 +8256,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

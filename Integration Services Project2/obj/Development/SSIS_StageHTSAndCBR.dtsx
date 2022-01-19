@@ -7,7 +7,7 @@
   DTS:CreatorName="KENYAHMIS\dgikandi"
   DTS:DTSID="{393A0A58-6A70-4849-8B7E-EB84CBE130DE}"
   DTS:ExecutableType="SSIS.Package.3"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StageHTSAndCBR"
   DTS:PackageType="5"
@@ -18,7 +18,7 @@
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LocalHost.All_Staging_2016_2]"
-      DTS:CreationName="ADO.Net:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
       DTS:DTSID="{E62CE75D-5795-4A76-813A-96969F5475C6}"
       DTS:ObjectName="LocalHost.All_Staging_2016_2">
       <DTS:ObjectData>
@@ -33,6 +33,8 @@
       DTS:ObjectName="LocalHost.All_Staging_2016_21">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=All_Staging_2016_2;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -43,6 +45,8 @@
       DTS:ObjectName="LocalHost.CBS_Staging">
       <DTS:ObjectData>
         <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
           DTS:ConnectionString="Data Source=.;Initial Catalog=CBS_Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
