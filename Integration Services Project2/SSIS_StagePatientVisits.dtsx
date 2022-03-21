@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientVisits"
   DTS:PackageType="5"
-  DTS:VersionBuild="89"
-  DTS:VersionGUID="{B3786C79-D5DC-41BE-A961-12195D2FB169}">
+  DTS:VersionBuild="90"
+  DTS:VersionGUID="{9E82D2A4-FAD6-44D6-AD52-A173E1286BF3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -129,7 +129,7 @@ NULL AS PatientUID
 FROM 
  
 [dbo].[PatientExtract] P 
-INNER JOIN [dbo].[PatientArtExtract] PA ON PA.[PatientId]= P.ID
+LEFT JOIN [dbo].[PatientArtExtract] PA ON PA.[PatientId]= P.ID
 INNER JOIN [dbo].[PatientVisitExtract] PV ON PV.[PatientId]= P.ID AND PV.Voided=0
 INNER JOIN [dbo].[Facility] F ON P.[FacilityId] = F.Id AND F.Voided=0
 ----LEFT JOIN All_Staging_2016_2.dbo.stg_Patients TPat ON TPat.PKV=LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber]))+'-'+LTRIM(RTRIM(STR(P.[PatientPID])))
@@ -8147,7 +8147,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="151,42"
+          Size="150.666666666667,42"
           Id="Package\Data Flow Task"
           TopLeft="5.5,5.5" />
       </GraphLayout>
@@ -8159,15 +8159,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="204,42"
-          Id="Package\Data Flow Task\Union All- After Adherence"
-          TopLeft="158.388888888889,616.166666666667" />
-        <NodeLayout
-          Size="152,42"
-          Id="Package\Data Flow Task\Knockout Rows"
-          TopLeft="411.944444444445,209.055555555556" />
-        <NodeLayout
-          Size="193,42"
+          Size="193.333333333334,42"
           Id="Package\Data Flow Task\lkp_AdhereanceMapping"
           TopLeft="5.50000000000013,514.388888888889" />
         <NodeLayout
@@ -8175,21 +8167,29 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Id="Package\Data Flow Task\Split - Check WHO Staging"
           TopLeft="158.166666666667,717.944444444445" />
         <NodeLayout
-          Size="188,42"
-          Id="Package\Data Flow Task\SQL Server Destination"
-          TopLeft="166.611111111111,1125.05555555556" />
-        <NodeLayout
           Size="156,42"
           Id="Package\Data Flow Task\Data Conversion"
           TopLeft="410.166666666667,310.833333333333" />
         <NodeLayout
-          Size="162,42"
-          Id="Package\Data Flow Task\lkp_WHOMapping"
-          TopLeft="321.055555555556,819.722222222223" />
+          Size="188,42"
+          Id="Package\Data Flow Task\SQL Server Destination"
+          TopLeft="166.611111111111,1125.05555555556" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Data Flow Task\Knockout Rows"
+          TopLeft="411.944444444445,209.055555555556" />
         <NodeLayout
           Size="274,42"
           Id="Package\Data Flow Task\Derived Column - Shorten Some Columns"
           TopLeft="183.5,1023.27777777778" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Data Flow Task\Union All- After Adherence"
+          TopLeft="158.388888888889,616.166666666667" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Data Flow Task\lkp_WHOMapping"
+          TopLeft="321.055555555556,819.722222222223" />
         <NodeLayout
           Size="228,42"
           Id="Package\Data Flow Task\Remove  Duplicate Visit Entries"
@@ -8199,6 +8199,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Id="Package\Data Flow Task\Split-Check Adherence"
           TopLeft="168.166666666667,412.611111111111" />
         <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task\ADO NET Source"
+          TopLeft="408.611111111111,5.50000000000002" />
+        <NodeLayout
           Size="212,42"
           Id="Package\Data Flow Task\Union All - After WHO Stage"
           TopLeft="154.388888888889,921.5" />
@@ -8206,10 +8210,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Size="156,42"
           Id="Package\Data Flow Task\DataReaderDest"
           TopLeft="412.833333333333,412.611111111111" />
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Data Flow Task\ADO NET Source"
-          TopLeft="408.611111111111,5.50000000000002" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[WHO Stage NULL]"
           TopLeft="226.870370370371,759.722222222223">
@@ -8639,7 +8639,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -8649,7 +8649,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -8670,7 +8670,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -8680,7 +8680,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
