@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterStageDWAPI Central"
   DTS:PackageType="5"
-  DTS:VersionBuild="180"
-  DTS:VersionGUID="{B0B416D2-EE94-4325-8B3D-6247D3EAE5A6}">
+  DTS:VersionBuild="184"
+  DTS:VersionGUID="{88E290CE-5866-490A-AAAE-8355A67F6DF8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -850,7 +850,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{15B88D83-F697-4C55-92F1-F68930278958}"
-          SQLTask:SqlStatementSource="&#xA;TRUNCATE TABLE stg_ARTPatients&#xA; GO &#xA;TRUNCATE TABLE stg_PatientLabs &#xA;GO &#xA;TRUNCATE TABLE stg_PatientPharmacy &#xA;GO &#xA;TRUNCATE TABLE stg_Patients &#xA;GO &#xA;TRUNCATE TABLE stg_PatientStatus&#xA; GO &#xA;TRUNCATE TABLE stg_PatientsWABWHOCD4&#xA; GO &#xA;TRUNCATE TABLE stg_PatientVisits&#xA; GO &#xA;TRUNCATE TABLE stg_AdverseEvents&#xA;GO " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;TRUNCATE TABLE stg_ARTPatients&#xA;GO &#xA;TRUNCATE TABLE stg_PatientLabs &#xA;GO &#xA;TRUNCATE TABLE stg_PatientPharmacy &#xA;GO &#xA;TRUNCATE TABLE stg_Patients &#xA;GO &#xA;TRUNCATE TABLE stg_PatientStatus&#xA;GO &#xA;TRUNCATE TABLE stg_PatientsWABWHOCD4&#xA;GO &#xA;TRUNCATE TABLE stg_PatientVisits&#xA;GO &#xA;TRUNCATE TABLE stg_AdverseEvents&#xA;GO " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1036,7 +1036,22 @@
       <GraphLayout
         Capacity="128" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="169,42"
+          Size="140,42"
+          Id="Package\COVID\COVID Table"
+          TopLeft="51,20" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\COVID\Defaulter Tracing"
+          TopLeft="244,18" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="440,112"
+          Size="440,154.666666666667"
+          Id="Package\COVID"
+          TopLeft="1431,2159" />
+        <NodeLayout
+          Size="169.333333333334,42"
           Id="Package\Disable Constraints"
           TopLeft="697.388888888889,209.055555555556" />
         <NodeLayout
@@ -1044,7 +1059,7 @@
           Id="Package\Enable Constraints"
           TopLeft="684.5,1404.61111111111" />
         <NodeLayout
-          Size="179,42"
+          Size="178.666666666667,42"
           Id="Package\Fix ECARE PID issues"
           TopLeft="683.055555555556,1500.38888888889" />
         <NodeLayout
@@ -1052,7 +1067,7 @@
           Id="Package\HTS and CBR"
           TopLeft="701.54761902239,1695.97550031996" />
         <NodeLayout
-          Size="163,42"
+          Size="162.666666666667,42"
           Id="Package\MNCH\ANC Visits"
           TopLeft="27,13" />
         <NodeLayout
@@ -1060,7 +1075,7 @@
           Id="Package\MNCH\CWC Enrolments"
           TopLeft="31,80" />
         <NodeLayout
-          Size="163,42"
+          Size="162.666666666667,42"
           Id="Package\MNCH\CWC Visits"
           TopLeft="32,154" />
         <NodeLayout
@@ -1092,69 +1107,69 @@
           Id="Package\MNCH\Mother Baby Pairs"
           TopLeft="529,89" />
         <NodeLayout
-          Size="177,42"
+          Size="177.333333333334,42"
           Id="Package\MNCH\PNC Visits"
           TopLeft="523,151" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="741,277"
-          Size="741,320"
+          PanelSize="741.333333333334,277.333333333334"
+          Size="741.333333333334,320"
           Id="Package\MNCH"
           TopLeft="1277,1790" />
         <NodeLayout
-          Size="185,42"
+          Size="185.333333333334,42"
           Id="Package\OVC_OTZ\allergies"
           TopLeft="37.166666666667,33.2777777777781" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\contact_listing"
           TopLeft="278,31" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\depression"
           TopLeft="506,32" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\drug_alcohol"
           TopLeft="41,135" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\enhanced_adherence"
           TopLeft="278,137" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\gbv"
           TopLeft="509.166666666667,128" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\ipt"
           TopLeft="35.166666666667,230" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\otz"
           TopLeft="287.166666666667,228" />
         <NodeLayout
-          Size="186,45"
+          Size="186,45.3333333333334"
           Id="Package\OVC_OTZ\ovc"
           TopLeft="515,227" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="745,327"
-          Size="745,370"
+          PanelSize="745.333333333334,326.666666666667"
+          Size="745.333333333334,370"
           Id="Package\OVC_OTZ"
           TopLeft="406,1785" />
         <NodeLayout
-          Size="157,42"
+          Size="157.333333333334,42"
           Id="Package\Patient PKV_UID"
           TopLeft="703.166666666667,412.611111111111" />
         <NodeLayout
-          Size="169,42"
+          Size="169.333333333334,42"
           Id="Package\Post Import Scripts"
           TopLeft="684.388888888889,1599.16666666667" />
         <NodeLayout
-          Size="171,42"
+          Size="170.666666666667,42"
           Id="Package\Reclaim HDD Space"
           TopLeft="696.055555555556,3.50766276973041" />
         <NodeLayout
@@ -1281,7 +1296,7 @@
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="970,204"
-          Size="970,247"
+          Size="970,246.666666666667"
           Id="Package\Sequence -"
           TopLeft="296.5,514.388888888889" />
         <NodeLayout
@@ -1293,7 +1308,7 @@
           Id="Package\Sequence Container\Patient Pharmacy PKV_UID"
           TopLeft="25.5,107.277777777778" />
         <NodeLayout
-          Size="169,42"
+          Size="169.333333333334,42"
           Id="Package\Sequence Container\Stage Patient Labs"
           TopLeft="293.388888888889,17.4999999999999" />
         <NodeLayout
@@ -1347,24 +1362,24 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="510,205"
+          PanelSize="510,205.333333333334"
           Size="510,248"
           Id="Package\Sequence Container"
           TopLeft="518.944444444445,825.500000000001" />
         <NodeLayout
-          Size="177,42"
+          Size="177.333333333334,42"
           Id="Package\Stage Patient Extract"
           TopLeft="692.944444444444,310.833333333333" />
         <NodeLayout
-          Size="151,42"
+          Size="150.666666666667,42"
           Id="Package\Truncate tables"
           TopLeft="706.055555555556,107.277777777778" />
         <NodeLayout
-          Size="185,42"
+          Size="185.333333333334,42"
           Id="Package\Visits\Patient Visits PKV_UID"
           TopLeft="46.166666666667,112.277777777778" />
         <NodeLayout
-          Size="171,42"
+          Size="170.666666666667,42"
           Id="Package\Visits\Stage Patient Visits"
           TopLeft="54.055555555556,14.5" />
         <EdgeLayout
@@ -1392,8 +1407,8 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="266,186"
-          Size="266,229"
+          PanelSize="266,186.666666666667"
+          Size="266,229.333333333334"
           Id="Package\Visits"
           TopLeft="638.666666666666,1122" />
         <EdgeLayout
@@ -1432,6 +1447,28 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,40.9999999999991" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="1649.25,2110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1686,43 +1723,6 @@
                     Point3="67,-20" />
                   <mssgle:LineSegment
                     End="118.5,-20" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="140,42"
-          Id="Package\COVID\COVID Table"
-          TopLeft="51,20" />
-        <NodeLayout
-          Size="160,42"
-          Id="Package\COVID\Defaulter Tracing"
-          TopLeft="244,18" />
-        <ContainerLayout
-          HeaderHeight="43"
-          IsExpanded="True"
-          PanelSize="440,112"
-          Size="440,155"
-          Id="Package\COVID"
-          TopLeft="1431,2159" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="1649.25,2110">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,49"
-              Start="0,0"
-              End="0,41.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
