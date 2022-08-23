@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientExtract"
   DTS:PackageType="5"
-  DTS:VersionBuild="47"
-  DTS:VersionGUID="{C1D6E592-A47C-4621-B5F2-D061D62E1130}">
+  DTS:VersionBuild="55"
+  DTS:VersionGUID="{191B7272-7900-47AE-8F4A-0250EA74B7BA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -140,10 +140,12 @@ P.[Id]
 	P.PatientResidentWard,
 	P.PatientResidentVillage,
 	P.TransferInDate, 
+                  P.Occupation,
 	0 as knockout
- FROM [dbo].[PatientExtract] P 
-INNER JOIN [dbo].[Facility] F ON P.[FacilityId] = F.Id AND F.Voided=0 
-WHERE P.Voided=0 and P.[Gender] is NOT NULL and p.gender!='Unknown'
+  FROM [dbo].[PatientExtract](NoLock) P 
+INNER JOIN [dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0 
+INNER JOIN FacilityManifest_MaxDateRecieved(NoLock) a ON F.Code = a.SiteCode
+WHERE P.Voided=0 and P.[Gender] is NOT NULL and p.gender!='Unknown' and a.[End] is not null and a.[Session] is not null and SiteCode &gt;0 
 ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                 <property
                   dataType="System.Int32"
@@ -606,6 +608,16 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       scale="7"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Occupation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Occupation]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Occupation]"
+                      name="Occupation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[knockout]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
@@ -826,6 +838,11 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       dataType="dbTimeStamp2"
                       name="TransferInDate"
                       scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Occupation]"
+                      dataType="wstr"
+                      length="150"
+                      name="Occupation" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[knockout]"
                       dataType="i4"
@@ -1089,6 +1106,12 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TransferInDate]"
                       name="TransferInDate"
                       scale="7" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Occupation]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Occupation]"
+                      name="Occupation" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[knockout]"
                       dataType="i4"
@@ -4173,6 +4196,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       cachedName="_PatientResidentVillage"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientResidentVillage]"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientResidentVillage]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Occupation]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Occupation"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Occupation]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Occupation]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -4398,6 +4428,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransferInDate]"
                       dataType="dbDate"
                       name="TransferInDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Occupation]"
+                      dataType="wstr"
+                      length="150"
+                      name="Occupation" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -4715,7 +4750,33 @@ where [refTable].[PKV] = ?</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete Complete Uploads"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{21B40E02-7634-4062-9FDC-819330467CBF}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Complete Uploads"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{83008F12-3293-4D6B-AD67-81B63D86E8C2}"
+          SQLTask:SqlStatementSource="DELETE a FROM [All_Staging_2016_2].[dbo].[stg_Patients] a&#xA;INNER JOIN [DWAPICentral].[dbo].[FacilityManifest_MaxDateRecieved]  b&#xA;ON A.SiteCode = B.SiteCode&#xA;where b.[End] is not null and b.[Session] is not null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7B9B76CB-1B8F-4151-B8CB-6B8FFD88DB67}"
+      DTS:From="Package\Delete Complete Uploads"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -4727,11 +4788,37 @@ where [refTable].[PKV] = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151,42"
+          Size="152,42.6666666666667"
           Id="Package\Data Flow Task"
-          TopLeft="86,73" />
+          TopLeft="103.49999973923,118.499999186397" />
+        <NodeLayout
+          Size="198.666666666667,42.6666666666667"
+          Id="Package\Delete Complete Uploads"
+          TopLeft="79.3749988172204,19.4999996513128" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="179.104165944892,62.1666663179795">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.3333328684171"
+              Start="0,0"
+              End="0,48.8333328684171">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.8333328684171" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -4739,7 +4826,23 @@ where [refTable].[PKV] = ?</property>
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="154.666666666667,42"
+          Id="Package\Data Flow Task\NewPatientUIDs"
+          TopLeft="51.9444444444445,514.388888888889" />
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Data Flow Task\Check for Duplicate PKVs in Pipeline"
+          TopLeft="5.50000000000003,107.277777777778" />
+        <NodeLayout
+          Size="170.666666666667,42"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="43.9444444444445,616.166666666667" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="51.5,310.833333333333" />
         <NodeLayout
           Size="160,42"
           Id="Package\Data Flow Task\PatientUID Exists"
@@ -4749,22 +4852,6 @@ where [refTable].[PKV] = ?</property>
           Id="Package\Data Flow Task\Remove Duplicate PKVs"
           TopLeft="34.3888888888889,209.055555555556" />
         <NodeLayout
-          Size="155,42"
-          Id="Package\Data Flow Task\NewPatientUIDs"
-          TopLeft="51.9444444444445,514.388888888889" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="43.9444444444445,616.166666666667" />
-        <NodeLayout
-          Size="156,42"
-          Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="51.5,310.833333333333" />
-        <NodeLayout
-          Size="248,42"
-          Id="Package\Data Flow Task\Check for Duplicate PKVs in Pipeline"
-          TopLeft="5.50000000000003,107.277777777778" />
-        <NodeLayout
           Size="158,42"
           Id="Package\Data Flow Task\ADO NET Source"
           TopLeft="50.3888888888889,5.50000000000002" />
@@ -4773,7 +4860,7 @@ where [refTable].[PKV] = ?</property>
           TopLeft="129.444444444445,556.388888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,59.7777777777779"
               Start="0,0"
               End="0,52.2777777777779">
@@ -4795,7 +4882,7 @@ where [refTable].[PKV] = ?</property>
           TopLeft="129.5,149.055555555556">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000002"
               Start="0,0"
               End="0,52.5000000000002">
@@ -4817,7 +4904,7 @@ where [refTable].[PKV] = ?</property>
           TopLeft="129.5,454.388888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -4841,7 +4928,7 @@ where [refTable].[PKV] = ?</property>
           TopLeft="129.5,352.611111111111">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000001"
               Start="0,0"
               End="0,52.5000000000001">
@@ -4863,7 +4950,7 @@ where [refTable].[PKV] = ?</property>
           TopLeft="129.5,250.833333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60"
               Start="0,0"
               End="0,52.5">
@@ -4887,7 +4974,7 @@ where [refTable].[PKV] = ?</property>
           TopLeft="129.5,47.2777777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{x:Null}"
+              StartConnector="{assembly:Null}"
               EndConnector="0,60.0000000000002"
               Start="0,0"
               End="0,52.5000000000002">
@@ -4908,6 +4995,19 @@ where [refTable].[PKV] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\PatientUID Exists">
     <Properties>
       <Property>
@@ -4927,19 +5027,6 @@ where [refTable].[PKV] = ?</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

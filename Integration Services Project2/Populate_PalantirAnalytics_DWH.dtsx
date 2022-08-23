@@ -1,0 +1,784 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/12/2022 11:11:17 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="KENYAHMIS"
+  DTS:CreatorName="KENYAHMIS\Administrator"
+  DTS:DTSID="{5546FD74-09A6-4656-BAD5-B9249CFDC6ED}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Populate_PalantirAnalytics_DWH"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{9212CCCB-B5FC-4F57-83E9-4050FC1CF7EA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Populate PalantirAnalytics Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C12A0572-15A1-46D1-A93C-14FAA2A64C69}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate PalantirAnalytics Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate PalantirAnalytics Task\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Palantir]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{C8891DBD-2887-4133-88FB-A9366DB9DDC3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWHData Analytics]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FacilityName"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[County]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="County"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UploadDate]"
+                      cachedDataType="dbDate"
+                      cachedName="UploadDate"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UploadDate]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[UploadDate]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Code]"
+                      cachedDataType="i4"
+                      cachedName="Code"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Code]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Implementing_Mechanism_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="Implementing_Mechanism_Name"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Implementing_Mechanism_Name]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateQueryExecuted]"
+                      cachedDataType="dbDate"
+                      cachedName="DateQueryExecuted"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SiteAbstractionDate]"
+                      cachedDataType="dbDate"
+                      cachedName="SiteAbstractionDate"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SiteAbstractionDate]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[SiteAbstractionDate]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Patients]"
+                      cachedDataType="i4"
+                      cachedName="Patients"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Patients]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Patients]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ART]"
+                      cachedDataType="i4"
+                      cachedName="ART"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ART]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[ART]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[visits]"
+                      cachedDataType="i4"
+                      cachedName="visits"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[visits]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[visits]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[pharm]"
+                      cachedDataType="i4"
+                      cachedName="pharm"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pharm]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[pharm]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[labs]"
+                      cachedDataType="i4"
+                      cachedName="labs"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[labs]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[labs]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[exits]"
+                      cachedDataType="i4"
+                      cachedName="exits"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[exits]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[exits]" />
+                    <inputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[adv]"
+                      cachedDataType="i4"
+                      cachedName="adv"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[adv]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[adv]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      dataType="i4"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="150"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="150"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Implementing_Mechanism_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UploadDate]"
+                      dataType="dbDate"
+                      name="UploadDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      name="SiteAbstractionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Patients]"
+                      dataType="i4"
+                      name="Patients" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ART]"
+                      dataType="i4"
+                      name="ART" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[visits]"
+                      dataType="i4"
+                      name="visits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pharm]"
+                      dataType="i4"
+                      name="pharm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[labs]"
+                      dataType="i4"
+                      name="labs" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[exits]"
+                      dataType="i4"
+                      name="exits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[adv]"
+                      dataType="i4"
+                      name="adv" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate PalantirAnalytics Task\Read from Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Read from Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT Distinct
+c.Code,df.Name as FacilityName,df.County,p.Implementing_Mechanism_Name,
+cast(Getdate() as Date)DateQueryExecuted,
+fm.UploadDate,
+cast(sa.siteAbst_DC as date) As SiteAbstractionDate,
+c.Patients,
+art.ART,
+vis.visits,
+phar.pharm,
+lab.labs,
+stat.exits,
+adv.adv
+from  (SELECT Code,count(Concat(PatientID,FacilityCode))Patients from [Data Request Palantir].dbo.Patients p
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code 
+			where f.voided=0 and code &gt;0
+			group by code
+)c 
+LEFT JOIN (SELECT Code, count(a.PatientID)ART from [Data Request Palantir].dbo.Patients p
+			inner join [Data Request Palantir].dbo.ART a on a.PatientId=p.PatientID
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code 
+			where f.voided=0
+			GROUP BY Code
+)art ON art.code=c.code
+
+LEFT JOIN (SELECT Code, count(VisitId)visits from [Data Request Palantir].dbo.Patients p
+			inner join [Data Request Palantir].dbo.Visits a on a.PatientId=p.PatientID
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code  where f.voided=0
+			GROUP BY Code
+)vis ON vis.code=c.code
+LEFT JOIN (SELECT Code, count(p.PatientID)pharm from [Data Request Palantir].dbo.Patients p
+			inner join [Data Request Palantir].dbo.Pharmacy a on a.PatientId=p.PatientID
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code  where f.voided=0
+			GROUP BY Code
+)phar ON phar.code=c.code
+LEFT JOIN (SELECT Code, count(a.PatientID)labs from [Data Request Palantir].dbo.Patients p
+			inner join [Data Request Palantir].dbo.Labs a on a.PatientId=p.PatientID
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code  where f.voided=0
+			GROUP BY Code
+)lab ON lab.code=c.code
+LEFT JOIN (SELECT Code, count(a.PatientID)exits from [Data Request Palantir].dbo.Patients p
+			inner join [Data Request Palantir].dbo.PatientStatus a on a.PatientId=p.PatientID
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code  where f.voided=0
+			GROUP BY Code
+)stat ON stat.code=c.code
+LEFT JOIN (SELECT Code, count(a.PatientID)adv from [Data Request Palantir].dbo.Patients p
+			inner join [Data Request Palantir].dbo.AdverseEvent a on a.PatientId=p.PatientID
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code  where f.voided=0
+			GROUP BY Code
+)adv ON adv.code=c.code
+LEFT JOIN [DWAPICentral].dbo.lkp_USGPartnerMenchanism p ON p.MFL_Code=c.Code
+LEFT Join (Select distinct sitecode, MAX(cast(DateRecieved as Date)) UploadDate from [DWAPICentral].dbo.FacilityManifest
+Group by sitecode)fm ON  p.MFL_Code=fm.sitecode
+LEFT Join (SELECT Code, Max(VisitDate)siteAbst_DC from [Data Request Palantir].dbo.Patients p
+			inner join [Data Request Palantir].dbo.Visits a on a.PatientId=p.PatientID
+			inner join [DWAPICentral].dbo.facility f on p.FacilityCode=f.Code  where f.voided=0
+			GROUP BY Code)sa ON  p.MFL_Code=sa.Code
+Left join [DWAPICentral].dbo.MasterFacility df on df.Code=c.code</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate PalantirAnalytics Task\Read from Src.Connections[OleDbConnection]"
+                  connectionManagerID="{CC953BCA-A6FE-4F7E-9BDF-C30B117D8DB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWAPICentral]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      length="255"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      length="255"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]"
+                      name="County"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[UploadDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[UploadDate]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[UploadDate]"
+                      name="UploadDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Code]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Code]"
+                      name="Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Implementing_Mechanism_Name]"
+                      length="200"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]"
+                      name="Implementing_Mechanism_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[SiteAbstractionDate]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[SiteAbstractionDate]"
+                      name="SiteAbstractionDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Patients]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Patients]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[Patients]"
+                      name="Patients"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[ART]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[ART]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[ART]"
+                      name="ART"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[visits]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[visits]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[visits]"
+                      name="visits"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[pharm]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[pharm]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[pharm]"
+                      name="pharm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[labs]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[labs]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[labs]"
+                      name="labs"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[exits]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[exits]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[exits]"
+                      name="exits"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[adv]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[adv]"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].Columns[adv]"
+                      name="adv"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="150"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="150"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[UploadDate]"
+                      dataType="dbDate"
+                      name="UploadDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      dataType="i4"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Implementing_Mechanism_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      name="SiteAbstractionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Patients]"
+                      dataType="i4"
+                      name="Patients" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[ART]"
+                      dataType="i4"
+                      name="ART" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[visits]"
+                      dataType="i4"
+                      name="visits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[pharm]"
+                      dataType="i4"
+                      name="pharm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[labs]"
+                      dataType="i4"
+                      name="labs" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[exits]"
+                      dataType="i4"
+                      name="exits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[adv]"
+                      dataType="i4"
+                      name="adv" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      name="Code" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      name="County" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Implementing_Mechanism_Name]"
+                      name="Implementing_Mechanism_Name" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[UploadDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[UploadDate]"
+                      name="UploadDate" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[SiteAbstractionDate]"
+                      name="SiteAbstractionDate" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Patients]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Patients]"
+                      name="Patients" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ART]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ART]"
+                      name="ART" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[visits]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[visits]"
+                      name="visits" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[pharm]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[pharm]"
+                      name="pharm" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[labs]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[labs]"
+                      name="labs" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[exits]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[exits]"
+                      name="exits" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[adv]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[adv]"
+                      name="adv" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate PalantirAnalytics Task.Paths[OLE DB Source Output]"
+              endId="Package\Populate PalantirAnalytics Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate PalantirAnalytics Task\Read from Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="225.333333333334,42.6666666666667"
+          Id="Package\Populate PalantirAnalytics Task"
+          TopLeft="113.124998314306,29.9833314620456" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Populate PalantirAnalytics Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Populate PalantirAnalytics Task\Read from Src"
+          TopLeft="149.999997764826,36.3999993491173" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Populate PalantirAnalytics Task\OLE DB Destination"
+          TopLeft="133.124998016283,160.549997129142" />
+        <EdgeLayout
+          Id="Package\Populate PalantirAnalytics Task.Paths[OLE DB Source Output]"
+          TopLeft="221.229164557221,79.066666015784">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,81.4833311133583"
+              Start="0,0"
+              End="0,73.9833311133583">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.9833311133583" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate PalantirAnalytics Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate PalantirAnalytics Task\Read from Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

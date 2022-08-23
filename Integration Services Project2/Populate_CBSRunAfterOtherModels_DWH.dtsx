@@ -1,0 +1,1019 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/13/2022 1:28:12 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="KENYAHMIS"
+  DTS:CreatorName="KENYAHMIS\Administrator"
+  DTS:DTSID="{20B0247B-69C9-4CB6-87E9-F54D68D15387}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Populate_CBSRunAfterOtherModels_DWH"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{052E5221-2347-487D-82FC-C67A24CF522C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6C0B57A5-F4BE-4E78-9FDB-CB75D2AFC715}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate Fact_Trans_HMIS_STATS_TXCURR"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Fact_Trans_HMIS_STATS_TXCURR]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.All_Staging_2016_2]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MFLCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MFLCode"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFLCode]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[MFLCode]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="FacilityName"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[County]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="County"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[County]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Subcounty]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Subcounty"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Subcounty]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Subcounty]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CTPartner]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="CTPartner"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CTPartner]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[CTPartner]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ageGroup]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ageGroup"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ageGroup]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[ageGroup]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientPK]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="PatientPK"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientPK]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[PatientPK]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="PatientID"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[PatientID]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ageGroupCleaned]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="ageGroupCleaned"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ageGroupCleaned]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[ageGroupCleaned]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Age_grp]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="Age_grp"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Age_grp]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Age_grp]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TXCURR_Total]"
+                      cachedDataType="i4"
+                      cachedName="TXCURR_Total"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TXCURR_Total]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[TXCURR_Total]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Eligible4VL]"
+                      cachedDataType="i4"
+                      cachedName="Eligible4VL"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Eligible4VL]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Eligible4VL]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Last12MonthVL]"
+                      cachedDataType="i4"
+                      cachedName="Last12MonthVL"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MonthVL]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Last12MonthVL]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Last12MVLSup]"
+                      cachedDataType="i4"
+                      cachedName="Last12MVLSup"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MVLSup]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Last12MVLSup]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HighViremia]"
+                      cachedDataType="i4"
+                      cachedName="HighViremia"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HighViremia]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[HighViremia]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LowViremia]"
+                      cachedDataType="i4"
+                      cachedName="LowViremia"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LowViremia]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[LowViremia]" />
+                    <inputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CTAgency]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="CTAgency"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CTAgency]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[CTAgency]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MFLCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="255"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Subcounty]"
+                      dataType="wstr"
+                      length="255"
+                      name="Subcounty" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="CTPartner" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ageGroup]"
+                      dataType="wstr"
+                      length="50"
+                      name="ageGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientPK]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientPK" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ageGroupCleaned]"
+                      dataType="wstr"
+                      length="50"
+                      name="ageGroupCleaned" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Age_grp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Age_grp" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TXCURR_Total]"
+                      dataType="i4"
+                      name="TXCURR_Total" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Eligible4VL]"
+                      dataType="i4"
+                      name="Eligible4VL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MonthVL]"
+                      dataType="i4"
+                      name="Last12MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MVLSup]"
+                      dataType="i4"
+                      name="Last12MVLSup" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HighViremia]"
+                      dataType="i4"
+                      name="HighViremia" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LowViremia]"
+                      dataType="i4"
+                      name="LowViremia" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CTAgency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="CTAgency" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Read From Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT MFLCode,FacilityName,County ,Subcounty,CTPartner,a.Gender,a.ageGroup,PatientPK,PatientID,
+Case 
+	WHEN a.ageGroup ='&lt;1' THEN 'Under 1'
+	ELSE a.ageGroup End as ageGroupCleaned,
+a.Age_grp,sum(TXCurr) TXCURR_Total,
+	sum(EligibleVL)Eligible4VL,	sum([Last12MonthVL]) [Last12MonthVL],	sum([Last12MVLSup])[Last12MVLSup],
+	sum(HVL) [HighViremia],
+	sum(LVL)[LowViremia],
+		CTAgency
+
+FROM (SELECT DISTINCT  MFLCode,FacilityName,County ,Subcounty,CTPartner,CTAgency,PatientPK,PatientID
+,P.Gender,p.EligibleVL,TXCurr,[Last12MonthVL],
+Case
+	WHEN Last12MVLResult is not NULL and Last12MVLResult ='VL' Then 1
+	ELSE 0 End as [Last12MVLSup],
+	g.AgeGroup,
+	
+Case
+	when floor(ageLV) &lt;15 then 'Child'
+	when floor(ageLV) &gt;=15 then 'Adult'
+ELSE 'Aii' End as Age_grp,
+
+Case
+	WHEN Last12MVLResult is not NULL and Last12MVLResult ='HVL' Then 1
+	ELSE 0 End as HVL,
+Case
+	WHEN Last12MVLResult is not NULL and Last12MVLResult ='LVL' Then 1
+	ELSE 0 End as LVL
+	
+FROM [dbo].[Fact_Trans_New_Cohort] P
+INNER join Portaldev.dbo.Dim_AgeGroups g on g.Age=P.ageLV
+where TXCurr=1
+)A
+where MFLCode&gt;0
+GROUP BY MFLCode,a.ageGroup,a.Gender,FacilityName,County ,Subcounty,CTPartner ,Age_grp, CTAgency,PatientPK,PatientID
+order by a.MFLCode asc</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Connections[OleDbConnection]"
+                  connectionManagerID="{D154BFA9-4C69-4BE6-80FC-824EDA5E9097}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.PortalDev]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[MFLCode]"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[MFLCode]"
+                      name="MFLCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      length="255"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[County]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      length="255"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[County]"
+                      name="County"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Subcounty]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Subcounty]"
+                      length="255"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Subcounty]"
+                      name="Subcounty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[CTPartner]"
+                      length="200"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[CTPartner]"
+                      name="CTPartner"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="6"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[ageGroup]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[ageGroup]"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[ageGroup]"
+                      name="ageGroup"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[PatientPK]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[PatientPK]"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[PatientPK]"
+                      name="PatientPK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      length="100"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[ageGroupCleaned]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[ageGroupCleaned]"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[ageGroupCleaned]"
+                      name="ageGroupCleaned"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Age_grp]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Age_grp]"
+                      length="5"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Age_grp]"
+                      name="Age_grp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[TXCURR_Total]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[TXCURR_Total]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[TXCURR_Total]"
+                      name="TXCURR_Total"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Eligible4VL]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Eligible4VL]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Eligible4VL]"
+                      name="Eligible4VL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Last12MonthVL]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MonthVL]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Last12MonthVL]"
+                      name="Last12MonthVL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Last12MVLSup]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MVLSup]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[Last12MVLSup]"
+                      name="Last12MVLSup"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[HighViremia]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[HighViremia]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[HighViremia]"
+                      name="HighViremia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[LowViremia]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[LowViremia]"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[LowViremia]"
+                      name="LowViremia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[CTAgency]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[CTAgency]"
+                      length="100"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].Columns[CTAgency]"
+                      name="CTAgency"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MFLCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="255"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Subcounty]"
+                      dataType="wstr"
+                      length="255"
+                      name="Subcounty" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="CTPartner" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[ageGroup]"
+                      dataType="wstr"
+                      length="50"
+                      name="ageGroup" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[PatientPK]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientPK" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[ageGroupCleaned]"
+                      dataType="wstr"
+                      length="50"
+                      name="ageGroupCleaned" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Age_grp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Age_grp" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[TXCURR_Total]"
+                      dataType="i4"
+                      name="TXCURR_Total" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Eligible4VL]"
+                      dataType="i4"
+                      name="Eligible4VL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MonthVL]"
+                      dataType="i4"
+                      name="Last12MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MVLSup]"
+                      dataType="i4"
+                      name="Last12MVLSup" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[HighViremia]"
+                      dataType="i4"
+                      name="HighViremia" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[LowViremia]"
+                      dataType="i4"
+                      name="LowViremia" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output].ExternalColumns[CTAgency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="CTAgency" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[MFLCode]"
+                      name="MFLCode" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      name="County" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Subcounty]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Subcounty]"
+                      name="Subcounty" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[CTPartner]"
+                      name="CTPartner" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ageGroup]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ageGroup]"
+                      name="ageGroup" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[PatientPK]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[PatientPK]"
+                      name="PatientPK" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ageGroupCleaned]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ageGroupCleaned]"
+                      name="ageGroupCleaned" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Age_grp]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Age_grp]"
+                      name="Age_grp" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[TXCURR_Total]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[TXCURR_Total]"
+                      name="TXCURR_Total" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Eligible4VL]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Eligible4VL]"
+                      name="Eligible4VL" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Last12MonthVL]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Last12MonthVL]"
+                      name="Last12MonthVL" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Last12MVLSup]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[Last12MVLSup]"
+                      name="Last12MVLSup" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[HighViremia]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[HighViremia]"
+                      name="HighViremia" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[LowViremia]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[LowViremia]"
+                      name="LowViremia" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[CTAgency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[CTAgency]"
+                      name="CTAgency" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR.Paths[OLE DB Source Output]"
+              endId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate table Fact_Trans_HMIS_STATS_TXCURR"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{12F58624-D031-44ED-AB96-46E68A3BFF2C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate table Fact_Trans_HMIS_STATS_TXCURR"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{CC953BCA-A6FE-4F7E-9BDF-C30B117D8DB7}"
+          SQLTask:SqlStatementSource="Truncate table All_Staging_2016_2.dbo.[Fact_Trans_HMIS_STATS_TXCURR]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EE6FA939-1CE1-40E2-BEA1-253377A31D4E}"
+      DTS:From="Package\Truncate table Fact_Trans_HMIS_STATS_TXCURR"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Populate Fact_Trans_HMIS_STATS_TXCURR" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="316,42.6666666666667"
+          Id="Package\Truncate table Fact_Trans_HMIS_STATS_TXCURR"
+          TopLeft="29.9999995529652,19.4999996513128" />
+        <NodeLayout
+          Size="288,42.6666666666667"
+          Id="Package\Populate Fact_Trans_HMIS_STATS_TXCURR"
+          TopLeft="378.124994365498,22.0999996048212" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="345.999999552965,42.1333329614004">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32.1249948125333,0"
+              Start="0,0"
+              End="24.6249948125333,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="24.6249948125333,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Populate Fact_Trans_HMIS_STATS_TXCURR">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src"
+          TopLeft="176.24999737367,16.2499997094274" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination"
+          TopLeft="182.499997280538,123.499997791648" />
+        <EdgeLayout
+          Id="Package\Populate Fact_Trans_HMIS_STATS_TXCURR.Paths[OLE DB Source Output]"
+          TopLeft="250.916664040337,58.916666376094">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.5833332402011,64.5833314155539"
+              Start="0,0"
+              End="17.5833332402011,57.0833314155539">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.291665707777" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.291665707777"
+                    Point2="0,32.291665707777"
+                    Point3="4,32.291665707777" />
+                  <mssgle:LineSegment
+                    End="13.5833332402011,32.291665707777" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.5833332402011,32.291665707777"
+                    Point2="17.5833332402011,32.291665707777"
+                    Point3="17.5833332402011,36.291665707777" />
+                  <mssgle:LineSegment
+                    End="17.5833332402011,57.0833314155539" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\Read From Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Fact_Trans_HMIS_STATS_TXCURR\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

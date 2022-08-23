@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="27"
-  DTS:VersionGUID="{9D165F70-48E2-486F-81C3-336C4C32144B}">
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{5A282A88-9A8E-49D7-BA12-21E8666E52B4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -45,7 +45,7 @@
       DTS:refId="Package\Data Flow Task"
       DTS:CreationName="SSIS.Pipeline.3"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{E74EBEB7-2849-48BE-92A3-A86161A9F195}"
+      DTS:DTSID="{b8bd64f1-505c-470b-9639-847f204afaf3}"
       DTS:ExecutableType="SSIS.Pipeline.3"
       DTS:LocaleID="-1"
       DTS:ObjectName="Data Flow Task">
@@ -106,13 +106,14 @@
       ,LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber])) +'-'+LTRIM(RTRIM(STR(P.[PatientPID]))) AS PKV
 ,NULL AS PatientUID
 FROM 
-[dbo].[PatientExtract] P 
-INNER JOIN [dbo].[PatientArtExtract] PA ON PA.[PatientId]= P.ID
-INNER JOIN [dbo].[PatientBaselinesExtract] PB ON PB.[PatientId]= P.ID AND PB.Voided=0
-INNER JOIN [dbo].[Facility] F ON P.[FacilityId] = F.Id AND F.Voided=0
+[dbo].[PatientExtract](NoLock) P 
+INNER JOIN [dbo].[PatientArtExtract](NoLock) PA ON PA.[PatientId]= P.ID
+INNER JOIN [dbo].[PatientBaselinesExtract](NoLock) PB ON PB.[PatientId]= P.ID AND PB.Voided=0
+INNER JOIN [dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0
+INNER JOIN FacilityManifest_MaxDateRecieved(NoLock) a ON F.Code = a.SiteCode
 ---LEFT JOIN All_Staging_2016_2.dbo.stg_Patients TPat ON TPat.PKV=LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber]))+'-'+LTRIM(RTRIM(STR(P.[PatientPID])))
 --GROUP BY  F.Name , YEAR([StartARTDate])
-WHERE p.gender!='Unknown'</property>
+WHERE p.gender!='Unknown'  and a.[End] is not null and a.[Session] is not null</property>
                 <property
                   dataType="System.Int32"
                   description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
@@ -155,10 +156,10 @@ WHERE p.gender!='Unknown'</property>
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]"
                       name="PatientID"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       dataType="i4"
@@ -167,7 +168,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
                       name="PatientPK"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       dataType="wstr"
@@ -177,7 +178,7 @@ WHERE p.gender!='Unknown'</property>
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
                       name="FacilityName"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       dataType="i4"
@@ -186,7 +187,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
                       name="SiteCode"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4]"
                       dataType="i4"
@@ -195,16 +196,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eCD4]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4]"
                       name="eCD4"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eCD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4Date]"
                       name="eCD4Date"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHO]"
                       dataType="i4"
@@ -213,16 +215,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHO]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHO]"
                       name="eWHO"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHODate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHODate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHODate]"
                       name="eWHODate"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4]"
                       dataType="i4"
@@ -231,16 +234,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4]"
                       name="bCD4"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4Date]"
                       name="bCD4Date"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHO]"
                       dataType="i4"
@@ -249,16 +253,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHO]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHO]"
                       name="bWHO"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHODate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHODate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHODate]"
                       name="bWHODate"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHO]"
                       dataType="i4"
@@ -267,16 +272,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHO]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHO]"
                       name="lastWHO"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHODate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHODate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHODate]"
                       name="lastWHODate"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4]"
                       dataType="i4"
@@ -285,16 +291,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4]"
                       name="lastCD4"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4Date]"
                       name="lastCD4Date"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4]"
                       dataType="i4"
@@ -303,16 +310,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4]"
                       name="m12CD4"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4Date]"
                       name="m12CD4Date"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4]"
                       dataType="i4"
@@ -321,36 +329,37 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4]"
                       name="m6CD4"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4Date]"
                       name="m6CD4Date"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Emr]"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
                       name="Emr"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Project]"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
                       name="Project"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       dataType="bool"
@@ -359,7 +368,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
                       name="Voided"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       dataType="bool"
@@ -368,7 +377,7 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Processed]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
                       name="Processed"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWAB]"
                       dataType="i4"
@@ -377,16 +386,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWAB]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWAB]"
                       name="bWAB"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWABDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWABDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWABDate]"
                       name="bWABDate"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWAB]"
                       dataType="i4"
@@ -395,16 +405,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWAB]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWAB]"
                       name="eWAB"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWABDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWABDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWABDate]"
                       name="eWABDate"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWAB]"
                       dataType="i4"
@@ -413,16 +424,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWAB]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWAB]"
                       name="lastWAB"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWABDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWABDate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWABDate]"
                       name="lastWABDate"
-                      truncationRowDisposition="IgnoreFailure" />
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       dataType="dbTimeStamp"
@@ -431,17 +443,17 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
                       name="Created"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
-                      length="172"
+                      length="122"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
                       name="PKV"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientUID]"
                       dataType="i4"
@@ -450,14 +462,14 @@ WHERE p.gender!='Unknown'</property>
                       externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientUID]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientUID]"
                       name="PatientUID"
-                      truncationRowDisposition="IgnoreFailure" />
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       name="PatientID" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
@@ -478,73 +490,81 @@ WHERE p.gender!='Unknown'</property>
                       name="eCD4" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eCD4Date]"
-                      dataType="dbTimeStamp"
-                      name="eCD4Date" />
+                      dataType="dbTimeStamp2"
+                      name="eCD4Date"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHO]"
                       dataType="i4"
                       name="eWHO" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHODate]"
-                      dataType="dbTimeStamp"
-                      name="eWHODate" />
+                      dataType="dbTimeStamp2"
+                      name="eWHODate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4]"
                       dataType="i4"
                       name="bCD4" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4Date]"
-                      dataType="dbTimeStamp"
-                      name="bCD4Date" />
+                      dataType="dbTimeStamp2"
+                      name="bCD4Date"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHO]"
                       dataType="i4"
                       name="bWHO" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHODate]"
-                      dataType="dbTimeStamp"
-                      name="bWHODate" />
+                      dataType="dbTimeStamp2"
+                      name="bWHODate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHO]"
                       dataType="i4"
                       name="lastWHO" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHODate]"
-                      dataType="dbTimeStamp"
-                      name="lastWHODate" />
+                      dataType="dbTimeStamp2"
+                      name="lastWHODate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4]"
                       dataType="i4"
                       name="lastCD4" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4Date]"
-                      dataType="dbTimeStamp"
-                      name="lastCD4Date" />
+                      dataType="dbTimeStamp2"
+                      name="lastCD4Date"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4]"
                       dataType="i4"
                       name="m12CD4" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4Date]"
-                      dataType="dbTimeStamp"
-                      name="m12CD4Date" />
+                      dataType="dbTimeStamp2"
+                      name="m12CD4Date"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4]"
                       dataType="i4"
                       name="m6CD4" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4Date]"
-                      dataType="dbTimeStamp"
-                      name="m6CD4Date" />
+                      dataType="dbTimeStamp2"
+                      name="m6CD4Date"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Emr]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       name="Emr" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Project]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       name="Project" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
@@ -560,24 +580,27 @@ WHERE p.gender!='Unknown'</property>
                       name="bWAB" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWABDate]"
-                      dataType="dbTimeStamp"
-                      name="bWABDate" />
+                      dataType="dbTimeStamp2"
+                      name="bWABDate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWAB]"
                       dataType="i4"
                       name="eWAB" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWABDate]"
-                      dataType="dbTimeStamp"
-                      name="eWABDate" />
+                      dataType="dbTimeStamp2"
+                      name="eWABDate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWAB]"
                       dataType="i4"
                       name="lastWAB" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWABDate]"
-                      dataType="dbTimeStamp"
-                      name="lastWABDate" />
+                      dataType="dbTimeStamp2"
+                      name="lastWABDate"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
                       dataType="dbTimeStamp"
@@ -585,7 +608,7 @@ WHERE p.gender!='Unknown'</property>
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
                       dataType="wstr"
-                      length="172"
+                      length="122"
                       name="PKV" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientUID]"
@@ -601,7 +624,7 @@ WHERE p.gender!='Unknown'</property>
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientID]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientID]"
                       name="PatientID" />
                     <outputColumn
@@ -627,9 +650,10 @@ WHERE p.gender!='Unknown'</property>
                       name="eCD4" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eCD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eCD4Date]"
-                      name="eCD4Date" />
+                      name="eCD4Date"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWHO]"
                       dataType="i4"
@@ -637,9 +661,10 @@ WHERE p.gender!='Unknown'</property>
                       name="eWHO" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWHODate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWHODate]"
-                      name="eWHODate" />
+                      name="eWHODate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bCD4]"
                       dataType="i4"
@@ -647,9 +672,10 @@ WHERE p.gender!='Unknown'</property>
                       name="bCD4" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bCD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bCD4Date]"
-                      name="bCD4Date" />
+                      name="bCD4Date"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWHO]"
                       dataType="i4"
@@ -657,9 +683,10 @@ WHERE p.gender!='Unknown'</property>
                       name="bWHO" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWHODate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWHODate]"
-                      name="bWHODate" />
+                      name="bWHODate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWHO]"
                       dataType="i4"
@@ -667,9 +694,10 @@ WHERE p.gender!='Unknown'</property>
                       name="lastWHO" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWHODate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWHODate]"
-                      name="lastWHODate" />
+                      name="lastWHODate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastCD4]"
                       dataType="i4"
@@ -677,9 +705,10 @@ WHERE p.gender!='Unknown'</property>
                       name="lastCD4" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastCD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastCD4Date]"
-                      name="lastCD4Date" />
+                      name="lastCD4Date"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m12CD4]"
                       dataType="i4"
@@ -687,9 +716,10 @@ WHERE p.gender!='Unknown'</property>
                       name="m12CD4" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m12CD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m12CD4Date]"
-                      name="m12CD4Date" />
+                      name="m12CD4Date"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m6CD4]"
                       dataType="i4"
@@ -697,19 +727,20 @@ WHERE p.gender!='Unknown'</property>
                       name="m6CD4" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m6CD4Date]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m6CD4Date]"
-                      name="m6CD4Date" />
+                      name="m6CD4Date"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Emr]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Emr]"
                       name="Emr" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Project]"
                       dataType="wstr"
-                      length="150"
+                      length="100"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Project]"
                       name="Project" />
                     <outputColumn
@@ -729,9 +760,10 @@ WHERE p.gender!='Unknown'</property>
                       name="bWAB" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWABDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWABDate]"
-                      name="bWABDate" />
+                      name="bWABDate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWAB]"
                       dataType="i4"
@@ -739,9 +771,10 @@ WHERE p.gender!='Unknown'</property>
                       name="eWAB" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWABDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWABDate]"
-                      name="eWABDate" />
+                      name="eWABDate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWAB]"
                       dataType="i4"
@@ -749,9 +782,10 @@ WHERE p.gender!='Unknown'</property>
                       name="lastWAB" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWABDate]"
-                      dataType="dbTimeStamp"
+                      dataType="dbTimeStamp2"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWABDate]"
-                      name="lastWABDate" />
+                      name="lastWABDate"
+                      scale="7" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Created]"
                       dataType="dbTimeStamp"
@@ -760,7 +794,7 @@ WHERE p.gender!='Unknown'</property>
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PKV]"
                       dataType="wstr"
-                      length="172"
+                      length="122"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PKV]"
                       name="PKV" />
                     <outputColumn
@@ -800,7 +834,7 @@ WHERE p.gender!='Unknown'</property>
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PatientID]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="100"
                       cachedName="PatientID"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]" />
                     <inputColumn
@@ -812,19 +846,19 @@ WHERE p.gender!='Unknown'</property>
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Emr]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="100"
                       cachedName="Emr"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[Project]"
                       cachedDataType="wstr"
-                      cachedLength="150"
+                      cachedLength="100"
                       cachedName="Project"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]" />
                     <inputColumn
                       refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PKV]"
                       cachedDataType="wstr"
-                      cachedLength="172"
+                      cachedLength="122"
                       cachedName="PKV"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]" />
                   </inputColumns>
@@ -1067,8 +1101,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[eCD4Date]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="eCD4Date"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eCD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4Date]" />
                     <inputColumn
@@ -1079,8 +1114,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHO]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[eWHODate]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="eWHODate"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eWHODate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHODate]" />
                     <inputColumn
@@ -1091,8 +1127,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[bCD4Date]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="bCD4Date"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bCD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4Date]" />
                     <inputColumn
@@ -1103,8 +1140,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHO]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[bWHODate]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="bWHODate"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bWHODate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHODate]" />
                     <inputColumn
@@ -1115,8 +1153,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHO]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lastWHODate]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="lastWHODate"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastWHODate]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHODate]" />
                     <inputColumn
@@ -1127,8 +1166,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lastCD4Date]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="lastCD4Date"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastCD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4Date]" />
                     <inputColumn
@@ -1139,8 +1179,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[m12CD4Date]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="m12CD4Date"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m12CD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4Date]" />
                     <inputColumn
@@ -1151,8 +1192,9 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[m6CD4Date]"
-                      cachedDataType="dbTimeStamp"
+                      cachedDataType="dbTimeStamp2"
                       cachedName="m6CD4Date"
+                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m6CD4Date]"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4Date]" />
                     <inputColumn
@@ -1510,7 +1552,1503 @@ WHERE p.gender!='Unknown'</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task_old"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{E74EBEB7-2849-48BE-92A3-A86161A9F195}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task_old">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task_old\ADO NET Source"
+              componentClassID="DTS.ManagedComponentWrapper.3"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  P.[PatientCccNumber] AS PatientID, 
+	  P.[PatientPID] AS PatientPK,
+	  F.Name AS FacilityName, 
+	  F.Code AS SiteCode,
+      PB.[eCD4]
+      ,PB.[eCD4Date]
+      ,PB.[eWHO]
+      ,PB.[eWHODate]
+      ,PB.[bCD4]
+      ,PB.[bCD4Date]
+      ,PB.[bWHO]
+      ,PB.[bWHODate]
+      ,PB.[lastWHO]
+      ,PB.[lastWHODate]
+      ,PB.[lastCD4]
+      ,PB.[lastCD4Date]
+      ,PB.[m12CD4]
+      ,PB.[m12CD4Date]
+      ,PB.[m6CD4]
+      ,PB.[m6CD4Date]
+      ,P.[Emr]
+      ,CASE P.[Project] 
+			WHEN 'I-TECH' THEN 'Kenya HMIS II' 
+			WHEN 'HMIS' THEN 'Kenya HMIS II'
+	   ELSE P.[Project] 
+	   END AS [Project] 
+      ,PB.[Voided]
+      ,PB.[Processed]
+      ,PB.[bWAB]
+      ,PB.[bWABDate]
+      ,PB.[eWAB]
+      ,PB.[eWABDate]
+      ,PB.[lastWAB]
+      ,PB.[lastWABDate]
+      ,PB.[Created]
+      ,LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber])) +'-'+LTRIM(RTRIM(STR(P.[PatientPID]))) AS PKV
+,NULL AS PatientUID
+FROM 
+[dbo].[PatientExtract] P 
+INNER JOIN [dbo].[PatientArtExtract] PA ON PA.[PatientId]= P.ID
+INNER JOIN [dbo].[PatientBaselinesExtract] PB ON PB.[PatientId]= P.ID AND PB.Voided=0
+INNER JOIN [dbo].[Facility] F ON P.[FacilityId] = F.Id AND F.Voided=0
+---LEFT JOIN All_Staging_2016_2.dbo.stg_Patients TPat ON TPat.PKV=LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber]))+'-'+LTRIM(RTRIM(STR(P.[PatientPID])))
+--GROUP BY  F.Name , YEAR([StartARTDate])
+WHERE p.gender!='Unknown'</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version= 11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter, Microsoft.SqlServer.ADONETSrc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter, Microsoft.SqlServer.ADONETSrc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task_old\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[FUTURESKE2\SQLSERVER.DWAPICentral.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[FUTURESKE2\SQLSERVER.DWAPICentral.sa]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]"
+                      name="PatientPK"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[FacilityName]"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]"
+                      name="SiteCode"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eCD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4]"
+                      name="eCD4"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eCD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4Date]"
+                      name="eCD4Date"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHO]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHO]"
+                      name="eWHO"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHODate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHODate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHODate]"
+                      name="eWHODate"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4]"
+                      name="bCD4"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4Date]"
+                      name="bCD4Date"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHO]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHO]"
+                      name="bWHO"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHODate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHODate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHODate]"
+                      name="bWHODate"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHO]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHO]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHO]"
+                      name="lastWHO"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHODate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHODate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHODate]"
+                      name="lastWHODate"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4]"
+                      name="lastCD4"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4Date]"
+                      name="lastCD4Date"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4]"
+                      name="m12CD4"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4Date]"
+                      name="m12CD4Date"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4]"
+                      name="m6CD4"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4Date]"
+                      name="m6CD4Date"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Emr]"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]"
+                      name="Emr"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Project]"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]"
+                      name="Project"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Voided]"
+                      name="Voided"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Processed]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Processed]"
+                      name="Processed"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWAB]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWAB]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWAB]"
+                      name="bWAB"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWABDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWABDate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWABDate]"
+                      name="bWABDate"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWAB]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWAB]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWAB]"
+                      name="eWAB"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWABDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWABDate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWABDate]"
+                      name="eWABDate"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWAB]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWAB]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWAB]"
+                      name="lastWAB"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWABDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWABDate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWABDate]"
+                      name="lastWABDate"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Created]"
+                      name="Created"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
+                      length="172"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]"
+                      name="PKV"
+                      truncationRowDisposition="IgnoreFailure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientUID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientUID]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientUID]"
+                      name="PatientUID"
+                      truncationRowDisposition="IgnoreFailure" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientID]"
+                      dataType="wstr"
+                      length="150"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientPK]"
+                      dataType="i4"
+                      name="PatientPK" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="150"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SiteCode]"
+                      dataType="i4"
+                      name="SiteCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eCD4]"
+                      dataType="i4"
+                      name="eCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eCD4Date]"
+                      dataType="dbTimeStamp"
+                      name="eCD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHO]"
+                      dataType="i4"
+                      name="eWHO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWHODate]"
+                      dataType="dbTimeStamp"
+                      name="eWHODate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4]"
+                      dataType="i4"
+                      name="bCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bCD4Date]"
+                      dataType="dbTimeStamp"
+                      name="bCD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHO]"
+                      dataType="i4"
+                      name="bWHO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWHODate]"
+                      dataType="dbTimeStamp"
+                      name="bWHODate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHO]"
+                      dataType="i4"
+                      name="lastWHO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWHODate]"
+                      dataType="dbTimeStamp"
+                      name="lastWHODate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4]"
+                      dataType="i4"
+                      name="lastCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastCD4Date]"
+                      dataType="dbTimeStamp"
+                      name="lastCD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4]"
+                      dataType="i4"
+                      name="m12CD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m12CD4Date]"
+                      dataType="dbTimeStamp"
+                      name="m12CD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4]"
+                      dataType="i4"
+                      name="m6CD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[m6CD4Date]"
+                      dataType="dbTimeStamp"
+                      name="m6CD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Emr]"
+                      dataType="wstr"
+                      length="150"
+                      name="Emr" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Project]"
+                      dataType="wstr"
+                      length="150"
+                      name="Project" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Voided]"
+                      dataType="bool"
+                      name="Voided" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Processed]"
+                      dataType="bool"
+                      name="Processed" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWAB]"
+                      dataType="i4"
+                      name="bWAB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[bWABDate]"
+                      dataType="dbTimeStamp"
+                      name="bWABDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWAB]"
+                      dataType="i4"
+                      name="eWAB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[eWABDate]"
+                      dataType="dbTimeStamp"
+                      name="eWABDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWAB]"
+                      dataType="i4"
+                      name="lastWAB" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[lastWABDate]"
+                      dataType="dbTimeStamp"
+                      name="lastWABDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Created]"
+                      dataType="dbTimeStamp"
+                      name="Created" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PKV]"
+                      dataType="wstr"
+                      length="172"
+                      name="PKV" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PatientUID]"
+                      dataType="i4"
+                      name="PatientUID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientID]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientPK]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientPK]"
+                      name="PatientPK" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SiteCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SiteCode]"
+                      name="SiteCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eCD4]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eCD4]"
+                      name="eCD4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eCD4Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eCD4Date]"
+                      name="eCD4Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWHO]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWHO]"
+                      name="eWHO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWHODate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWHODate]"
+                      name="eWHODate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bCD4]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bCD4]"
+                      name="bCD4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bCD4Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bCD4Date]"
+                      name="bCD4Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWHO]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWHO]"
+                      name="bWHO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWHODate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWHODate]"
+                      name="bWHODate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWHO]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWHO]"
+                      name="lastWHO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWHODate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWHODate]"
+                      name="lastWHODate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastCD4]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastCD4]"
+                      name="lastCD4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastCD4Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastCD4Date]"
+                      name="lastCD4Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m12CD4]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m12CD4]"
+                      name="m12CD4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m12CD4Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m12CD4Date]"
+                      name="m12CD4Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m6CD4]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m6CD4]"
+                      name="m6CD4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m6CD4Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[m6CD4Date]"
+                      name="m6CD4Date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Emr]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Emr]"
+                      name="Emr" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Project]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Project]"
+                      name="Project" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Voided]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Voided]"
+                      name="Voided" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Processed]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Processed]"
+                      name="Processed" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWAB]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWAB]"
+                      name="bWAB" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWABDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[bWABDate]"
+                      name="bWABDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWAB]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWAB]"
+                      name="eWAB" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWABDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[eWABDate]"
+                      name="eWABDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWAB]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWAB]"
+                      name="lastWAB" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWABDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[lastWABDate]"
+                      name="lastWABDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Created]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Created]"
+                      name="Created" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PKV]"
+                      dataType="wstr"
+                      length="172"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PKV]"
+                      name="PKV" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientUID]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PatientUID]"
+                      name="PatientUID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task_old\Data Conversion"
+              componentClassID="DTSTransform.DataConvert.3"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input].Columns[PatientID]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="PatientID"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input].Columns[FacilityName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="FacilityName"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input].Columns[Emr]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Emr"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input].Columns[Project]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Project"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input].Columns[PKV]"
+                      cachedDataType="wstr"
+                      cachedLength="172"
+                      cachedName="PKV"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientID]"
+                      name="_PatientID"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_FacilityName]"
+                      name="_FacilityName"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[FacilityName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]"
+                      name="_Emr"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Emr]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_Project]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_Project]"
+                      name="_Project"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[Project]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]"
+                      name="_PKV"
+                      truncationRowDisposition="IgnoreFailure">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PKV]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task_old\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_PatientsWABWHOCD4]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,ROWS_PER_BATCH = 100000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task_old\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DWH-Dev.DWAPICentral_Staging.sa]"
+                  connectionManagerRefId="Package.ConnectionManagers[DWH-Dev.DWAPICentral_Staging.sa]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientPK]"
+                      cachedDataType="i4"
+                      cachedName="PatientPK"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientPK]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[PatientPK]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SiteCode]"
+                      cachedDataType="i4"
+                      cachedName="SiteCode"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SiteCode]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[SiteCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[eCD4]"
+                      cachedDataType="i4"
+                      cachedName="eCD4"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eCD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[eCD4Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="eCD4Date"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eCD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eCD4Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[eWHO]"
+                      cachedDataType="i4"
+                      cachedName="eWHO"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eWHO]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[eWHODate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="eWHODate"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eWHODate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[eWHODate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[bCD4]"
+                      cachedDataType="i4"
+                      cachedName="bCD4"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bCD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[bCD4Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="bCD4Date"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bCD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bCD4Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[bWHO]"
+                      cachedDataType="i4"
+                      cachedName="bWHO"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bWHO]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[bWHODate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="bWHODate"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bWHODate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[bWHODate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lastWHO]"
+                      cachedDataType="i4"
+                      cachedName="lastWHO"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastWHO]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHO]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lastWHODate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="lastWHODate"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastWHODate]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastWHODate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lastCD4]"
+                      cachedDataType="i4"
+                      cachedName="lastCD4"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastCD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lastCD4Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="lastCD4Date"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastCD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[lastCD4Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[m12CD4]"
+                      cachedDataType="i4"
+                      cachedName="m12CD4"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m12CD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[m12CD4Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="m12CD4Date"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m12CD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m12CD4Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[m6CD4]"
+                      cachedDataType="i4"
+                      cachedName="m6CD4"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m6CD4]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[m6CD4Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="m6CD4Date"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m6CD4Date]"
+                      lineageId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output].Columns[m6CD4Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_Emr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_Emr"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Emr]"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_Emr]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_Project]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_Project"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_Project]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_PatientID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_PatientID"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_PatientID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_FacilityName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="_FacilityName"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityID]"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_FacilityName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_PKV]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="_PKV"
+                      externalMetadataColumnId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PKV]"
+                      lineageId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output].Columns[_PKV]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FacilityID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SiteCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SiteCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bCD4]"
+                      dataType="r8"
+                      name="bCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bCD4Date]"
+                      dataType="dbDate"
+                      name="bCD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bWHO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="bWHO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bWHODate]"
+                      dataType="dbDate"
+                      name="bWHODate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eCD4]"
+                      dataType="r8"
+                      name="eCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eCD4Date]"
+                      dataType="dbDate"
+                      name="eCD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eWHO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="eWHO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eWHODate]"
+                      dataType="dbDate"
+                      name="eWHODate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastWHO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="lastWHO" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastWHODate]"
+                      dataType="dbDate"
+                      name="lastWHODate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastCD4]"
+                      dataType="r8"
+                      name="lastCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastCD4Date]"
+                      dataType="dbDate"
+                      name="lastCD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m12CD4]"
+                      dataType="r8"
+                      name="m12CD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m12CD4Date]"
+                      dataType="dbDate"
+                      name="m12CD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m6CD4]"
+                      dataType="r8"
+                      name="m6CD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[m6CD4Date]"
+                      dataType="dbDate"
+                      name="m6CD4Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientPK]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PatientPK" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Emr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Emr" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Project]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Project" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateImported]"
+                      dataType="dbDate"
+                      name="DateImported" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4atEnrollment]"
+                      dataType="r8"
+                      name="CD4atEnrollment" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4atEnrollment_Date]"
+                      dataType="dbDate"
+                      name="CD4atEnrollment_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4BeforeARTStart]"
+                      dataType="r8"
+                      name="CD4BeforeARTStart" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4BeforeARTStart_Date]"
+                      dataType="dbDate"
+                      name="CD4BeforeARTStart_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastCD4AfterARTStart]"
+                      dataType="r8"
+                      name="LastCD4AfterARTStart" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastCD4AfterARTStart_Date]"
+                      dataType="dbDate"
+                      name="LastCD4AfterARTStart_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4atEnrollmentPercent]"
+                      dataType="r8"
+                      name="CD4atEnrollmentPercent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4atEnrollmentPercent_Date]"
+                      dataType="dbDate"
+                      name="CD4atEnrollmentPercent_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4BeforeARTStartPercent]"
+                      dataType="r8"
+                      name="CD4BeforeARTStartPercent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CD4BeforeARTStartPercent_Date]"
+                      dataType="dbDate"
+                      name="CD4BeforeARTStartPercent_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastCD4AfterARTStartPercent]"
+                      dataType="r8"
+                      name="LastCD4AfterARTStartPercent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastCD4AfterARTStartPercent_Date]"
+                      dataType="dbDate"
+                      name="LastCD4AfterARTStartPercent_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Ident]"
+                      dataType="i4"
+                      name="Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[6MonthCD4]"
+                      dataType="r8"
+                      name="6MonthCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[6MonthCD4_Date]"
+                      dataType="dbDate"
+                      name="6MonthCD4_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[12MonthCD4]"
+                      dataType="r8"
+                      name="12MonthCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[12MonthCD4_Date]"
+                      dataType="dbDate"
+                      name="12MonthCD4_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[6MonthCD4Percent]"
+                      dataType="r8"
+                      name="6MonthCD4Percent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[6MonthCD4Percent_Date]"
+                      dataType="dbDate"
+                      name="6MonthCD4Percent_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[12MonthCD4Percent]"
+                      dataType="r8"
+                      name="12MonthCD4Percent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[12MonthCD4Percent_Date]"
+                      dataType="dbDate"
+                      name="12MonthCD4Percent_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstCD4AfterARTStart]"
+                      dataType="r8"
+                      name="FirstCD4AfterARTStart" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstCD4AfterARTStart_Date]"
+                      dataType="dbDate"
+                      name="FirstCD4AfterARTStart_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirtsCD4AfterARTStartPercent]"
+                      dataType="r8"
+                      name="FirtsCD4AfterARTStartPercent" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirtsCD4AfterARTStartPercent_date]"
+                      dataType="dbDate"
+                      name="FirtsCD4AfterARTStartPercent_date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[6MonthVL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="6MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[6MonthVlDate]"
+                      dataType="dbDate"
+                      name="6MonthVlDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[12MonthVL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="12MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[12MonthVLDate]"
+                      dataType="dbDate"
+                      name="12MonthVLDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LstickBaselineCD4]"
+                      dataType="r8"
+                      name="LstickBaselineCD4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LstickBaselineCD4_Date]"
+                      dataType="dbDate"
+                      name="LstickBaselineCD4_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PKV]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="PKV" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[18MonthVL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="18MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[18MonthVlDate]"
+                      dataType="dbDate"
+                      name="18MonthVlDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[24MonthVL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="24MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[24MonthVLDate]"
+                      dataType="dbDate"
+                      name="24MonthVLDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientUID]"
+                      dataType="guid"
+                      name="PatientUID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task_old\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task_old.Paths[ADO NET Source Output]"
+              endId="Package\Data Flow Task_old\Data Conversion.Inputs[Data Conversion Input]"
+              name="ADO NET Source Output"
+              startId="Package\Data Flow Task_old\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Data Flow Task_old.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task_old\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task_old\Data Conversion.Outputs[Data Conversion Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete Complete Uploads"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{18FF00B9-CABB-4E19-B97D-B1093ABA8B0C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Complete Uploads"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BA8A8E23-2AF7-4CE9-B8D3-48C4146CF93B}"
+          SQLTask:SqlStatementSource="DELETE a FROM [All_Staging_2016_2].[dbo].[stg_PatientsWABWHOCD4] a&#xA;INNER JOIN [DWAPICentral].[dbo].[FacilityManifest_MaxDateRecieved]  b&#xA;ON A.SiteCode = B.SiteCode&#xA;where b.[End] is not null and b.[Session] is not null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A0D88255-634D-410C-B4DF-71C312832984}"
+      DTS:From="Package\Delete Complete Uploads"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -1522,11 +3060,41 @@ WHERE p.gender!='Unknown'</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151,42"
+          Size="150.666666666667,42"
           Id="Package\Data Flow Task"
+          TopLeft="214.249996889383,115.316666538815" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Data Flow Task_old"
           TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="164,42.6666666666667"
+          Id="Package\Delete Complete Uploads"
+          TopLeft="214.99999679625,10.3999998140335" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="293.291663509483,53.0666664807002">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,62.2500000581145"
+              Start="0,0"
+              End="0,54.7500000581145">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.7500000581145" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1534,9 +3102,9 @@ WHERE p.gender!='Unknown'</property>
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171,42"
+          Size="170.666666666667,42"
           Id="Package\Data Flow Task\OLE DB Destination"
           TopLeft="5.50000000000003,209.055555555556" />
         <NodeLayout
@@ -1549,6 +3117,78 @@ WHERE p.gender!='Unknown'</property>
           TopLeft="13.0555555555556,107.277777777778" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="91.0555555555556,149.055555555556">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="91.0555555555556,47.2777777777778">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task_old">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task_old\OLE DB Destination"
+          TopLeft="5.50000000000003,209.055555555556" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task_old\ADO NET Source"
+          TopLeft="11.9444444444445,5.50000000000002" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data Flow Task_old\Data Conversion"
+          TopLeft="13.0555555555556,107.277777777778" />
+        <EdgeLayout
+          Id="Package\Data Flow Task_old.Paths[Data Conversion Output]"
           TopLeft="91.0555555555556,149.055555555556">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1570,7 +3210,7 @@ WHERE p.gender!='Unknown'</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
+          Id="Package\Data Flow Task_old.Paths[ADO NET Source Output]"
           TopLeft="91.0555555555556,47.2777777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1595,7 +3235,7 @@ WHERE p.gender!='Unknown'</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Data Flow Task_old\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1608,7 +3248,7 @@ WHERE p.gender!='Unknown'</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\ADO NET Source">
+    design-time-name="Package\Data Flow Task_old\ADO NET Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

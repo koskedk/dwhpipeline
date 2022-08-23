@@ -1,0 +1,1123 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/12/2022 11:11:17 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="KENYAHMIS"
+  DTS:CreatorName="KENYAHMIS\Administrator"
+  DTS:DTSID="{2BD50A32-15BD-4337-9DEE-7238F695E716}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Populate_DGTStudy_DWH"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{E5CDC2B8-8C95-48CB-892E-0C14CE39DCC4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Populate table DTGStudyLinelist  Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D69DF476-AD88-4F4D-BC79-EF21D1532F02}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate table DTGStudyLinelist  Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DTGStudyLinelist]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{96142A0B-0178-474D-9AE2-D5B933D6C0AE}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.Data Request Palantir]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MFLCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MFLCode"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFLCode]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[MFLCode]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="FacilityName"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CT Partner]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="CT Partner"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CT Partner]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[CT Partner]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AgeAtLastVisit]"
+                      cachedDataType="i4"
+                      cachedName="AgeAtLastVisit"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AgeAtLastVisit]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[AgeAtLastVisit]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PatientID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="PatientID"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[PatientID]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StartARTDate]"
+                      cachedDataType="dbDate"
+                      cachedName="StartARTDate"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartARTDate]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartARTDate]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StartRegimen]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="StartRegimen"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartRegimen]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartRegimen]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[StartRegimenLine]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="StartRegimenLine"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartRegimenLine]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartRegimenLine]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FirstDTGDispenseDate]"
+                      cachedDataType="dbDate"
+                      cachedName="FirstDTGDispenseDate"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstDTGDispenseDate]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[FirstDTGDispenseDate]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LatestWeight]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="LatestWeight"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LatestWeight]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LatestWeight]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastRegimen]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="LastRegimen"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastRegimen]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LastRegimen]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Category]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Category"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[Category]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateLastVisit]"
+                      cachedDataType="dbDate"
+                      cachedName="DateLastVisit"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateLastVisit]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateLastVisit]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NextAppointmentDate]"
+                      cachedDataType="dbDate"
+                      cachedName="NextAppointmentDate"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NextAppointmentDate]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[NextAppointmentDate]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastVL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="LastVL"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastVL]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LastVL]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HighVL]"
+                      cachedDataType="i4"
+                      cachedName="HighVL"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HighVL]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[HighVL]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateLastVL]"
+                      cachedDataType="dbDate"
+                      cachedName="DateLastVL"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateLastVL]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateLastVL]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EACVisitDate_1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="EACVisitDate_1"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EACVisitDate_1]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_1]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EACVisitDate_2]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="EACVisitDate_2"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EACVisitDate_2]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_2]" />
+                    <inputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EACVisitDate_3]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="EACVisitDate_3"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EACVisitDate_3]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_3]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MFLCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CT Partner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="CT Partner" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AgeAtLastVisit]"
+                      dataType="i4"
+                      name="AgeAtLastVisit" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartARTDate]"
+                      dataType="dbDate"
+                      name="StartARTDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="StartRegimen" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[StartRegimenLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="StartRegimenLine" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstDTGDispenseDate]"
+                      dataType="dbDate"
+                      name="FirstDTGDispenseDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LatestWeight]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="LatestWeight" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="LastRegimen" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateLastVisit]"
+                      dataType="dbDate"
+                      name="DateLastVisit" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NextAppointmentDate]"
+                      dataType="dbDate"
+                      name="NextAppointmentDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastVL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="LastVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HighVL]"
+                      dataType="i4"
+                      name="HighVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateLastVL]"
+                      dataType="dbDate"
+                      name="DateLastVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EACVisitDate_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="EACVisitDate_1" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EACVisitDate_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="EACVisitDate_2" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EACVisitDate_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="EACVisitDate_3" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LiveRowId]"
+                      dataType="i8"
+                      name="LiveRowId" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate table DTGStudyLinelist  Task\Read from Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Read from Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select  distinct  Y.* 
+from (
+SELECT DISTINCT
+      MFLCode, facname as FacilityName, [CT Partner],ageLVyrs as AgeAtLastVisit,
+      Uniqueidno_orig as PatientID ,StartARTDate, firstARTreg as StartRegimen, firstARTline as StartRegimenLine,FirstDTGDispenseDate, LatestWeight,
+      case when CurrentRegimen like '%DTG%' then CurrentRegimen else 'non DTG' end as LastRegimen,
+       case when firstARTreg =CurrentRegimen then 'Initiation' else 'Transition' end as Category,
+      dtLastVisit as DateLastVisit, dtlastapt as NextAppointmentDate, LastVL1 as LastVL, 
+	  Case when ISNumeric(LastVL1)=1 and cast(Replace(Replace(LastVL1, ' ', ''), ',', '') as float) &gt;=1000.00 THEN 1 ELSE 0 END AS HighVL,dtlastVL1 as DateLastVL,EACVisitDate_1,EACVisitDate_2,EACVisitDate_3
+ FROM (Select * from [All_Staging_2016_2].[dbo].[Cohort2015_2016](NoLock) where CurrentRegimen like '%DTG%' and ARTOutcome='V')c 
+
+  LEFT JOIN (
+    SELECT ROW_NUMBER () OVER (PARTITION BY stg_PatientPharmacy.PatientID, stg_PatientPharmacy.PatientPK, stg_PatientPharmacy.SiteCode, stg_PatientPharmacy.Drug ORDER BY DispenseDate ASC)  AS RowNumber, DispenseDate  FirstDTGDispenseDate, stg_PatientPharmacy.Drug, stg_PatientPharmacy.SiteCode, stg_PatientPharmacy.PatientID, stg_PatientPharmacy.PatientPk from All_Staging_2016_2.[dbo].stg_PatientPharmacy
+    INNER JOIN (
+        SELECT ROW_NUMBER () OVER (PARTITION BY PatientID, PatientPK, SiteCode ORDER BY DispenseDate DESC)  AS RowNumber, PatientID, PatientPK, SiteCode, Drug from All_Staging_2016_2.[dbo].stg_PatientPharmacy
+    ) LatestDrug  on LatestDrug.PatientID = stg_PatientPharmacy.PatientID and LatestDrug.PatientPK = stg_PatientPharmacy.PatientPK and LatestDrug.SiteCode = stg_PatientPharmacy.SiteCode and LatestDrug.Drug = stg_PatientPharmacy.Drug and LatestDrug.RowNumber = 1
+)As Pharm on c.MFLCode=Pharm.SiteCode and  c.uniqueidno_orig = Pharm.PatientID and c.PatientPk= Pharm.PatientPk and Pharm.RowNumber=1 
+
+LEFT JOIN (SELECT * FROM (
+SELECT SiteCode, PatientID, PatientPk, val,
+Case  WHEN cols='EAC_VisitDate' THEN 'EACVisitDate_' WHEN cols='SessionNumber' THEN 'SessionNumber_' WHEN  cols='EACRecievedVL' THEN 'EACReceivedVL_'
+    End + cast(DENSE_RANK() OVER( partition BY PatientID,SiteCode,PatientPK ORDER BY VisitDate ASC) as varchar)as NUM
+FROM (
+    SELECT SiteCode, PatientID, PatientPk ,VisitDate,
+        CONVERT(VARCHAR(20),cast(VisitDate as date)) AS EAC_VisitDate,
+       CONVERT(VARCHAR(20), [SessionNumber]) AS [SessionNumber],
+       CONVERT(VARCHAR(20), [EACRecievedVL]) AS [EACRecievedVL]
+      FROM All_Staging_2016_2.dbo.stg_EnhancedAdherenceCounselling WHERE Year(VisitDate)&gt;1900
+    ) AS Source 
+UNPIVOT
+(
+    val FOR cols IN (EAC_VisitDate,SessionNumber, EACRecievedVL)
+) AS unpiv
+)src
+pivot(
+MAX(val)
+for NUM in (EACVisitDate_1,SessionNumber_1,EACReceivedVL_1,EACVisitDate_2,SessionNumber_2,EACReceivedVL_2,EACVisitDate_3,SessionNumber_3,EACReceivedVL_3)
+) piv
+) H on H.PatientPK=c.PatientPK and H.PatientID=c.uniqueidno_orig and H.SiteCode=c.MFLCode
+
+LEFT  JOIN (SELECT * FROM (
+              SELECT  TestName as TestNameHIVVL, 
+         OrderedbyDate,ReportedByDate,TestResult,SiteCode, PatientID, PatientPk from All_Staging_2016_2.[dbo].[stg_PatientLabs]
+             where    ([TestName] LIKE '%Viral%' OR TestName = 'VL' OR TestName like '%LDL%') AND TestResult IS NOT NULL 
+             )A 
+)AS AllLabs on c.MFLCode=AllLabs.SiteCode and  c.uniqueidno_orig = AllLabs.PatientID and c.PatientPk= AllLabs.PatientPk AND  AllLabs.OrderedbyDate&gt;= Pharm.FirstDTGDispenseDate 
+
+
+   where MFLCode  in ('13468','13476','13488','11936','12881','11258','11259','18267','13507','11970','11976','12905','12904','15862','12929','12911','13220','12973',
+   '18743',
+'17719','13191','18219','16073','13604','13608','13939','12177','10485','13019','13667','13023','10520','10539','13028','10603','13703','13704','12366',
+   '13050','16662','15965',
+'13738','12438','12455','12457','13777','13781','12488','12492','13798','13805','16030','10777','10808','15282','10825','13841','13864',
+   '10890','13921','10903','14012','13156',
+'14020','13165','14058','10973','14080','14103','14106','14110','16141','14120','14121','14130','13074','11094','14156',
+    '14175','12930')
+
+
+)Y  Where  HighVL =1 and  FirstDTGDispenseDate &gt;= cast ('2017-07-01' as date)  and (StartRegimenLine not in ('Second Line','Third Line') or StartRegimenLine IS NULL) 
+
+
+Order by PatientID, StartRegimenLine Desc</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Connections[OleDbConnection]"
+                  connectionManagerID="{CC953BCA-A6FE-4F7E-9BDF-C30B117D8DB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWAPICentral]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[MFLCode]"
+                      length="50"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[MFLCode]"
+                      name="MFLCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      length="255"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[CT Partner]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[CT Partner]"
+                      length="1000"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[CT Partner]"
+                      name="CT Partner"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[AgeAtLastVisit]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[AgeAtLastVisit]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[AgeAtLastVisit]"
+                      name="AgeAtLastVisit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      length="100"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartARTDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[StartARTDate]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartARTDate]"
+                      name="StartARTDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[StartRegimen]"
+                      length="250"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartRegimen]"
+                      name="StartRegimen"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartRegimenLine]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[StartRegimenLine]"
+                      length="250"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[StartRegimenLine]"
+                      name="StartRegimenLine"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[FirstDTGDispenseDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FirstDTGDispenseDate]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[FirstDTGDispenseDate]"
+                      name="FirstDTGDispenseDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LatestWeight]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LatestWeight]"
+                      length="150"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LatestWeight]"
+                      name="LatestWeight"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LastRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LastRegimen]"
+                      length="250"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LastRegimen]"
+                      name="LastRegimen"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      length="10"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateLastVisit]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateLastVisit]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateLastVisit]"
+                      name="DateLastVisit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[NextAppointmentDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[NextAppointmentDate]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[NextAppointmentDate]"
+                      name="NextAppointmentDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LastVL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LastVL]"
+                      length="100"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[LastVL]"
+                      name="LastVL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[HighVL]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[HighVL]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[HighVL]"
+                      name="HighVL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateLastVL]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateLastVL]"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateLastVL]"
+                      name="DateLastVL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EACVisitDate_1]"
+                      length="20"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_1]"
+                      name="EACVisitDate_1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_2]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EACVisitDate_2]"
+                      length="20"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_2]"
+                      name="EACVisitDate_2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_3]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EACVisitDate_3]"
+                      length="20"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].Columns[EACVisitDate_3]"
+                      name="EACVisitDate_3"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MFLCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[CT Partner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="CT Partner" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[AgeAtLastVisit]"
+                      dataType="i4"
+                      name="AgeAtLastVisit" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[StartARTDate]"
+                      dataType="dbDate"
+                      name="StartARTDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[StartRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="StartRegimen" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[StartRegimenLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="StartRegimenLine" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FirstDTGDispenseDate]"
+                      dataType="dbDate"
+                      name="FirstDTGDispenseDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LatestWeight]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="LatestWeight" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LastRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="LastRegimen" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateLastVisit]"
+                      dataType="dbDate"
+                      name="DateLastVisit" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[NextAppointmentDate]"
+                      dataType="dbDate"
+                      name="NextAppointmentDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LastVL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="LastVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[HighVL]"
+                      dataType="i4"
+                      name="HighVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateLastVL]"
+                      dataType="dbDate"
+                      name="DateLastVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EACVisitDate_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="EACVisitDate_1" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EACVisitDate_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="EACVisitDate_2" />
+                    <externalMetadataColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EACVisitDate_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="EACVisitDate_3" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[MFLCode]"
+                      name="MFLCode" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[CT Partner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[CT Partner]"
+                      name="CT Partner" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[AgeAtLastVisit]"
+                      dataType="i4"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[AgeAtLastVisit]"
+                      name="AgeAtLastVisit" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[StartARTDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[StartARTDate]"
+                      name="StartARTDate" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[StartRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[StartRegimen]"
+                      name="StartRegimen" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[StartRegimenLine]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[StartRegimenLine]"
+                      name="StartRegimenLine" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FirstDTGDispenseDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FirstDTGDispenseDate]"
+                      name="FirstDTGDispenseDate" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LatestWeight]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LatestWeight]"
+                      name="LatestWeight" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LastRegimen]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LastRegimen]"
+                      name="LastRegimen" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateLastVisit]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateLastVisit]"
+                      name="DateLastVisit" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[NextAppointmentDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[NextAppointmentDate]"
+                      name="NextAppointmentDate" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LastVL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LastVL]"
+                      name="LastVL" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[HighVL]"
+                      dataType="i4"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[HighVL]"
+                      name="HighVL" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateLastVL]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateLastVL]"
+                      name="DateLastVL" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EACVisitDate_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EACVisitDate_1]"
+                      name="EACVisitDate_1" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EACVisitDate_2]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EACVisitDate_2]"
+                      name="EACVisitDate_2" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EACVisitDate_3]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EACVisitDate_3]"
+                      name="EACVisitDate_3" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate table DTGStudyLinelist  Task.Paths[OLE DB Source Output]"
+              endId="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate table DTGStudyLinelist  Task\Read from Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE DTGStudyLinelist Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6303A27A-B6B6-4C00-8B8E-44EF3E65B906}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE DTGStudyLinelist Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{96142A0B-0178-474D-9AE2-D5B933D6C0AE}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DTGStudyLinelist" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7ABA9901-BEA6-4FE4-A305-AC88682B52CE}"
+      DTS:From="Package\TRUNCATE DTGStudyLinelist Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Populate table DTGStudyLinelist  Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="258.666666666667,42.6666666666667"
+          Id="Package\Populate table DTGStudyLinelist  Task"
+          TopLeft="97.4999985471368,130.649997663796" />
+        <NodeLayout
+          Size="240,42.6666666666667"
+          Id="Package\TRUNCATE DTGStudyLinelist Task"
+          TopLeft="104.374998444691,16.2666663877169" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="225.604165162581,58.9333330543836">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71.7166646094124"
+              Start="0,0"
+              End="0,64.2166646094124">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.2166646094124" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Populate table DTGStudyLinelist  Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Populate table DTGStudyLinelist  Task\Read from Src"
+          TopLeft="124.374998146668,22.1166662831108" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination"
+          TopLeft="113.749998304993,131.94999764055" />
+        <EdgeLayout
+          Id="Package\Populate table DTGStudyLinelist  Task.Paths[OLE DB Source Output]"
+          TopLeft="198.729164892497,64.7833329497774">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.1666646907728"
+              Start="0,0"
+              End="0,59.6666646907728">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.6666646907728" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate table DTGStudyLinelist  Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate table DTGStudyLinelist  Task\Read from Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,2289 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/12/2022 10:21:00 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="KENYAHMIS"
+  DTS:CreatorName="KENYAHMIS\Administrator"
+  DTS:DTSID="{758689B8-FCD1-42CC-9230-A32CBEA1FB6B}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Populate_AllStagingStgNumbers_DWH"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{A03B77EF-E189-45F0-B73B-B2C1DD8D075F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Populate Allstaging_HTS Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3DC9C4A3-7B69-47CC-9F40-8C683A7B1F3E}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate Allstaging_HTS Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate Allstaging_HTS Task\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Allstaging_HTS]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{C8891DBD-2887-4133-88FB-A9366DB9DDC3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWHData Analytics]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Sitecode]"
+                      cachedDataType="i4"
+                      cachedName="Sitecode"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sitecode]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Sitecode]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FacilityName"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CTPartner]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="CTPartner"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CTPartner]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[CTPartner]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateQueryExecuted]"
+                      cachedDataType="dbDate"
+                      cachedName="DateQueryExecuted"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Earliest_TestDate]"
+                      cachedDataType="dbDate"
+                      cachedName="Earliest_TestDate"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Earliest_TestDate]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Earliest_TestDate]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Latest_TestDate]"
+                      cachedDataType="dbDate"
+                      cachedName="Latest_TestDate"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Latest_TestDate]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Latest_TestDate]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Clients]"
+                      cachedDataType="i4"
+                      cachedName="Clients"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Clients]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Clients]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Tests]"
+                      cachedDataType="i4"
+                      cachedName="Tests"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tests]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Tests]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Linkages]"
+                      cachedDataType="i4"
+                      cachedName="Linkages"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Linkages]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Linkages]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Kits]"
+                      cachedDataType="i4"
+                      cachedName="Kits"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Kits]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Kits]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ClientTracing]"
+                      cachedDataType="i4"
+                      cachedName="ClientTracing"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientTracing]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[ClientTracing]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PNS]"
+                      cachedDataType="i4"
+                      cachedName="PNS"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PNS]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[PNS]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PartnerTracing]"
+                      cachedDataType="i4"
+                      cachedName="PartnerTracing"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PartnerTracing]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[PartnerTracing]" />
+                    <inputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UploadDate]"
+                      cachedDataType="dbDate"
+                      cachedName="UploadDate"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[dateUploaded]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[UploadDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Sitecode]"
+                      dataType="i4"
+                      name="Sitecode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="CTPartner" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[dateUploaded]"
+                      dataType="dbDate"
+                      name="dateUploaded" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Earliest_TestDate]"
+                      dataType="dbDate"
+                      name="Earliest_TestDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Latest_TestDate]"
+                      dataType="dbDate"
+                      name="Latest_TestDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Clients]"
+                      dataType="i4"
+                      name="Clients" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Tests]"
+                      dataType="i4"
+                      name="Tests" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Linkages]"
+                      dataType="i4"
+                      name="Linkages" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Kits]"
+                      dataType="i4"
+                      name="Kits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClientTracing]"
+                      dataType="i4"
+                      name="ClientTracing" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PNS]"
+                      dataType="i4"
+                      name="PNS" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PartnerTracing]"
+                      dataType="i4"
+                      name="PartnerTracing" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Allstaging_HTS Task\Read from Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Read from Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT fm.Sitecode,df.FacilityName,p.Implementing_Mechanism_Name as CTPartner,
+cast(GetDate()as date) AS DateQueryExecuted,
+cast(fm.UploadDate as date)UploadDate,
+cast(Earliest_TestDate as date)Earliest_TestDate,
+cast(Latest_TestDate as date)Latest_TestDate,
+Clients,
+test.Tests,
+link.Linkages,
+TestKits.Kits,
+CTrace.ClientTracing,
+pns.PNS,
+PTRace.PartnerTracing
+
+from (Select sitecode, MAX(cast(DateArrived as Date)) UploadDate,
+Case When EmrSetup=2 then 'IRDO' 
+	 When EmrSetup=1 THEN 'FACES'
+	 When EmrSetup=0 AND SiteCode in  (12875,12911,12973,13075,13169,13191,13207,13220,
+13230,17548,17719,18219,18409,18743) THEN 'EDARP'
+Else 'Kenya HMIS II' END AS Project
+FROM HTSCentral.[dbo].[Manifests] H
+Group by sitecode,EmrSetup)fm
+LEFT JOIN (SELECT Sitecode,project, count(distinct concat(c.sitecode,'-',patientpk)) Clients from [All_Staging_2016_2].dbo.stg_hts_clients c group by Sitecode,Project)c
+ON fm.SiteCode=c.SiteCode and fm.Project=c.project
+left join (SELECT Sitecode,project, count(distinct concat(sitecode,'-',patientpk,'-',EncounterId)) Tests,Min(cast(TestDate as date))Earliest_TestDate,Max(cast(TestDate as date))Latest_TestDate
+from [All_Staging_2016_2].dbo.stg_hts_ClientTests c group by sitecode,project
+)test ON test.SiteCode=c.SiteCode and test.Project=c.project
+LEFT JOIN (SELECT Sitecode,project, count(concat(sitecode,'-',patientpk)) Linkages from [All_Staging_2016_2].dbo.stg_hts_ClientLinkages c group by sitecode,project
+) link ON link.SiteCode=c.SiteCode and link.Project=c.project
+LEFT JOIN (SELECT Sitecode,project, count(concat(sitecode,'-',patientpk)) PNS from [All_Staging_2016_2].dbo.stg_hts_PartnerNotificationServices c 
+group by sitecode,project
+) pns ON pns.SiteCode=c.SiteCode and pns.Project=c.project
+LEFT JOIN (SELECT Sitecode,project, count(concat(sitecode,'-',patientpk)) Kits from [All_Staging_2016_2].dbo.stg_hts_TestKits c group by sitecode,project
+) TestKits ON TestKits.SiteCode=c.SiteCode and testkits.Project=c.project
+LEFT JOIN (SELECT Sitecode,project, count(concat(sitecode,'-',patientpk)) PartnerTracing from [All_Staging_2016_2].dbo.stg_hts_PartnerTracings c 
+group by sitecode,project
+) PTrace ON PTrace.SiteCode=c.SiteCode and pTrace.Project=c.project
+LEFT JOIN (SELECT Sitecode,project, count(concat(sitecode,'-',patientpk)) ClientTracing from [All_Staging_2016_2].dbo.stg_hts_ClientTracing c 
+group by sitecode,project
+) CTrace ON CTrace.SiteCode=c.SiteCode and cTrace.Project=c.project
+inner join All_Staging_2016_2.dbo.DimFacilities df on df.FacilityCode=fm.SiteCode
+inner join All_Staging_2016_2.dbo.lkp_USGPartnerMenchanism_hts p on p.MFL_Code=fm.sitecode and p.project=fm.Project</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Allstaging_HTS Task\Read from Src.Connections[OleDbConnection]"
+                  connectionManagerID="{CC953BCA-A6FE-4F7E-9BDF-C30B117D8DB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWAPICentral]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Sitecode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Sitecode]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Sitecode]"
+                      name="Sitecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      length="255"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[CTPartner]"
+                      length="200"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[CTPartner]"
+                      name="CTPartner"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[UploadDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[UploadDate]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[UploadDate]"
+                      name="UploadDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Earliest_TestDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Earliest_TestDate]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Earliest_TestDate]"
+                      name="Earliest_TestDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Latest_TestDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Latest_TestDate]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Latest_TestDate]"
+                      name="Latest_TestDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Clients]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Clients]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Clients]"
+                      name="Clients"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Tests]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Tests]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Tests]"
+                      name="Tests"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Linkages]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Linkages]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Linkages]"
+                      name="Linkages"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Kits]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Kits]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[Kits]"
+                      name="Kits"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[ClientTracing]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[ClientTracing]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[ClientTracing]"
+                      name="ClientTracing"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[PNS]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[PNS]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[PNS]"
+                      name="PNS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[PartnerTracing]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[PartnerTracing]"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].Columns[PartnerTracing]"
+                      name="PartnerTracing"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Sitecode]"
+                      dataType="i4"
+                      name="Sitecode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="CTPartner" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[UploadDate]"
+                      dataType="dbDate"
+                      name="UploadDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Earliest_TestDate]"
+                      dataType="dbDate"
+                      name="Earliest_TestDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Latest_TestDate]"
+                      dataType="dbDate"
+                      name="Latest_TestDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Clients]"
+                      dataType="i4"
+                      name="Clients" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Tests]"
+                      dataType="i4"
+                      name="Tests" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Linkages]"
+                      dataType="i4"
+                      name="Linkages" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Kits]"
+                      dataType="i4"
+                      name="Kits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[ClientTracing]"
+                      dataType="i4"
+                      name="ClientTracing" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[PNS]"
+                      dataType="i4"
+                      name="PNS" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[PartnerTracing]"
+                      dataType="i4"
+                      name="PartnerTracing" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Sitecode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Sitecode]"
+                      name="Sitecode" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[CTPartner]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[CTPartner]"
+                      name="CTPartner" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[UploadDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[UploadDate]"
+                      name="UploadDate" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Earliest_TestDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Earliest_TestDate]"
+                      name="Earliest_TestDate" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Latest_TestDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Latest_TestDate]"
+                      name="Latest_TestDate" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Clients]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Clients]"
+                      name="Clients" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Tests]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Tests]"
+                      name="Tests" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Linkages]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Linkages]"
+                      name="Linkages" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Kits]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Kits]"
+                      name="Kits" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ClientTracing]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ClientTracing]"
+                      name="ClientTracing" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[PNS]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[PNS]"
+                      name="PNS" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[PartnerTracing]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[PartnerTracing]"
+                      name="PartnerTracing" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate Allstaging_HTS Task.Paths[OLE DB Source Output]"
+              endId="Package\Populate Allstaging_HTS Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate Allstaging_HTS Task\Read from Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Populate AllStaging_StgNumbers Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C1751E5D-D7D3-4B99-8BAA-52236847928C}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate AllStaging_StgNumbers Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[AllStaging_StgNumbers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{C8891DBD-2887-4133-88FB-A9366DB9DDC3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWHData Analytics]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityCode]"
+                      cachedDataType="i4"
+                      cachedName="FacilityCode"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityCode]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityCode]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityName]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="FacilityName"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[County]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="County"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Implementing_Mechanism_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="Implementing_Mechanism_Name"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Implementing_Mechanism_Name]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="EMR"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMR]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[EMR]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateQueryExecuted]"
+                      cachedDataType="dbDate"
+                      cachedName="DateQueryExecuted"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateUploaded]"
+                      cachedDataType="dbDate"
+                      cachedName="DateUploaded"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateUploaded]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateUploaded]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SiteAbstractionDate]"
+                      cachedDataType="dbDate"
+                      cachedName="SiteAbstractionDate"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SiteAbstractionDate]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[SiteAbstractionDate]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Patients]"
+                      cachedDataType="i4"
+                      cachedName="Patients"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Patients]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Patients]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ART]"
+                      cachedDataType="i4"
+                      cachedName="ART"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ART]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[ART]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Baseline]"
+                      cachedDataType="i4"
+                      cachedName="Baseline"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Baseline]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Baseline]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[visits]"
+                      cachedDataType="i4"
+                      cachedName="visits"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[visits]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[visits]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[pharm]"
+                      cachedDataType="i4"
+                      cachedName="pharm"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pharm]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[pharm]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[labs]"
+                      cachedDataType="i4"
+                      cachedName="labs"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[labs]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[labs]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[exits]"
+                      cachedDataType="i4"
+                      cachedName="exits"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[exits]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[exits]" />
+                    <inputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[adv]"
+                      cachedDataType="i4"
+                      cachedName="adv"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[adv]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[adv]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityCode]"
+                      dataType="i4"
+                      name="FacilityCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="255"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Implementing_Mechanism_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="EMR" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateUploaded]"
+                      dataType="dbDate"
+                      name="DateUploaded" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      name="SiteAbstractionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Patients]"
+                      dataType="i4"
+                      name="Patients" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ART]"
+                      dataType="i4"
+                      name="ART" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Baseline]"
+                      dataType="i4"
+                      name="Baseline" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[visits]"
+                      dataType="i4"
+                      name="visits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pharm]"
+                      dataType="i4"
+                      name="pharm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[labs]"
+                      dataType="i4"
+                      name="labs" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[exits]"
+                      dataType="i4"
+                      name="exits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[adv]"
+                      dataType="i4"
+                      name="adv" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate AllStaging_StgNumbers Task\Read from Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Read from Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT Distinct --c.Code,
+f.FacilityCode,f.FacilityName,f.County,p.Implementing_Mechanism_Name,
+c.EMR,
+Cast(GETDATE() as Date)DateQueryExecuted,
+Cast(j.DateUploaded as Date) DateUploaded,
+j.SiteAbstractionDate,
+c.Patients,
+art.ART,
+base.Baseline,
+vis.visits,
+phar.pharm,
+lab.labs,
+stat.exits,
+adv.adv
+from 
+(SELECT SiteCode,EMR,count(*)Patients from [All_Staging_2016_2].dbo.stg_Patients p GROUP BY sitecode,EMR
+)c 
+LEFT JOIN (SELECT SiteCode, count(*)ART from [All_Staging_2016_2].dbo.stg_ARTPatients p GROUP BY sitecode
+)art ON art.sitecode=c.sitecode
+LEFT JOIN (SELECT sitecode, count(*)Baseline from [All_Staging_2016_2].dbo.stg_PatientsWABWHOCD4 p GROUP BY sitecode
+)base ON base.sitecode=c.sitecode
+LEFT JOIN (SELECT sitecode, count(*)visits from [All_Staging_2016_2].dbo.stg_PatientVisits p GROUP BY sitecode
+)vis ON vis.sitecode=c.sitecode
+LEFT JOIN (SELECT sitecode, count(*)pharm from [All_Staging_2016_2].dbo.stg_PatientPharmacy p GROUP BY sitecode
+)phar ON phar.sitecode=c.sitecode
+LEFT JOIN (SELECT sitecode, count(*)labs from [All_Staging_2016_2].dbo.stg_PatientLabs GROUP BY sitecode
+)lab ON lab.sitecode=c.sitecode
+LEFT JOIN (SELECT sitecode, count(*)exits from [All_Staging_2016_2].dbo.stg_PatientStatus GROUP BY sitecode
+)stat ON stat.sitecode=c.sitecode
+LEFT JOIN (SELECT sitecode, count(*)adv from [All_Staging_2016_2].dbo.stg_AdverseEvents p GROUP BY sitecode
+)adv ON adv.sitecode=c.sitecode
+LEFT JOIN [All_Staging_2016_2].dbo.lkp_USGPartnerMenchanism p on p.MFL_Code=c.SiteCode
+LEFT JOIN [All_Staging_2016_2].dbo.DimFacilities f on f.FacilityCode=c.SiteCode
+LEFT JOIN [All_Staging_2016_2].dbo.Cohort2015_2016 j on j.MFLCode=c.SiteCode AND DateUploaded IS NOT NULL 
+WHERE c.SiteCode&gt;1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Connections[OleDbConnection]"
+                  connectionManagerID="{CC953BCA-A6FE-4F7E-9BDF-C30B117D8DB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWAPICentral]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityCode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityCode]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityCode]"
+                      name="FacilityCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      length="255"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      length="255"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]"
+                      name="County"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Implementing_Mechanism_Name]"
+                      length="200"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]"
+                      name="Implementing_Mechanism_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[EMR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EMR]"
+                      length="100"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[EMR]"
+                      name="EMR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateUploaded]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateUploaded]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateUploaded]"
+                      name="DateUploaded"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[SiteAbstractionDate]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[SiteAbstractionDate]"
+                      name="SiteAbstractionDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Patients]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Patients]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Patients]"
+                      name="Patients"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[ART]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[ART]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[ART]"
+                      name="ART"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Baseline]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Baseline]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[Baseline]"
+                      name="Baseline"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[visits]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[visits]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[visits]"
+                      name="visits"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[pharm]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[pharm]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[pharm]"
+                      name="pharm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[labs]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[labs]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[labs]"
+                      name="labs"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[exits]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[exits]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[exits]"
+                      name="exits"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[adv]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[adv]"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].Columns[adv]"
+                      name="adv"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityCode]"
+                      dataType="i4"
+                      name="FacilityCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      dataType="wstr"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="255"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Implementing_Mechanism_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[EMR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="EMR" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateUploaded]"
+                      dataType="dbDate"
+                      name="DateUploaded" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      name="SiteAbstractionDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Patients]"
+                      dataType="i4"
+                      name="Patients" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[ART]"
+                      dataType="i4"
+                      name="ART" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Baseline]"
+                      dataType="i4"
+                      name="Baseline" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[visits]"
+                      dataType="i4"
+                      name="visits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[pharm]"
+                      dataType="i4"
+                      name="pharm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[labs]"
+                      dataType="i4"
+                      name="labs" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[exits]"
+                      dataType="i4"
+                      name="exits" />
+                    <externalMetadataColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[adv]"
+                      dataType="i4"
+                      name="adv" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityCode]"
+                      name="FacilityCode" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      name="County" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Implementing_Mechanism_Name]"
+                      name="Implementing_Mechanism_Name" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EMR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[EMR]"
+                      name="EMR" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateUploaded]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateUploaded]"
+                      name="DateUploaded" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[SiteAbstractionDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[SiteAbstractionDate]"
+                      name="SiteAbstractionDate" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Patients]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Patients]"
+                      name="Patients" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ART]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ART]"
+                      name="ART" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Baseline]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Baseline]"
+                      name="Baseline" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[visits]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[visits]"
+                      name="visits" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[pharm]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[pharm]"
+                      name="pharm" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[labs]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[labs]"
+                      name="labs" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[exits]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[exits]"
+                      name="exits" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[adv]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[adv]"
+                      name="adv" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate AllStaging_StgNumbers Task.Paths[OLE DB Source Output]"
+              endId="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate AllStaging_StgNumbers Task\Read from Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Populate Indicators Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{781640CF-9788-4501-8A8C-B7CBD99518F4}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate Indicators Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate Indicators Task\OLE DB Destination"
+              componentClassID="DTSAdapter.OLEDBDestination.3"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Indicators]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Indicators Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{C8891DBD-2887-4133-88FB-A9366DB9DDC3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWHData Analytics]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MFLCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MFLCode"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFLCode]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[MFLCode]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FacilityName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="FacilityName"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[County]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="County"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Implementing_Mechanism_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="200"
+                      cachedName="Implementing_Mechanism_Name"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Implementing_Mechanism_Name]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateQueryExecuted]"
+                      cachedDataType="dbDate"
+                      cachedName="DateQueryExecuted"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TXCURR]"
+                      cachedDataType="i4"
+                      cachedName="TXCURR"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TXCURR]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[TXCURR]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Eligible4VL]"
+                      cachedDataType="i4"
+                      cachedName="Eligible4VL"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Eligible4VL]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Eligible4VL]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Last12MonthVL]"
+                      cachedDataType="i4"
+                      cachedName="Last12MonthVL"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MonthVL]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Last12MonthVL]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Last12MVLSup]"
+                      cachedDataType="i4"
+                      cachedName="Last12MVLSup"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MVLSup]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Last12MVLSup]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HighViremia]"
+                      cachedDataType="i4"
+                      cachedName="HighViremia"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HighViremia]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[HighViremia]" />
+                    <inputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LowViremia]"
+                      cachedDataType="i4"
+                      cachedName="LowViremia"
+                      externalMetadataColumnId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LowViremia]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[LowViremia]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MFLCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="255"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Implementing_Mechanism_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TXCURR]"
+                      dataType="i4"
+                      name="TXCURR" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Eligible4VL]"
+                      dataType="i4"
+                      name="Eligible4VL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MonthVL]"
+                      dataType="i4"
+                      name="Last12MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Last12MVLSup]"
+                      dataType="i4"
+                      name="Last12MVLSup" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HighViremia]"
+                      dataType="i4"
+                      name="HighViremia" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LowViremia]"
+                      dataType="i4"
+                      name="LowViremia" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Indicators Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Indicators Task\Read from Src"
+              componentClassID="DTSAdapter.OLEDBSource.3"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Read from Src"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  [MFLCode]
+      ,[FacilityName]
+      ,[County]
+      ,[CTPartner] Implementing_Mechanism_Name
+	  ,CAST(GETDATE() as Date)DateQueryExecuted
+      ,SUM([TXCURR_Total])TXCURR
+      ,sum([Eligible4VL])[Eligible4VL]
+      ,SUM([Last12MonthVL])[Last12MonthVL]
+      ,SUM([Last12MVLSup])[Last12MVLSup]
+      ,SUM([HighViremia]) [HighViremia]
+      ,SUM([LowViremia])[LowViremia]
+FROM [PortalDev].[dbo].[Fact_Trans_HMIS_STATS_TXCURR]
+GROUP BY [MFLCode]
+    ,[FacilityName]
+    ,[County]
+    ,[CTPartner]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Indicators Task\Read from Src.Connections[OleDbConnection]"
+                  connectionManagerID="{CC953BCA-A6FE-4F7E-9BDF-C30B117D8DB7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.DWAPICentral]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[MFLCode]"
+                      length="50"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[MFLCode]"
+                      name="MFLCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      length="255"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[FacilityName]"
+                      name="FacilityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      length="255"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[County]"
+                      name="County"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Implementing_Mechanism_Name]"
+                      length="200"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Implementing_Mechanism_Name]"
+                      name="Implementing_Mechanism_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[TXCURR]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[TXCURR]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[TXCURR]"
+                      name="TXCURR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Eligible4VL]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Eligible4VL]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Eligible4VL]"
+                      name="Eligible4VL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Last12MonthVL]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MonthVL]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Last12MonthVL]"
+                      name="Last12MonthVL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Last12MVLSup]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MVLSup]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[Last12MVLSup]"
+                      name="Last12MVLSup"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[HighViremia]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[HighViremia]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[HighViremia]"
+                      name="HighViremia"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[LowViremia]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LowViremia]"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].Columns[LowViremia]"
+                      name="LowViremia"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MFLCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="FacilityName" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="255"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      name="Implementing_Mechanism_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      name="DateQueryExecuted" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[TXCURR]"
+                      dataType="i4"
+                      name="TXCURR" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Eligible4VL]"
+                      dataType="i4"
+                      name="Eligible4VL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MonthVL]"
+                      dataType="i4"
+                      name="Last12MonthVL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[Last12MVLSup]"
+                      dataType="i4"
+                      name="Last12MVLSup" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[HighViremia]"
+                      dataType="i4"
+                      name="HighViremia" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output].ExternalColumns[LowViremia]"
+                      dataType="i4"
+                      name="LowViremia" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[MFLCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[MFLCode]"
+                      name="MFLCode" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[FacilityName]"
+                      name="FacilityName" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[County]"
+                      name="County" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Implementing_Mechanism_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="200"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Implementing_Mechanism_Name]"
+                      name="Implementing_Mechanism_Name" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[DateQueryExecuted]"
+                      name="DateQueryExecuted" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[TXCURR]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[TXCURR]"
+                      name="TXCURR" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Eligible4VL]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Eligible4VL]"
+                      name="Eligible4VL" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Last12MonthVL]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Last12MonthVL]"
+                      name="Last12MonthVL" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Last12MVLSup]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[Last12MVLSup]"
+                      name="Last12MVLSup" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[HighViremia]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[HighViremia]"
+                      name="HighViremia" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LowViremia]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[LowViremia]"
+                      name="LowViremia" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate Indicators Task.Paths[OLE DB Source Output]"
+              endId="Package\Populate Indicators Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate Indicators Task\Read from Src.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2E34C4C2-DA07-4F4A-B770-B2FED9F397E1}"
+      DTS:From="Package\Populate AllStaging_StgNumbers Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Populate Indicators Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{28E42D2F-809A-45FD-BD73-D7173A2DFC69}"
+      DTS:From="Package\Populate Indicators Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Populate Allstaging_HTS Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="220,42.6666666666667"
+          Id="Package\Populate Allstaging_HTS Task"
+          TopLeft="43.7499993480741,191.716665074329" />
+        <NodeLayout
+          Size="258.666666666667,42.6666666666667"
+          Id="Package\Populate AllStaging_StgNumbers Task"
+          TopLeft="19.37499971129,11.0499998024106" />
+        <NodeLayout
+          Size="196,42.6666666666667"
+          Id="Package\Populate Indicators Task"
+          TopLeft="53.7499991990626,87.0999984425307" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="150.229166121843,53.7166664690773">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,33.3833319734534"
+              Start="0,0"
+              End="0,25.8833319734534">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.8833319734534" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="152.749999273568,129.766665109197">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,61.9499999651313"
+              Start="0,0"
+              End="0,54.4499999651313">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.4499999651313" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Populate Allstaging_HTS Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Populate Allstaging_HTS Task\Read from Src"
+          TopLeft="286,25" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Populate Allstaging_HTS Task\OLE DB Destination"
+          TopLeft="310,168" />
+        <EdgeLayout
+          Id="Package\Populate Allstaging_HTS Task.Paths[OLE DB Source Output]"
+          TopLeft="359.333333333333,67.6666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="36.6666666666667,100.333333333333"
+              Start="0,0"
+              End="36.6666666666667,92.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.1666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.1666666666667"
+                    Point2="0,50.1666666666667"
+                    Point3="4,50.1666666666667" />
+                  <mssgle:LineSegment
+                    End="32.6666666666667,50.1666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32.6666666666667,50.1666666666667"
+                    Point2="36.6666666666667,50.1666666666667"
+                    Point3="36.6666666666667,54.1666666666667" />
+                  <mssgle:LineSegment
+                    End="36.6666666666667,92.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Allstaging_HTS Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Allstaging_HTS Task\Read from Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Populate AllStaging_StgNumbers Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Populate AllStaging_StgNumbers Task\Read from Src"
+          TopLeft="146.874997811392,30.5499994537234" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination"
+          TopLeft="142.499997876585,150.149997315109" />
+        <EdgeLayout
+          Id="Package\Populate AllStaging_StgNumbers Task.Paths[OLE DB Source Output]"
+          TopLeft="220.208331144725,73.2166661203901">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="8.29166673185921,76.9333311947187"
+              Start="0,0"
+              End="8.29166673185921,69.4333311947187">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.4666655973594" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.4666655973594"
+                    Point2="0,38.4666655973594"
+                    Point3="4,38.4666655973594" />
+                  <mssgle:LineSegment
+                    End="4.29166673185921,38.4666655973594" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.29166673185921,38.4666655973594"
+                    Point2="8.29166673185921,38.4666655973594"
+                    Point3="8.29166673185921,42.4666655973594" />
+                  <mssgle:LineSegment
+                    End="8.29166673185921,69.4333311947187" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate AllStaging_StgNumbers Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate AllStaging_StgNumbers Task\Read from Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Populate Indicators Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\Populate Indicators Task\Read from Src"
+          TopLeft="247,26" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Populate Indicators Task\OLE DB Destination"
+          TopLeft="226,214" />
+        <EdgeLayout
+          Id="Package\Populate Indicators Task.Paths[OLE DB Source Output]"
+          TopLeft="320.333333333333,68.6666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-8.33333333333331,145.333333333333"
+              Start="0,0"
+              End="-8.33333333333331,137.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,68.6666666666667"
+                    Point2="0,72.6666666666667"
+                    Point3="-4,72.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-4.33333333333331,72.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.33333333333331,72.6666666666667"
+                    Point2="-8.33333333333331,72.6666666666667"
+                    Point3="-8.33333333333331,76.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-8.33333333333331,137.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Indicators Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Indicators Task\Read from Src">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

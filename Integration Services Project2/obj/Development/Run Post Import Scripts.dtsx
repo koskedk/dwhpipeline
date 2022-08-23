@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Run Post Import Scripts"
   DTS:PackageType="5"
-  DTS:VersionBuild="212"
-  DTS:VersionGUID="{D042BBD6-DD92-4BAF-AF2C-F748935DEA60}">
+  DTS:VersionBuild="225"
+  DTS:VersionGUID="{D51104F7-30FE-4A36-8ED6-1259ACCC1AEC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -69,7 +69,7 @@
       DTS:ObjectName="Transfer Database">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=NASCOPDWH;Integrated Security=SSPI;Connect Timeout=30;" />
+          DTS:ConnectionString="Data Source=NASCOPDWH;Integrated Security=True;Connect Timeout=30;Application Name=SSIS-Run Post Import Scripts-{7278DC1B-6C3B-419E-BFAE-DB9E643E9753}Transfer Database;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -79,17 +79,16 @@
       DTS:refId="Package\Back Up Database - All Staging"
       DTS:CreationName="Microsoft.SqlServer.Management.DatabaseMaintenance.DbMaintenanceBackupTask, Microsoft.SqlServer.MaintenancePlanTasks, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Back Up Database Task"
+      DTS:Disabled="True"
       DTS:DTSID="{98f2c750-d48d-4af1-b925-2ff43ef3d555}"
       DTS:ExecutableType="Microsoft.SqlServer.Management.DatabaseMaintenance.DbMaintenanceBackupTask, Microsoft.SqlServer.MaintenancePlanTasks, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Back Up Database - All Staging"
       DTS:TaskContact="Back Up Database Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{11D43ED6-D8DF-400B-80AB-F21BE98CAE27}"
-          SQLTask:DatabaseSelectionType="4"
           SQLTask:ServerVersion="14"
           SQLTask:ExtendedLogging="True"
           SQLTask:LocalConnectionForLogging=""
@@ -112,10 +111,7 @@
           SQLTask:UseExpiration="False"
           SQLTask:BackupCompressionAction="1"
           SQLTask:CopyOnlyBackup="False"
-          SQLTask:IgnoreReplicaType="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
-          <SQLTask:SelectedDatabases
-            SQLTask:DatabaseName="All_Staging_2016_2" />
-        </SQLTask:SqlTaskData>
+          SQLTask:IgnoreReplicaType="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -127,7 +123,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Back Up Database Task"
       DTS:TaskContact="Back Up Database Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -149,7 +145,7 @@
           SQLTask:BackupCreateSubFolder="False"
           SQLTask:BackupFileExtension=""
           SQLTask:BackupVerifyIntegrity="False"
-          SQLTask:ExpireDate="2019-10-21T00:00:00"
+          SQLTask:ExpireDate="2022-07-28T00:00:00"
           SQLTask:RetainDays="14"
           SQLTask:InDays="True"
           SQLTask:UseExpiration="False"
@@ -157,7 +153,7 @@
           SQLTask:CopyOnlyBackup="False"
           SQLTask:IgnoreReplicaType="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:SelectedDatabases
-            SQLTask:DatabaseName="Cohort_2018" />
+            SQLTask:DatabaseName="All_Staging_2016_2" />
         </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -170,7 +166,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Build ART Visits Matrix"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -204,12 +200,12 @@
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Cleanup- Stg_PatientStatus"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{B20E3E95-4C39-4161-97E8-5ED753223300}"
-          SQLTask:SqlStatementSource="DELETE FROM stg_PatientStatus WHERE Ident IN (&#xA;SELECT PS.IDENT FROM vw_LastPatientEncounter LE&#xA;INNER JOIN stg_PatientStatus PS&#xA;ON LE.PatientPK=PS.PatientPK AND LE.SiteCode=PS.SiteCode&#xA;WHERE PS.ExitDate &lt; LE.LastEncounterDate&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
+          SQLTask:SqlStatementSource="DELETE FROM stg_PatientStatus &#xA;WHERE Ident IN (SELECT PS.IDENT FROM vw_LastPatientEncounter LE&#xA;&#x9;&#x9;&#x9;&#x9;INNER JOIN stg_PatientStatus(NoLock) PS&#xA;&#x9;&#x9;&#x9;&#x9;ON LE.PatientPK=PS.PatientPK AND LE.SiteCode=PS.SiteCode&#xA;&#x9;&#x9;&#x9;&#x9;WHERE PS.ExitDate &lt; LE.LastEncounterDate&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -221,7 +217,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Compute Newly Enrolled"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -238,12 +234,12 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="CorrectSiteAbstractionDates"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
-          SQLTask:SqlStatementSource="&#x9;/*&#xA;&#x9;Assumptions:&#xA;&#x9;1. We shall use the Maximum last encounter date as the site abstration date. &#xA;&#x9;2. If the Site's visit / pgharmacy file did not arrive completely we use the MAX(stg_patient.LastVisitDate) in the stg_patient File  &#xA;&#x9;&#xA;&#x9;*/&#xA;&#x9;&#xA;&#x9;IF OBJECT_ID('lkp_SiteAbstractionDate') IS NOT NULL &#xA;&#x9;DROP TABLE lkp_SiteAbstractionDate&#xA;&#x9;GO &#xA;&#x9;&#xA;&#x9;--1 &#xA;&#x9;SELECT * INTO lkp_SiteAbstractionDate FROM vw_SiteAbstractionDates2&#xA;&#x9;go &#xA;&#x9;-- Index Table SiteCode&#xA;&#x9;CREATE INDEX IX_lkp_SiteAbstractionDate_SiteCode ON lkp_SiteAbstractionDate (SiteCode)&#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;---2 Correct stg_Patients Last Visit&#xA;&#xA;&#x9;&#xA;&#x9;UPDATE X SET X.LastVisit = &#xA;&#x9;CASE WHEN AB.LastVisit &lt; AB.LE THEN AB.LE ELSE AB.LastVisit END &#xA;&#xA;&#x9;FROM stg_Patients X&#xA;&#x9;INNER JOIN &#xA;&#xA;&#x9;(SELECT P.PatientID, P.PatientPK, P.Emr, P.SiteCode, LE, LastVisit, PE FROM Stg_Patients P&#xA;&#x9;LEFT JOIN &#xA;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode)  V&#xA;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode)  Ph&#xA;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;WHERE LastVisit &lt;&gt; LE)&#xA;&#x9;AB&#xA;&#x9; &#xA;&#x9;ON  x.PatientID = AB.PatientID AND  X.PatientPK =AB.PatientPK AND X.Emr = AB.Emr AND  X.SiteCode=AB.SiteCode&#xA;&#xA;&#xA;&#x9;---Find Facilities with no Abstraction dates and use the last patient's most recent visit&#xA;&#x9;---SELECT * FROM lkp_SiteAbstractionDate&#xA;&#x9;INSERT lkp_SiteAbstractionDate (SiteCode,EMR,Project,VisitAbstractionDate,PharmacyAbstractionDate)&#xA;&#x9;&#xA;&#x9;SELECT X.SiteCode, EMR, Project, &#xA;&#x9;CASE WHEN LE IS NULL THEN LastVisit ELSE LE END AS LE,&#xA;&#x9;CASE WHEN PE  IS NULL THEN LastVisit ELSE PE END AS PE&#xA;&#x9;&#xA;&#x9;    FROM &#xA;&#x9;&#x9;(SELECT M.SiteCode, M.Project FROM&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;(SELECT Sitecode, Project from stg_Patients M group by SiteCode, Project) M&#xA;&#x9;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;&#x9;lkp_SiteAbstractionDate lk ON lk.SiteCode = m.SiteCode &#xA;&#x9;&#x9;&#x9;WHERE lk.SiteCode IS NULL &#xA;&#x9;&#x9;&#x9;) AS X&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;INNER JOIN &#xA;&#x9;( SELECT * FROM &#xA;&#x9;&#x9;(SELECT  P.Emr, P.SiteCode, MAX(LE) AS LE, MAX(LastVisit) AS LastVisit, MAX(PE) AS PE FROM Stg_Patients P&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  V&#xA;&#x9;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project,MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  Ph&#xA;&#x9;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;&#x9;----WHERE LastVisit &lt;&gt; LE&#xA;&#x9;&#x9;GROUP BY P.Emr, P.SiteCode &#xA;&#x9;&#x9;) AS A &#xA;&#x9;&#x9;where le is null or Pe is null&#xA;&#x9;) AS B &#xA;&#x9;ON X.SiteCode=B.SiteCode&#xA;&#xA;&#x9;GO &#xA;&#x9;UPDATE  lkp_SiteAbstractionDate SET &#xA;&#x9;&#x9;SiteAbstractionDate = CASE WHEN PharmacyAbstractionDate &gt; VisitAbstractionDate THEN PharmacyAbstractionDate ELSE  VisitAbstractionDate END &#xA;&#x9;WHERE SiteAbstractionDate IS NULL &#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;DELETE lkp_SiteAbstractionDate WHERE SiteCode IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#x9;/*&#xA;&#x9;Assumptions:&#xA;&#x9;1. We shall use the Maximum last encounter date as the site abstration date. &#xA;&#x9;2. If the Site's visit / pgharmacy file did not arrive completely we use the MAX(stg_patient.LastVisitDate) in the stg_patient File  &#xA;&#x9;&#xA;&#x9;*/&#xA;&#x9;&#xA;&#x9;IF OBJECT_ID('lkp_SiteAbstractionDate') IS NOT NULL &#xA;&#x9;DROP TABLE lkp_SiteAbstractionDate&#xA;&#x9;GO &#xA;&#xA;&#x9;--1 &#xA;&#x9;SELECT * INTO lkp_SiteAbstractionDate FROM vw_SiteAbstractionDates2&#xA;&#x9;go &#xA;&#x9;-- Index Table SiteCode&#xA;&#x9;CREATE INDEX IX_lkp_SiteAbstractionDate_SiteCode ON lkp_SiteAbstractionDate (SiteCode)&#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;---2 Correct stg_Patients Last Visit&#xA;&#xA;&#x9;&#xA;&#x9;UPDATE X SET X.LastVisit = &#xA;&#x9;CASE WHEN AB.LastVisit &lt; AB.LE THEN AB.LE ELSE AB.LastVisit END &#xA;&#xA;&#x9;FROM stg_Patients X&#xA;&#x9;INNER JOIN &#xA;&#xA;&#x9;(SELECT P.PatientID, P.PatientPK, P.Emr, P.SiteCode, LE, LastVisit, PE FROM Stg_Patients P&#xA;&#x9;LEFT JOIN &#xA;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode)  V&#xA;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode)  Ph&#xA;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;WHERE LastVisit &lt;&gt; LE)&#xA;&#x9;AB&#xA;&#x9; &#xA;&#x9;ON  x.PatientID = AB.PatientID AND  X.PatientPK =AB.PatientPK AND X.Emr = AB.Emr AND  X.SiteCode=AB.SiteCode&#xA;&#x9;GO&#xA;&#xA;&#x9;---Find Facilities with no Abstraction dates and use the last patient's most recent visit&#xA;&#x9;---SELECT * FROM lkp_SiteAbstractionDate&#xA;&#x9;INSERT lkp_SiteAbstractionDate (SiteCode,EMR,Project,VisitAbstractionDate,PharmacyAbstractionDate)&#xA;&#x9;&#xA;&#x9;SELECT X.SiteCode, EMR, Project, &#xA;&#x9;CASE WHEN LE IS NULL THEN LastVisit ELSE LE END AS LE,&#xA;&#x9;CASE WHEN PE  IS NULL THEN LastVisit ELSE PE END AS PE&#xA;&#x9;&#xA;&#x9;    FROM &#xA;&#x9;&#x9;(SELECT M.SiteCode, M.Project FROM&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;(SELECT Sitecode, Project from stg_Patients M group by SiteCode, Project) M&#xA;&#x9;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;&#x9;lkp_SiteAbstractionDate lk ON lk.SiteCode = m.SiteCode &#xA;&#x9;&#x9;&#x9;WHERE lk.SiteCode IS NULL &#xA;&#x9;&#x9;&#x9;) AS X&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;INNER JOIN &#xA;&#x9;( SELECT * FROM &#xA;&#x9;&#x9;(SELECT  P.Emr, P.SiteCode, MAX(LE) AS LE, MAX(LastVisit) AS LastVisit, MAX(PE) AS PE FROM Stg_Patients P&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  V&#xA;&#x9;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project,MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  Ph&#xA;&#x9;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;&#x9;----WHERE LastVisit &lt;&gt; LE&#xA;&#x9;&#x9;GROUP BY P.Emr, P.SiteCode &#xA;&#x9;&#x9;) AS A &#xA;&#x9;&#x9;where le is null or Pe is null&#xA;&#x9;) AS B &#xA;&#x9;ON X.SiteCode=B.SiteCode&#xA;&#xA;&#x9;GO &#xA;&#x9;UPDATE  lkp_SiteAbstractionDate SET &#xA;&#x9;&#x9;SiteAbstractionDate = CASE WHEN PharmacyAbstractionDate &gt; VisitAbstractionDate THEN PharmacyAbstractionDate ELSE  VisitAbstractionDate END &#xA;&#x9;WHERE SiteAbstractionDate IS NULL &#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;DELETE lkp_SiteAbstractionDate WHERE SiteCode IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -266,7 +262,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate  ART Patient Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="7">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -283,7 +279,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Baseline Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -300,7 +296,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Patient Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -317,7 +313,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Status Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -348,7 +344,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Lab Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -366,7 +362,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Pharmacy Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -384,7 +380,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="De-Duplicate Visit Data"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -401,7 +397,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Disable Lab Table Indexes"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -418,7 +414,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Disable Pharmacy Tables Indexes"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -435,7 +431,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Disable Visit Table Indexes"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -452,7 +448,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Enable Lab Table indexes"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -469,7 +465,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Enable Pharmacy Table Indexes"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -486,7 +482,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Enable Visit Table Indexes"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -556,7 +552,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="DO NOT ENABLE Correct Project Names"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="7">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -573,29 +569,28 @@
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Get latest FP status"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
-          SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.PatientLatestFP', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.PatientLatestFP; &#xA;&#xA;  go&#xA;&#xA;select * into PatientLatestFP  from (&#xA;SELECT distinct  v.[SiteCode],v.[PatientPK], Pregnant,[FamilyPlanningMethod] = STUFF((Select distinct ','+  [FamilyPlanningMethod]&#xA;from stg_PatientVisits T1&#xA;where T1.VisitID=v.VisitID and T1.patientpk=v.patientpk  and T1.sitecode=v.sitecode &#xA;FOR XML PATH('')),1,1,'')&#xA;&#xA;, mv.LastVisitDate&#xA;  FROM stg_PatientVisits v&#xA;  inner join vw_LastVisitDate mv on v.SiteCode=mv.SiteCode and v.PatientPK=mv.PatientPK &#xA;  where v.VisitDate=mv.LastVisitDate and (len([FamilyPlanningMethod])&gt;1)) a&#xA;&#xA;go&#xA;&#xA;ALTER TABLE [dbo].[Cohort2015_2016]&#xA;ADD LatestPregnancy varchar(250)&#xA;&#xA;go&#xA;&#xA;ALTER TABLE [dbo].[Cohort2015_2016]&#xA;ADD LatestFPMethod varchar(250)&#xA;&#xA;go&#xA;&#xA;UPDATE&#xA;     [dbo].[Cohort2015_2016]&#xA;SET&#xA;     [dbo].[Cohort2015_2016].LatestPregnancy = LVis.[Pregnant], [dbo].[Cohort2015_2016].LatestFPMethod = LVis.[FamilyPlanningMethod]&#xA;FROM&#xA;     [dbo].[Cohort2015_2016] p&#xA;LEFT JOIN [dbo].[PatientLatestFP] LVis &#xA;&#xA;ON P.[PatientPK]=LVis.[PatientPK] AND P.PatientPK = LVis.PatientPK AND P.[MFLCode] = LVis.SiteCode&#xA;&#xA;go&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.PatientLatestFP', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.PatientLatestFP; &#xA;&#xA;  go&#xA;&#xA;select * into PatientLatestFP  from (&#xA;SELECT distinct  v.[SiteCode],v.[PatientPK], Pregnant,[FamilyPlanningMethod] = STUFF((Select distinct ','+  [FamilyPlanningMethod]&#xA;from stg_PatientVisits(NoLock) T1&#xA;where T1.VisitID=v.VisitID and T1.patientpk=v.patientpk  and T1.sitecode=v.sitecode &#xA;FOR XML PATH('')),1,1,'')&#xA;&#xA;, mv.LastVisitDate&#xA;  FROM stg_PatientVisits v&#xA;  inner join vw_LastVisitDate mv on v.SiteCode=mv.SiteCode and v.PatientPK=mv.PatientPK &#xA;  where v.VisitDate=mv.LastVisitDate and (len([FamilyPlanningMethod])&gt;1)) a&#xA;&#xA;go&#xA;&#xA;ALTER TABLE [dbo].[Cohort2015_2016]&#xA;ADD LatestPregnancy varchar(250)&#xA;&#xA;go&#xA;&#xA;ALTER TABLE [dbo].[Cohort2015_2016]&#xA;ADD LatestFPMethod varchar(250)&#xA;&#xA;go&#xA;&#xA;UPDATE&#xA;     [dbo].[Cohort2015_2016]&#xA;SET&#xA;     [dbo].[Cohort2015_2016].LatestPregnancy = LVis.[Pregnant], [dbo].[Cohort2015_2016].LatestFPMethod = LVis.[FamilyPlanningMethod]&#xA;FROM&#xA;     [dbo].[Cohort2015_2016] p&#xA;LEFT JOIN [dbo].[PatientLatestFP] LVis &#xA;&#xA;ON P.[PatientPK]=LVis.[PatientPK] AND P.PatientPK = LVis.PatientPK AND P.[MFLCode] = LVis.SiteCode&#xA;&#xA;go&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Patient PKV_UID"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{9b1b08ae-5947-4c14-821c-31308d5c0b98}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Patient PKV_UID"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{B20E3E95-4C39-4161-97E8-5ED753223300}"
-          SQLTask:SqlStatementSource="&#xA;--GO &#xA;--UPDATE P  SET P.[PatientUID] = M.[PatientUID]&#xA;--FROM &#xA;--[All_Staging_2016_2].dbo.stg_Patients P&#xA;--INNER JOIN [MPI].[dbo].[TempPatientMatch] M&#xA;--ON P.PKV = M.PKV&#xA;--GO &#xA;&#xA;-- UPDATE [All_Staging_2016_2].dbo.stg_Patients  SET [PatientUID] = NEWID () WHERE [PatientUID]  IS NULL&#xA;-- GO&#xA;&#xA;&#xA;&#xA;--SELECT * FROM [All_Staging_2016_2].dbo.stg_Patients   WHERE [PatientUID]  IS NULL&#xA;INSERT [MPI].[dbo].[TempPatientMatch]  (PKV,PatientUID,SiteCode,PatientPk,cccnumber)&#xA;SELECT PKV,PatientUID,SiteCode,PatientPk,PatientID  FROM [All_Staging_2016_2].dbo.stg_Patients  WHERE [PatientUID] NOT IN (SELECT [PatientUID] FROM [MPI].[dbo].[TempPatientMatch] )&#xA;GO &#xA;&#xA;&#xA;----delete TempPatientMatch where PatientUID match not in stg_Patients&#xA;DELETE [MPI].[dbo].[TempPatientMatch] WHERE [PatientUID] NOT IN (SELECT [PatientUID] FROM [All_Staging_2016_2].dbo.stg_Patients)&#xA;go &#xA;&#xA;&#xA;GO&#xA;&#xA;TRUNCATE TABLE [MPI].[dbo].[PatientMatchingTable]&#xA;GO &#xA;&#xA;&#xA;--UPDATE PM&#xA;--Set cccnumber=P.PatientID &#xA;--from  [MPI].[dbo].[TempPatientMatch] PM&#xA;--INNER JOIN All_Staging_2016_2.dbo.stg_Patients P ON PM.PatientUID=P.PatientUID&#xA;&#xA;&#xA;INSERT [MPI].[dbo].[PatientMatchingTable]([PKV], [PatientUID], [SiteCode], [PatienPK],cccnumber)&#xA;SELECT [PKV], [PatientUID], [SiteCode], [PatientPk] ,cccnumber FROM [MPI].[dbo].[TempPatientMatch]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
+          SQLTask:SqlStatementSource="&#xA;--GO &#xA;--UPDATE P  SET P.[PatientUID] = M.[PatientUID]&#xA;--FROM &#xA;--[All_Staging_2016_2].dbo.stg_Patients P&#xA;--INNER JOIN [MPI].[dbo].[TempPatientMatch] M&#xA;--ON P.PKV = M.PKV&#xA;--GO &#xA;&#xA;-- UPDATE [All_Staging_2016_2].dbo.stg_Patients  SET [PatientUID] = NEWID () WHERE [PatientUID]  IS NULL&#xA;-- GO&#xA;&#xA;&#xA;&#xA;--SELECT * FROM [All_Staging_2016_2].dbo.stg_Patients   WHERE [PatientUID]  IS NULL&#xA;INSERT [MPI].[dbo].[TempPatientMatch]  (PKV,PatientUID,SiteCode,PatientPk,cccnumber)&#xA;SELECT PKV,PatientUID,SiteCode,PatientPk,PatientID  &#xA;FROM [All_Staging_2016_2].dbo.stg_Patients (NoLock) &#xA;WHERE [PatientUID] NOT IN (SELECT [PatientUID] FROM [MPI].[dbo].[TempPatientMatch] (NoLock) )&#xA;GO &#xA;&#xA;&#xA;----delete TempPatientMatch where PatientUID match not in stg_Patients&#xA;DELETE [MPI].[dbo].[TempPatientMatch] &#xA;WHERE [PatientUID] NOT IN (SELECT [PatientUID] FROM [All_Staging_2016_2].dbo.stg_Patients(NoLock) )&#xA;&#xA;GO&#xA;&#xA;TRUNCATE TABLE [MPI].[dbo].[PatientMatchingTable]&#xA;GO &#xA;&#xA;&#xA;--UPDATE PM&#xA;--Set cccnumber=P.PatientID &#xA;--from  [MPI].[dbo].[TempPatientMatch] PM&#xA;--INNER JOIN All_Staging_2016_2.dbo.stg_Patients P ON PM.PatientUID=P.PatientUID&#xA;&#xA;&#xA;INSERT [MPI].[dbo].[PatientMatchingTable]([PKV], [PatientUID], [SiteCode], [PatienPK],cccnumber)&#xA;SELECT [PKV], [PatientUID], [SiteCode], [PatientPk] ,cccnumber FROM [MPI].[dbo].[TempPatientMatch](NoLock) " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -617,7 +612,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="AdverseEvents PKV UID"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -633,7 +628,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="ART Patients PKV_UID"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -649,7 +644,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Labs PKV_UID"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -665,7 +660,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Pharmacy PKV_UID"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -681,7 +676,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient PKV_UID"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -697,7 +692,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Status PKV_UID"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -713,7 +708,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient Visits PKV_UID"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -729,7 +724,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Patient WAB PKV_UID"
-          DTS:ThreadHint="7">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -745,7 +740,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update Patent Match"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6348,13 +6343,13 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Re-Compute Baslines"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
           SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="PRINT ('Dropping table')&#xA;IF OBJECT_ID ('PatientBaselines') IS NOT NULL &#xA;DROP TABLE PatientBaselines&#xA;go&#xA;PRINT ('CReating Mirror table')&#xA;go&#xA;--CReate A mirror table &#xA;SELECT  * INTO PatientBaselines FROM stg_PatientsWABWHOCD4 &#xA;go&#xA;--delete &#xA;PRINT ('Cleaning Mirror table')&#xA;go&#xA;DELETE FROM PatientBaselines&#xA;go&#xA;--&#xA;PRINT ('Seeding Mirror table with Patients with CD4 Results')&#xA;go&#xA;INSERT PatientBaselines (PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported) &#xA;SELECT A.PatientID,A.FacilityName, A.SiteCode,A.PatientPK, A.Emr,A.Project,A.DateImported  FROM stg_ARTPatients A&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = A.PatientID and C.PatientPK=A.PatientPK and C.SiteCode=A.SiteCode&#xA;GO&#xA;&#xA; &#xA;&#xA;PRINT ('Seeding Mirror Table With WHO data')&#xA;go&#xA;UPDATE PB &#xA;SET &#xA;PB.bWHO= ST.bWHO,PB.bWHODate=ST.bWHODate,PB.eWHO=ST.eWHO,PB.eWHODate=ST.eWHODate,PB.lastWHO=ST.lastWHO,PB.lastWHODate=ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;INNER JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA; go&#xA;&#xA; &#xA;PRINT ('Seeding Mirror Table with WHO data only where Patient did not have CD4 data')&#xA;go&#xA;INSERT PatientBaselines ( PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported,bWHO,bWHODate,eWHO,eWHODate,lastWHO,lastWHODate)&#xA;SELECT ST.PatientID, ST.FacilityID, ST.SiteCode,ST.PatientPK, ST.Emr, &#xA;ST.Project, ST.DateImported,ST.bWHO,ST.bWHODate,ST.eWHO,ST.eWHODate,ST.lastWHO,ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;RIGHT JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA;WHERE PB.PatientID is NULL&#xA;go&#xA;&#xA;PRINT ('Dropping Duplicated Seed Records')&#xA;go&#xA;DELETE M &#xA;FROM PatientBaselines M&#xA;INNER JOIN &#xA;(&#xA;SELECT ROW_NUMBER() OVER (PARTITION BY  PatientID, FacilityID, SiteCode,PatientPK ORDER BY  PatientID, FacilityID, SiteCode,PatientPK ASC) AS NUM,  &#xA;PatientID, FacilityID, SiteCode,PatientPK, Ident&#xA;FROM PatientBaselines ) B&#xA;ON  M.Ident = B.Ident WHERE B.NUM &gt; 1&#xA;go&#xA;&#xA; &#xA;Print ('UPDATING CD4 Baseline Data. This will take some time.....')&#xA;go&#xA;&#xA;----CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollment=TestResult,CD4atEnrollment_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA;----% CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollmentPercent=cast(TestResult as float),CD4atEnrollmentPercent_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA; -----Last CD4 AfterART Start&#xA;--UPDATE CW &#xA;--SET CW.LastCD4AfterARTStart = D.TestResult, CW.LastCD4AfterARTStart_Date=d.OrderedbyDate&#xA;--FROM &#xA;--(&#xA;--SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;--INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;--INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;--inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;--GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;--) C&#xA;--INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;--inner join  vw_GetCD4Counts D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;--go&#xA;&#xA;&#xA;---Last CD4 Percent AfterART Start&#xA;UPDATE CW &#xA;SET CW.LastCD4AfterARTStartPercent = D.TestResult, CW.LastCD4AfterARTStartPercent_Date=d.OrderedbyDate&#xA;FROM &#xA;(&#xA;SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;) C&#xA;INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;inner join  vw_GetCD4Percent D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;&#xA; &#xA;&#xA;go&#xA;&#xA;---6month cd4&#xA;UPDATE W SET  W.[6MonthCD4]=TestResult, w.[6MonthCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA; &#xA;&#xA;&#xA;---6month cd4Percent&#xA;UPDATE W SET  W.[6MonthCD4Percent]=TestResult, w.[6MonthCD4Percent_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;--12month cd4&#xA;UPDATE W SET W.[12MonthCD4]= TestResult,W.[12MonthCD4_Date]= OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 11 AND 13&#xA;go&#xA;&#xA; &#xA;&#xA;&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.eCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.bCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;----LStickCD4 beforARTSTart&#xA;UPDATE W SET W.[LstickBaselineCD4]=TestResult,W.[LstickBaselineCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -122 AND 92&#xA;go&#xA;&#xA;--Update by MM 17th March 2021 for inclusion of non numeric true VL results (Undetectable/NotDetected/LDL)&#xA;--Update by MM 17th March 2021: Changed the period to +-2 from +-3 as advised by Dr Muthoka&#xA;&#xA;--- 6m Viral Load&#xA;UPDATE W SET W.[6MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[6MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 4 AND 8&#xA;go&#xA;&#xA; &#xA;&#xA;--- 12m Viral Load&#xA;UPDATE W SET W.[12MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[12MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 10 AND 14&#xA;&#xA; &#xA;&#xA;--- 18mViral Load&#xA;UPDATE W SET &#xA;W.[18MonthVL]= CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[18MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 16 AND 20&#xA;&#xA; &#xA;&#xA;go&#xA;--- 24mViral Load&#xA;UPDATE W SET W.[24MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[24MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 22 AND 26" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="PRINT ('Dropping table')&#xA;IF OBJECT_ID ('PatientBaselines') IS NOT NULL &#xA;DROP TABLE PatientBaselines&#xA;go&#xA;PRINT ('CReating Mirror table')&#xA;go&#xA;--CReate A mirror table &#xA;SELECT  * INTO PatientBaselines FROM stg_PatientsWABWHOCD4 &#xA;go&#xA;--delete &#xA;PRINT ('Cleaning Mirror table')&#xA;go&#xA;DELETE FROM PatientBaselines&#xA;go&#xA;--&#xA;PRINT ('Seeding Mirror table with Patients with CD4 Results')&#xA;go&#xA;INSERT PatientBaselines (PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported) &#xA;SELECT A.PatientID,A.FacilityName, A.SiteCode,A.PatientPK, A.Emr,A.Project,A.DateImported  FROM stg_ARTPatients A&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = A.PatientID and C.PatientPK=A.PatientPK and C.SiteCode=A.SiteCode&#xA;GO&#xA;&#xA; &#xA;&#xA;PRINT ('Seeding Mirror Table With WHO data')&#xA;go&#xA;UPDATE PB &#xA;SET &#xA;PB.bWHO= ST.bWHO,PB.bWHODate=ST.bWHODate,PB.eWHO=ST.eWHO,PB.eWHODate=ST.eWHODate,PB.lastWHO=ST.lastWHO,PB.lastWHODate=ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;INNER JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA; go&#xA;&#xA; &#xA;PRINT ('Seeding Mirror Table with WHO data only where Patient did not have CD4 data')&#xA;go&#xA;INSERT PatientBaselines ( PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported,bWHO,bWHODate,eWHO,eWHODate,lastWHO,lastWHODate)&#xA;SELECT ST.PatientID, ST.FacilityID, ST.SiteCode,ST.PatientPK, ST.Emr, &#xA;ST.Project, ST.DateImported,ST.bWHO,ST.bWHODate,ST.eWHO,ST.eWHODate,ST.lastWHO,ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;RIGHT JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA;WHERE PB.PatientID is NULL&#xA;go&#xA;&#xA;PRINT ('Dropping Duplicated Seed Records')&#xA;go&#xA;DELETE M &#xA;FROM PatientBaselines M&#xA;INNER JOIN &#xA;(&#xA;SELECT ROW_NUMBER() OVER (PARTITION BY  PatientID, FacilityID, SiteCode,PatientPK ORDER BY  PatientID, FacilityID, SiteCode,PatientPK ASC) AS NUM,  &#xA;PatientID, FacilityID, SiteCode,PatientPK, Ident&#xA;FROM PatientBaselines ) B&#xA;ON  M.Ident = B.Ident WHERE B.NUM &gt; 1&#xA;go&#xA;&#xA; &#xA;Print ('UPDATING CD4 Baseline Data. This will take some time.....')&#xA;go&#xA;&#xA;----CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollment=TestResult,CD4atEnrollment_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA;----% CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollmentPercent=cast(TestResult as float),CD4atEnrollmentPercent_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA; -----Last CD4 AfterART Start&#xA;--UPDATE CW &#xA;--SET CW.LastCD4AfterARTStart = D.TestResult, CW.LastCD4AfterARTStart_Date=d.OrderedbyDate&#xA;--FROM &#xA;--(&#xA;--SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;--INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;--INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;--inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;--GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;--) C&#xA;--INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;--inner join  vw_GetCD4Counts D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;--go&#xA;&#xA;&#xA;---Last CD4 Percent AfterART Start&#xA;UPDATE CW &#xA;SET CW.LastCD4AfterARTStartPercent = D.TestResult, CW.LastCD4AfterARTStartPercent_Date=d.OrderedbyDate&#xA;FROM &#xA;(&#xA;SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;) C&#xA;INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;inner join  vw_GetCD4Percent D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;&#xA; &#xA;&#xA;go&#xA;&#xA;---6month cd4&#xA;UPDATE W SET  W.[6MonthCD4]=TestResult, w.[6MonthCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA;&#xA;---6month cd4Percent&#xA;UPDATE W SET  W.[6MonthCD4Percent]=TestResult, w.[6MonthCD4Percent_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;--12month cd4&#xA;UPDATE W SET W.[12MonthCD4]= TestResult,W.[12MonthCD4_Date]= OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 11 AND 13&#xA;go&#xA;&#xA; &#xA;&#xA;&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.eCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.bCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;----LStickCD4 beforARTSTart&#xA;UPDATE W SET W.[LstickBaselineCD4]=TestResult,W.[LstickBaselineCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -122 AND 92&#xA;go&#xA;&#xA;--Update by MM 17th March 2021 for inclusion of non numeric true VL results (Undetectable/NotDetected/LDL)&#xA;--Update by MM 17th March 2021: Changed the period to +-2 from +-3 as advised by Dr Muthoka&#xA;&#xA;--- 6m Viral Load&#xA;UPDATE W SET W.[6MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[6MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 4 AND 8&#xA;go&#xA;&#xA; &#xA;&#xA;--- 12m Viral Load&#xA;UPDATE W SET W.[12MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[12MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 10 AND 14&#xA;&#xA; GO&#xA;&#xA;--- 18mViral Load&#xA;UPDATE W SET &#xA;W.[18MonthVL]= CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[18MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 16 AND 20&#xA;&#xA;&#xA;go&#xA;--- 24mViral Load&#xA;UPDATE W SET W.[24MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[24MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 22 AND 26" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -6365,7 +6360,7 @@
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Reclaim HDD Space"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -6377,11 +6372,12 @@
       DTS:refId="Package\Reclaim HDD Space 1"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Shring DB log file to re-claim space"
+      DTS:Disabled="True"
       DTS:DTSID="{ea35d43b-a21b-4fa9-bd1e-9f47489ca692}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Reclaim HDD Space 1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -6398,7 +6394,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Run Cohort Analysis"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -6424,11 +6420,11 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - ART Patients"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{B20E3E95-4C39-4161-97E8-5ED753223300}"
+              SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
               SQLTask:SqlStatementSource="UPDATE M &#xA; SET M.[PatientSource]=T.[Target_PatientSource]  FROM [dbo].stg_ARTPatients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_PatientSourceMapping] T ON M.[PatientSource] = T.[Source_PatientSource]&#xA;--WHERE  M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.Gender= T.Target_Gender FROM [dbo].stg_ARTPatients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_Gender] T ON M.Gender = T.Source_Gender&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA; UPDATE P&#xA; SET  P.StartRegimen=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenMap]  M&#xA; ON P.StartRegimen = M.Source_Regimen&#xA;&#xA; GO&#xA; &#xA; UPDATE P&#xA; SET  P.LastRegimen=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenMap]  M&#xA; ON P.LastRegimen = M.Source_Regimen&#xA;&#xA; GO &#xA;&#xA; UPDATE P&#xA; SET  P.LastRegimenLine=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenLineMap]  M&#xA; ON P.LastRegimenLine = M.Source_Regimen&#xA;&#xA; GO &#xA;&#xA; &#xA; UPDATE P&#xA; SET  P.StartRegimenLine=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenLineMap]  M&#xA; ON P.StartRegimenLine = M.Source_Regimen&#xA;&#xA; GO &#xA; UPDATE P&#xA; SET  P.PatientSource=M.Target_PatientSource  FROM stg_ArtPatients P  INNER  JOIN  [dbo].[lkp_PatientSourceMapping] M&#xA; ON P.PatientSource = M.Source_PatientSource&#xA;&#xA; GO &#xA;-----UPDATE Sex DOB in ARTPatients Table &#xA;UPDATE ART &#xA;SET ART.Gender = P.Gender, ART.DOB=P.DOB FROM stg_ARTPatients ART &#xA;INNER JOIN &#xA;stg_Patients P ON P.PatientID = ART.PatientID AND P.PatientPk=ART.PatientPK AND P.SiteCode=ART.SiteCode AND P.Emr=ART.EMR&#xA;&#xA;GO " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -6440,11 +6436,11 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Patient Baselines"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{B20E3E95-4C39-4161-97E8-5ED753223300}"
+              SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
               SQLTask:SqlStatementSource="UPDATE M SET  M.eWHO= T.Target_WHOStage FROM [dbo].PatientBaselines M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.eWHO = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[bWHO]= T.Target_WHOStage FROM [dbo].PatientBaselines M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[bWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[lastWHO]= T.Target_WHOStage FROM [dbo].PatientBaselines M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[lastWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -6458,7 +6454,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Patient Pharmacy"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6476,7 +6472,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Patient Status"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6493,12 +6489,12 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Patients"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{B20E3E95-4C39-4161-97E8-5ED753223300}"
-              SQLTask:SqlStatementSource="&#xA;&#xA;UPDATE M &#xA; SET M.[PatientSource]=T.[Target_PatientSource]  FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_PatientSourceMapping] T ON M.[PatientSource] = T.[Source_PatientSource]&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;--------------------&#xA;&#xA;UPDATE M SET  M.MaritalStatus= T.Target_MaritalStatus FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_MaritalStatus] T ON M.MaritalStatus = T.Source_MaritalStatus&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.Gender= T.Target_Gender FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_Gender] T ON M.Gender = T.Source_Gender&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO &#xA;&#xA;---Education Level&#xA;UPDATE M SET M.EducationLevel=T.TargetEducationLevel FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[Lkp_EducationLevel] T ON M.EducationLevel = T.SourceEducationLevel&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;---Contact Relation &#xA;UPDATE M SET M.ContactRelation=T.TargetContactRelation FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].Lkp_ContactRelation T ON M.ContactRelation = T.SourceContactRelation&#xA;GO &#xA;&#xA;&#xA; UPDATE P&#xA; SET  P.PatientSource=M.Target_PatientSource  FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[lkp_PatientSourceMapping] M  ON P.PatientSource = M.Source_PatientSource&#xA;&#xA; GO&#xA; &#xA; UPDATE P&#xA; SET  P.EducationLevel=M.[TargetEducationLevel] FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[Lkp_EducationLevel] M  ON P.EducationLevel = M.[SourceEducationLevel]&#xA; &#xA;GO&#xA;&#xA;  UPDATE&#xA;    [All_Staging_2016_2].dbo.stg_Patients&#xA;SET&#xA;    [All_Staging_2016_2].dbo.stg_Patients.MPIPKV = ran.MPIPKV&#xA;FROM&#xA;   [All_Staging_2016_2].dbo.stg_Patients SI&#xA;INNER JOIN&#xA;    ( SELECT distinct p.PKV as 'PatientPKV', a.sxdmPKValueDoB as MPIPKV, p.Gender, p.PatientPK, p.SiteCode, p.DOB &#xA;  FROM [All_Staging_2016_2].dbo.stg_Patients p &#xA;  left join [CBSCentral].[dbo].[MasterPatientIndices] a on a.PatientPk = p.PatientPK and a.SiteCode=p.SiteCode &#xA;  where a.sxdmPKValueDoB is not null) ran&#xA;ON &#xA;    SI.PatientPk = ran.PatientPK and si.SiteCode=ran.SiteCode &#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
+              SQLTask:SqlStatementSource="&#xA;&#xA;UPDATE M &#xA; SET M.[PatientSource]=T.[Target_PatientSource]  FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_PatientSourceMapping] T ON M.[PatientSource] = T.[Source_PatientSource]&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;--------------------&#xA;&#xA;UPDATE M SET MaritalStatus = T.Target_MaritalStatus&#xA;from All_Staging_2016_2.dbo.stg_Patients M&#xA;inner JOIN All_Staging_2016_2.[dbo].lkp_MaritalStatus T&#xA;on M.MaritalStatus = T.Source_MaritalStatus&#xA;&#xA;GO&#xA;&#xA;UPDATE M SET  M.Gender= T.Target_Gender FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_Gender] T ON M.Gender = T.Source_Gender&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO &#xA;&#xA;---Education Level&#xA;UPDATE M SET M.EducationLevel=T.TargetEducationLevel FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[Lkp_EducationLevel] T ON M.EducationLevel = T.SourceEducationLevel&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;---Contact Relation &#xA;UPDATE M SET M.ContactRelation=T.TargetContactRelation FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].Lkp_ContactRelation T ON M.ContactRelation = T.SourceContactRelation&#xA;GO &#xA;&#xA;&#xA; UPDATE P&#xA; SET  P.PatientSource=M.Target_PatientSource  FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[lkp_PatientSourceMapping] M  ON P.PatientSource = M.Source_PatientSource&#xA;&#xA; GO&#xA; &#xA; UPDATE P&#xA; SET  P.EducationLevel=M.[TargetEducationLevel] FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[Lkp_EducationLevel] M  ON P.EducationLevel = M.[SourceEducationLevel]&#xA; &#xA;GO&#xA;&#xA;  UPDATE&#xA;    [All_Staging_2016_2].dbo.stg_Patients&#xA;SET&#xA;    [All_Staging_2016_2].dbo.stg_Patients.MPIPKV = ran.MPIPKV&#xA;FROM&#xA;   [All_Staging_2016_2].dbo.stg_Patients SI&#xA;INNER JOIN&#xA;    ( SELECT distinct p.PKV as 'PatientPKV', a.sxdmPKValueDoB as MPIPKV, p.Gender, p.PatientPK, p.SiteCode, p.DOB &#xA;  FROM [All_Staging_2016_2].dbo.stg_Patients p &#xA;  left join [CBSCentral].[dbo].[MasterPatientIndices] a on a.PatientPk = p.PatientPK and a.SiteCode=p.SiteCode &#xA;  where a.sxdmPKValueDoB is not null) ran&#xA;ON &#xA;    SI.PatientPk = ran.PatientPK and si.SiteCode=ran.SiteCode &#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -6510,7 +6506,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - Visits"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6526,11 +6522,11 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Mapping Queries - WABWHO"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{B20E3E95-4C39-4161-97E8-5ED753223300}"
+              SQLTask:Connection="{EEFF87B0-29C7-4F67-8176-628E9C88B1E6}"
               SQLTask:SqlStatementSource="--------------------&#xA;UPDATE M SET  M.eWHO= T.Target_WHOStage FROM [dbo].[stg_PatientsWABWHOCD4] M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.eWHO = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[bWHO]= T.Target_WHOStage FROM [dbo].[stg_PatientsWABWHOCD4] M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[bWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[lastWHO]= T.Target_WHOStage FROM [dbo].[stg_PatientsWABWHOCD4] M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[lastWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
@@ -6542,7 +6538,7 @@
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="VL Lookup"
-          DTS:ThreadHint="7">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6560,6 +6556,38 @@
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
           DTS:To="Package\Sequence Container\Mapping Queries - ART Patients" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A8BA9A35-17AB-4A72-A3A0-B9D36D81C6FF}"
+          DTS:From="Package\Sequence Container\Mapping Queries - Patient Baselines"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\Mapping Queries - Patient Status" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{7D2D0A9F-A0EC-4C2A-B734-134666EB0065}"
+          DTS:From="Package\Sequence Container\Mapping Queries - Patient Status"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\Mapping Queries - Patients" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{19FAFBC6-CCA6-42DF-8665-337AFB7862C1}"
+          DTS:From="Package\Sequence Container\Mapping Queries - ART Patients"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence Container\VL Lookup" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{3C2A9BF3-E768-462C-B2D8-32E7BE0F9ED2}"
+          DTS:From="Package\Sequence Container\VL Lookup"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence Container\Mapping Queries - WABWHO" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -6570,7 +6598,7 @@
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
       DTS:ObjectName="Shrink Database Files"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -6588,7 +6616,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Truncate Transfer Table"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -6792,11 +6820,11 @@
           Id="Package\Build ART Visits Matrix"
           TopLeft="1082.5,1237.5" />
         <NodeLayout
-          Size="202.666666666667,42"
+          Size="203,42"
           Id="Package\Build Pre-ART Visits Matrix"
-          TopLeft="1326,1236.5" />
+          TopLeft="1472.87499781139,1236.5" />
         <NodeLayout
-          Size="206.666666666667,42"
+          Size="207,42"
           Id="Package\Cleanup- Stg_PatientStatus"
           TopLeft="1325,107.5" />
         <NodeLayout
@@ -6808,15 +6836,15 @@
           Id="Package\CorrectSiteAbstractionDates"
           TopLeft="1322.5,720.5" />
         <NodeLayout
-          Size="226.666666666667,42"
+          Size="227,42"
           Id="Package\De-Duplicate Patient ArtPatient PaientStatus\De-Duplicate  ART Patient Data"
           TopLeft="5.5,5.5" />
         <NodeLayout
-          Size="186.666666666667,42"
+          Size="187,42"
           Id="Package\De-Duplicate Patient ArtPatient PaientStatus\De-Duplicate Baseline Data"
           TopLeft="293.5,5.5" />
         <NodeLayout
-          Size="186.666666666667,42"
+          Size="187,42"
           Id="Package\De-Duplicate Patient ArtPatient PaientStatus\De-Duplicate Patient Data"
           TopLeft="541.5,5.49999999999989" />
         <NodeLayout
@@ -6826,12 +6854,12 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="982,102.666666666667"
+          PanelSize="982,103"
           Size="982,146"
           Id="Package\De-Duplicate Patient ArtPatient PaientStatus"
           TopLeft="241.919743691943,266.340356113889" />
         <NodeLayout
-          Size="186.666666666667,42"
+          Size="187,42"
           Id="Package\De-Duplicate PatientLabs PatientPharmacy Patient Visit\De-Duplicate Lab Data"
           TopLeft="12.5,107.5" />
         <NodeLayout
@@ -6839,7 +6867,7 @@
           Id="Package\De-Duplicate PatientLabs PatientPharmacy Patient Visit\De-Duplicate Pharmacy Data"
           TopLeft="271.5,107.5" />
         <NodeLayout
-          Size="186.666666666667,42"
+          Size="187,42"
           Id="Package\De-Duplicate PatientLabs PatientPharmacy Patient Visit\De-Duplicate Visit Data"
           TopLeft="561,107.5" />
         <NodeLayout
@@ -6859,7 +6887,7 @@
           Id="Package\De-Duplicate PatientLabs PatientPharmacy Patient Visit\Enable Lab Table indexes"
           TopLeft="5.5,209.5" />
         <NodeLayout
-          Size="229.333333333334,42"
+          Size="229,42"
           Id="Package\De-Duplicate PatientLabs PatientPharmacy Patient Visit\Enable Pharmacy Table Indexes"
           TopLeft="264,209.5" />
         <NodeLayout
@@ -7001,8 +7029,8 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="761.333333333334,306.666666666667"
-          Size="761.333333333334,350"
+          PanelSize="761,307"
+          Size="761,350"
           Id="Package\De-Duplicate PatientLabs PatientPharmacy Patient Visit"
           TopLeft="1377.16665358676,177.515874649932" />
         <NodeLayout
@@ -7014,7 +7042,7 @@
           Id="Package\Get latest FP status"
           TopLeft="1091.1111211188,1607.41201743286" />
         <NodeLayout
-          Size="157.333333333334,42"
+          Size="157,42"
           Id="Package\Patient PKV_UID"
           TopLeft="1350,5.5" />
         <NodeLayout
@@ -7034,7 +7062,7 @@
           Id="Package\PKV UID Sequence\Patient Pharmacy PKV_UID"
           TopLeft="744.5,107.5" />
         <NodeLayout
-          Size="157.333333333334,42"
+          Size="157,42"
           Id="Package\PKV UID Sequence\Patient PKV_UID"
           TopLeft="769,5.49999999999989" />
         <NodeLayout
@@ -7042,7 +7070,7 @@
           Id="Package\PKV UID Sequence\Patient Status PKV_UID"
           TopLeft="1011.5,107.5" />
         <NodeLayout
-          Size="185.333333333334,42"
+          Size="185,42"
           Id="Package\PKV UID Sequence\Patient Visits PKV_UID"
           TopLeft="1505,107.5" />
         <NodeLayout
@@ -7050,7 +7078,7 @@
           Id="Package\PKV UID Sequence\Patient WAB PKV_UID"
           TopLeft="1262.5,107.5" />
         <NodeLayout
-          Size="177.333333333334,42"
+          Size="177,42"
           Id="Package\PKV UID Sequence\Update Patent Match"
           TopLeft="759,209.5" />
         <EdgeLayout
@@ -7508,20 +7536,20 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="1696,306"
-          Size="1696,349.333333333334"
+          PanelSize="1696,307"
+          Size="1696,349"
           Id="Package\PKV UID Sequence"
           TopLeft="580.5,1951.5" />
         <NodeLayout
-          Size="190.666666666667,42"
+          Size="191,42"
           Id="Package\Populate Transfer Table"
           TopLeft="1334.5,1420.5" />
         <NodeLayout
-          Size="170.666666666667,42"
+          Size="171,42"
           Id="Package\Reclaim HDD Space"
           TopLeft="1343,619.5" />
         <NodeLayout
-          Size="181.333333333334,42"
+          Size="181,42"
           Id="Package\Reclaim HDD Space 1"
           TopLeft="1338,2360.5" />
         <NodeLayout
@@ -7529,7 +7557,7 @@
           Id="Package\Re-Compute Baslines"
           TopLeft="1339.5,823.5" />
         <NodeLayout
-          Size="173.333333333334,42"
+          Size="173,42"
           Id="Package\Run Cohort Analysis"
           TopLeft="1342,1543.5" />
         <NodeLayout
@@ -7537,15 +7565,15 @@
           Id="Package\Sequence Container\Mapping Queries - ART Patients"
           TopLeft="714.5,107.5" />
         <NodeLayout
-          Size="188,42"
+          Size="248,42"
           Id="Package\Sequence Container\Mapping Queries - Patient Baselines"
-          TopLeft="5.5,109.5" />
+          TopLeft="14.2499998696148,21.7500015690922" />
         <NodeLayout
-          Size="165.333333333334,42"
+          Size="165,42"
           Id="Package\Sequence Container\Mapping Queries - Patient Pharmacy"
           TopLeft="254,109.5" />
         <NodeLayout
-          Size="178.666666666667,42"
+          Size="179,42"
           Id="Package\Sequence Container\Mapping Queries - Patient Status"
           TopLeft="480,109.5" />
         <NodeLayout
@@ -7561,7 +7589,7 @@
           Id="Package\Sequence Container\Mapping Queries - WABWHO"
           TopLeft="1243.5,109.5" />
         <NodeLayout
-          Size="162.666666666667,42"
+          Size="163,42"
           Id="Package\Sequence Container\VL Lookup"
           TopLeft="1012,112" />
         <EdgeLayout
@@ -7586,19 +7614,131 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="138.249999869615,63.7500015690922">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="402.750000130385,45.7499984309078"
+              Start="0,0"
+              End="402.750000130385,38.2499984309078">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.2068096981146" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.2068096981146"
+                    Point2="0,27.2068096981146"
+                    Point3="4,27.2068096981146" />
+                  <mssgle:LineSegment
+                    End="398.750000130385,27.2068096981146" />
+                  <mssgle:CubicBezierSegment
+                    Point1="398.750000130385,27.2068096981146"
+                    Point2="402.750000130385,27.2068096981146"
+                    Point3="402.750000130385,31.2068096981146" />
+                  <mssgle:LineSegment
+                    End="402.750000130385,38.2499984309078" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="597.777777777778,109.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="193.722222222222,-62"
+              Start="0,0"
+              End="193.722222222222,-54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-27.0451013093929" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-27.0451013093929"
+                    Point2="0,-31.0451013093929"
+                    Point3="4,-31.0451013093929" />
+                  <mssgle:LineSegment
+                    End="189.722222222222,-31.0451013093929" />
+                  <mssgle:CubicBezierSegment
+                    Point1="189.722222222222,-31.0451013093929"
+                    Point2="193.722222222222,-31.0451013093929"
+                    Point3="193.722222222222,-35.0451013093928" />
+                  <mssgle:LineSegment
+                    End="193.722222222222,-54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="924.5,131.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87.4999999999999,0"
+              Start="0,0"
+              End="79.9999999999999,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="79.9999999999999,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1174.66666666667,131.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68.8333333333335,0"
+              Start="0,0"
+              End="61.3333333333335,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="61.3333333333335,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="1462.66666666667,209.333333333334"
-          Size="1462.66666666667,252"
+          PanelSize="1463,210"
+          Size="1463,253"
           Id="Package\Sequence Container"
           TopLeft="696,924.5" />
         <NodeLayout
-          Size="178.666666666667,42"
+          Size="179,42"
           Id="Package\Shrink Database Files"
           TopLeft="1339,1849.5" />
         <NodeLayout
-          Size="193.333333333334,42"
+          Size="193,42"
           Id="Package\Truncate Transfer Table"
           TopLeft="1332.5,1339.5" />
         <EdgeLayout
@@ -7637,18 +7777,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="1428,865.5">
+          TopLeft="1427.91666666667,865.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59"
+              EndConnector="0,58.9999999999999"
               Start="0,0"
-              End="0,51.5">
+              End="0,51.4999999999999">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,51.5" />
+                    End="0,51.4999999999999" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7927,30 +8067,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="1185,1176.5">
+          TopLeft="1184.88888888889,1177.16666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-10.5,61"
+              EndConnector="-10.3888888888891,60.3333333333335"
               Start="0,0"
-              End="-10.5,53.5">
+              End="-10.3888888888891,52.8333333333335">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.4399836132732" />
+                    End="0,20.1728889698295" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.4399836132732"
-                    Point2="0,24.4399836132732"
-                    Point3="-4,24.4399836132732" />
+                    Point1="0,20.1728889698295"
+                    Point2="0,24.1728889698295"
+                    Point3="-4,24.1728889698295" />
                   <mssgle:LineSegment
-                    End="-6.5,24.4399836132732" />
+                    End="-6.38888888888914,24.1728889698295" />
                   <mssgle:CubicBezierSegment
-                    Point1="-6.5,24.4399836132732"
-                    Point2="-10.5,24.4399836132732"
-                    Point3="-10.5,28.4399836132732" />
+                    Point1="-6.38888888888914,24.1728889698295"
+                    Point2="-10.3888888888891,24.1728889698295"
+                    Point3="-10.3888888888891,28.1728889698295" />
                   <mssgle:LineSegment
-                    End="-10.5,53.5" />
+                    End="-10.3888888888891,52.8333333333335" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7995,30 +8135,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="1670,1176.5">
+          TopLeft="1669.77777777778,1177.16666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-242.5,60"
+              EndConnector="-95.5694466330526,59.3333333333335"
               Start="0,0"
-              End="-242.5,52.5">
+              End="-95.5694466330526,51.8333333333335">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.0393281442032" />
+                    End="0,19.772233351545" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,20.0393281442032"
-                    Point2="0,24.0393281442032"
-                    Point3="-4,24.0393281442032" />
+                    Point1="0,19.772233351545"
+                    Point2="0,23.772233351545"
+                    Point3="-4,23.772233351545" />
                   <mssgle:LineSegment
-                    End="-238.5,24.0393281442032" />
+                    End="-91.5694466330526,23.772233351545" />
                   <mssgle:CubicBezierSegment
-                    Point1="-238.5,24.0393281442032"
-                    Point2="-242.5,24.0393281442032"
-                    Point3="-242.5,28.0393281442032" />
+                    Point1="-91.5694466330526,23.772233351545"
+                    Point2="-95.5694466330526,23.772233351545"
+                    Point3="-95.5694466330526,27.772233351545" />
                   <mssgle:LineSegment
-                    End="-242.5,52.5" />
+                    End="-95.5694466330526,51.8333333333335" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8085,30 +8225,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="1427.42857142857,1278.78571428571">
+          TopLeft="1574.20833114473,1278.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="32.1190476190477,60.7142857142858"
+              EndConnector="-114.15277558917,61"
               Start="0,0"
-              End="32.1190476190477,53.2142857142858">
+              End="-114.15277558917,53.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.1283948541159" />
+                    End="0,32.2995896032832" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,32.1283948541159"
-                    Point2="0,36.1283948541159"
-                    Point3="4,36.1283948541159" />
+                    Point1="0,32.2995896032832"
+                    Point2="0,36.2995896032832"
+                    Point3="-4,36.2995896032832" />
                   <mssgle:LineSegment
-                    End="28.1190476190477,36.1283948541159" />
+                    End="-110.15277558917,36.2995896032832" />
                   <mssgle:CubicBezierSegment
-                    Point1="28.1190476190477,36.1283948541159"
-                    Point2="32.1190476190477,36.1283948541159"
-                    Point3="32.1190476190477,40.1283948541159" />
+                    Point1="-110.15277558917,36.2995896032832"
+                    Point2="-114.15277558917,36.2995896032832"
+                    Point3="-114.15277558917,40.2995896032832" />
                   <mssgle:LineSegment
-                    End="32.1190476190477,53.2142857142858" />
+                    End="-114.15277558917,53.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -8198,7 +8338,7 @@
         <AnnotationLayout
           Text="r"
           ParentId="Package"
-          Size="33.3333333333334,37.3333333333334"
+          Size="33,37"
           Id="baea6774-3b87-4fae-909a-ecb13733b170"
           TopLeft="1223,2465">
           <AnnotationLayout.FontInfo>

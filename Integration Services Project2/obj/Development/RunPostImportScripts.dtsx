@@ -1,0 +1,1005 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/14/2022 8:51:26 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="KENYAHMIS"
+  DTS:CreatorName="KENYAHMIS\Administrator"
+  DTS:DTSID="{13BEF319-A853-49E4-849E-0756DF2DAB82}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RunPostImportScripts"
+  DTS:PackageType="5"
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{39452A01-60A0-4317-A509-4EE697AAD026}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[backup_CohortDB]"
+      DTS:CreationName="ADO.NET:SQL"
+      DTS:DTSID="{B030C047-606A-4DFB-ABCD-0D44145EFF4C}"
+      DTS:ObjectName="backup_CohortDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=KENYAHMIS;Integrated Security=SSPI;Connect Timeout=30;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Cohort_2018]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{ABAE7D36-4FF5-4269-8930-EF7724F6CC6C}"
+      DTS:ObjectName="LocalHost.Cohort_2018">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Cohort_2018;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Back Up Database Task"
+      DTS:CreationName="Microsoft.SqlServer.Management.DatabaseMaintenance.DbMaintenanceBackupTask, Microsoft.SqlServer.MaintenancePlanTasks, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Back Up Database Task"
+      DTS:DTSID="{1d73095e-3fb2-44fd-8f7e-af965aff5b09}"
+      DTS:ExecutableType="Microsoft.SqlServer.Management.DatabaseMaintenance.DbMaintenanceBackupTask, Microsoft.SqlServer.MaintenancePlanTasks, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Back Up Database Task"
+      DTS:TaskContact="Back Up Database Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B030C047-606A-4DFB-ABCD-0D44145EFF4C}"
+          SQLTask:DatabaseSelectionType="4"
+          SQLTask:ServerVersion="14"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False"
+          SQLTask:BackupAction="0"
+          SQLTask:BackupIsIncremental="False"
+          SQLTask:BackupFileGroupsFiles=""
+          SQLTask:BackupDeviceType="2"
+          SQLTask:BackupPhisycalDestinationType="2"
+          SQLTask:BackupDestinationType="0"
+          SQLTask:BackupDestinationAutoFolderPath="J:\Databases\Backup\Package"
+          SQLTask:BackupActionForExistingBackups="0"
+          SQLTask:BackupCreateSubFolder="False"
+          SQLTask:BackupFileExtension=""
+          SQLTask:BackupVerifyIntegrity="False"
+          SQLTask:ExpireDate="2022-07-28T00:00:00"
+          SQLTask:RetainDays="14"
+          SQLTask:InDays="True"
+          SQLTask:UseExpiration="False"
+          SQLTask:BackupCompressionAction="0"
+          SQLTask:CopyOnlyBackup="False"
+          SQLTask:IgnoreReplicaType="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:SelectedDatabases
+            SQLTask:DatabaseName="All_Staging_2016_2" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Build ART Visits Matrix"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AB086076-C21E-441A-98E3-0B8000FB1E64}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Build ART Visits Matrix"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[pr_Create_Populate_Lkp_VisitDates] &#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Build Pre-ART Visits Matrix"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ADC2F152-B0DB-4C7F-A1B6-102B82D64E26}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Build Pre-ART Visits Matrix"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[pr_Create_Populate_lkp_PreARTVisitDates] &#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Cleanup- Stg_PatientStatus"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D927B406-BE8E-4AC4-92F7-C0DC5A1D636E}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cleanup- Stg_PatientStatus"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="DELETE FROM stg_PatientStatus &#xA;WHERE Ident IN (SELECT PS.IDENT FROM vw_LastPatientEncounter LE&#xA;&#x9;&#x9;&#x9;&#x9;INNER JOIN stg_PatientStatus(NoLock) PS&#xA;&#x9;&#x9;&#x9;&#x9;ON LE.PatientPK=PS.PatientPK AND LE.SiteCode=PS.SiteCode&#xA;&#x9;&#x9;&#x9;&#x9;WHERE PS.ExitDate &lt; LE.LastEncounterDate&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Compute Newly Enrolled"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F134678B-3977-44DD-ADF4-CF6A86925E53}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Compute Newly Enrolled"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="EXECUTE [dbo].[MER_05_TXNEW_1] " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CorrectSiteAbstractionDates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EE71E59B-5380-4DD1-B718-A0ECA618C162}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CorrectSiteAbstractionDates"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="&#x9;/*&#xA;&#x9;Assumptions:&#xA;&#x9;1. We shall use the Maximum last encounter date as the site abstration date. &#xA;&#x9;2. If the Site's visit / pgharmacy file did not arrive completely we use the MAX(stg_patient.LastVisitDate) in the stg_patient File  &#xA;&#x9;&#xA;&#x9;*/&#xA;&#x9;&#xA;&#x9;IF OBJECT_ID('lkp_SiteAbstractionDate') IS NOT NULL &#xA;&#x9;DROP TABLE lkp_SiteAbstractionDate&#xA;&#x9;GO &#xA;&#xA;&#x9;--1 &#xA;&#x9;SELECT * INTO lkp_SiteAbstractionDate FROM vw_SiteAbstractionDates2&#xA;&#x9;go &#xA;&#x9;-- Index Table SiteCode&#xA;&#x9;CREATE INDEX IX_lkp_SiteAbstractionDate_SiteCode ON lkp_SiteAbstractionDate (SiteCode)&#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;---2 Correct stg_Patients Last Visit&#xA;&#xA;&#x9;&#xA;&#x9;UPDATE X SET X.LastVisit = &#xA;&#x9;CASE WHEN AB.LastVisit &lt; AB.LE THEN AB.LE ELSE AB.LastVisit END &#xA;&#xA;&#x9;FROM stg_Patients X&#xA;&#x9;INNER JOIN &#xA;&#xA;&#x9;(SELECT P.PatientID, P.PatientPK, P.Emr, P.SiteCode, LE, LastVisit, PE FROM Stg_Patients P&#xA;&#x9;LEFT JOIN &#xA;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode)  V&#xA;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode)  Ph&#xA;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;WHERE LastVisit &lt;&gt; LE)&#xA;&#x9;AB&#xA;&#x9; &#xA;&#x9;ON  x.PatientID = AB.PatientID AND  X.PatientPK =AB.PatientPK AND X.Emr = AB.Emr AND  X.SiteCode=AB.SiteCode&#xA;&#x9;GO&#xA;&#xA;&#x9;---Find Facilities with no Abstraction dates and use the last patient's most recent visit&#xA;&#x9;---SELECT * FROM lkp_SiteAbstractionDate&#xA;&#x9;INSERT lkp_SiteAbstractionDate (SiteCode,EMR,Project,VisitAbstractionDate,PharmacyAbstractionDate)&#xA;&#x9;&#xA;&#x9;SELECT X.SiteCode, EMR, Project, &#xA;&#x9;CASE WHEN LE IS NULL THEN LastVisit ELSE LE END AS LE,&#xA;&#x9;CASE WHEN PE  IS NULL THEN LastVisit ELSE PE END AS PE&#xA;&#x9;&#xA;&#x9;    FROM &#xA;&#x9;&#x9;(SELECT M.SiteCode, M.Project FROM&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;(SELECT Sitecode, Project from stg_Patients M group by SiteCode, Project) M&#xA;&#x9;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;&#x9;lkp_SiteAbstractionDate lk ON lk.SiteCode = m.SiteCode &#xA;&#x9;&#x9;&#x9;WHERE lk.SiteCode IS NULL &#xA;&#x9;&#x9;&#x9;) AS X&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;INNER JOIN &#xA;&#x9;( SELECT * FROM &#xA;&#x9;&#x9;(SELECT  P.Emr, P.SiteCode, MAX(LE) AS LE, MAX(LastVisit) AS LastVisit, MAX(PE) AS PE FROM Stg_Patients P&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  V&#xA;&#x9;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project,MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  Ph&#xA;&#x9;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;&#x9;----WHERE LastVisit &lt;&gt; LE&#xA;&#x9;&#x9;GROUP BY P.Emr, P.SiteCode &#xA;&#x9;&#x9;) AS A &#xA;&#x9;&#x9;where le is null or Pe is null&#xA;&#x9;) AS B &#xA;&#x9;ON X.SiteCode=B.SiteCode&#xA;&#xA;&#x9;GO &#xA;&#x9;UPDATE  lkp_SiteAbstractionDate SET &#xA;&#x9;&#x9;SiteAbstractionDate = CASE WHEN PharmacyAbstractionDate &gt; VisitAbstractionDate THEN PharmacyAbstractionDate ELSE  VisitAbstractionDate END &#xA;&#x9;WHERE SiteAbstractionDate IS NULL &#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;DELETE lkp_SiteAbstractionDate WHERE SiteCode IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get latest FP status"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{67503BC3-16ED-42DC-83DC-D48D5FBA15F7}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get latest FP status"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('dbo.PatientLatestFP', 'U') IS NOT NULL &#xA;  DROP TABLE dbo.PatientLatestFP; &#xA;&#xA;  go&#xA;&#xA;select * into PatientLatestFP  from (&#xA;SELECT distinct  v.[SiteCode],v.[PatientPK], Pregnant,[FamilyPlanningMethod] = STUFF((Select distinct ','+  [FamilyPlanningMethod]&#xA;from stg_PatientVisits(NoLock) T1&#xA;where T1.VisitID=v.VisitID and T1.patientpk=v.patientpk  and T1.sitecode=v.sitecode &#xA;FOR XML PATH('')),1,1,'')&#xA;&#xA;, mv.LastVisitDate&#xA;  FROM stg_PatientVisits v&#xA;  inner join vw_LastVisitDate mv on v.SiteCode=mv.SiteCode and v.PatientPK=mv.PatientPK &#xA;  where v.VisitDate=mv.LastVisitDate and (len([FamilyPlanningMethod])&gt;1)) a&#xA;&#xA;go&#xA;&#xA;ALTER TABLE [dbo].[Cohort2015_2016]&#xA;ADD LatestPregnancy varchar(250)&#xA;&#xA;go&#xA;&#xA;ALTER TABLE [dbo].[Cohort2015_2016]&#xA;ADD LatestFPMethod varchar(250)&#xA;&#xA;go&#xA;&#xA;UPDATE&#xA;     [dbo].[Cohort2015_2016]&#xA;SET&#xA;     [dbo].[Cohort2015_2016].LatestPregnancy = LVis.[Pregnant], [dbo].[Cohort2015_2016].LatestFPMethod = LVis.[FamilyPlanningMethod]&#xA;FROM&#xA;     [dbo].[Cohort2015_2016] p&#xA;LEFT JOIN [dbo].[PatientLatestFP] LVis &#xA;&#xA;ON P.[PatientPK]=LVis.[PatientPK] AND P.PatientPK = LVis.PatientPK AND P.[MFLCode] = LVis.SiteCode&#xA;&#xA;go&#xA;  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Patient PKV_UID"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5C0A67C0-155E-466B-A2E3-35B0CAD0677D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Patient PKV_UID"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="&#xA;--GO &#xA;--UPDATE P  SET P.[PatientUID] = M.[PatientUID]&#xA;--FROM &#xA;--[All_Staging_2016_2].dbo.stg_Patients P&#xA;--INNER JOIN [MPI].[dbo].[TempPatientMatch] M&#xA;--ON P.PKV = M.PKV&#xA;--GO &#xA;&#xA;-- UPDATE [All_Staging_2016_2].dbo.stg_Patients  SET [PatientUID] = NEWID () WHERE [PatientUID]  IS NULL&#xA;-- GO&#xA;&#xA;&#xA;&#xA;--SELECT * FROM [All_Staging_2016_2].dbo.stg_Patients   WHERE [PatientUID]  IS NULL&#xA;INSERT [MPI].[dbo].[TempPatientMatch]  (PKV,PatientUID,SiteCode,PatientPk,cccnumber)&#xA;SELECT PKV,PatientUID,SiteCode,PatientPk,PatientID  &#xA;FROM [All_Staging_2016_2].dbo.stg_Patients (NoLock) &#xA;WHERE [PatientUID] NOT IN (SELECT [PatientUID] FROM [MPI].[dbo].[TempPatientMatch] (NoLock) )&#xA;GO &#xA;&#xA;&#xA;----delete TempPatientMatch where PatientUID match not in stg_Patients&#xA;DELETE [MPI].[dbo].[TempPatientMatch] &#xA;WHERE [PatientUID] NOT IN (SELECT [PatientUID] FROM [All_Staging_2016_2].dbo.stg_Patients(NoLock) )&#xA;&#xA;GO&#xA;&#xA;TRUNCATE TABLE [MPI].[dbo].[PatientMatchingTable]&#xA;GO &#xA;&#xA;&#xA;--UPDATE PM&#xA;--Set cccnumber=P.PatientID &#xA;--from  [MPI].[dbo].[TempPatientMatch] PM&#xA;--INNER JOIN All_Staging_2016_2.dbo.stg_Patients P ON PM.PatientUID=P.PatientUID&#xA;&#xA;&#xA;INSERT [MPI].[dbo].[PatientMatchingTable]([PKV], [PatientUID], [SiteCode], [PatienPK],cccnumber)&#xA;SELECT [PKV], [PatientUID], [SiteCode], [PatientPk] ,cccnumber FROM [MPI].[dbo].[TempPatientMatch](NoLock) " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Re-Compute Baslines"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CDAEB1DB-5C5F-4A17-A3A3-ED1DC7B0434C}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Re-Compute Baslines"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="PRINT ('Dropping table')&#xA;IF OBJECT_ID ('PatientBaselines') IS NOT NULL &#xA;DROP TABLE PatientBaselines&#xA;go&#xA;PRINT ('CReating Mirror table')&#xA;go&#xA;--CReate A mirror table &#xA;SELECT  * INTO PatientBaselines FROM stg_PatientsWABWHOCD4 &#xA;go&#xA;--delete &#xA;PRINT ('Cleaning Mirror table')&#xA;go&#xA;DELETE FROM PatientBaselines&#xA;go&#xA;--&#xA;PRINT ('Seeding Mirror table with Patients with CD4 Results')&#xA;go&#xA;INSERT PatientBaselines (PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported) &#xA;SELECT A.PatientID,A.FacilityName, A.SiteCode,A.PatientPK, A.Emr,A.Project,A.DateImported  FROM stg_ARTPatients A&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = A.PatientID and C.PatientPK=A.PatientPK and C.SiteCode=A.SiteCode&#xA;GO&#xA;&#xA; &#xA;&#xA;PRINT ('Seeding Mirror Table With WHO data')&#xA;go&#xA;UPDATE PB &#xA;SET &#xA;PB.bWHO= ST.bWHO,PB.bWHODate=ST.bWHODate,PB.eWHO=ST.eWHO,PB.eWHODate=ST.eWHODate,PB.lastWHO=ST.lastWHO,PB.lastWHODate=ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;INNER JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA; go&#xA;&#xA; &#xA;PRINT ('Seeding Mirror Table with WHO data only where Patient did not have CD4 data')&#xA;go&#xA;INSERT PatientBaselines ( PatientID, FacilityID, SiteCode,PatientPK, Emr, &#xA;Project, DateImported,bWHO,bWHODate,eWHO,eWHODate,lastWHO,lastWHODate)&#xA;SELECT ST.PatientID, ST.FacilityID, ST.SiteCode,ST.PatientPK, ST.Emr, &#xA;ST.Project, ST.DateImported,ST.bWHO,ST.bWHODate,ST.eWHO,ST.eWHODate,ST.lastWHO,ST.lastWHODate&#xA;FROM  PatientBaselines PB&#xA;RIGHT JOIN stg_PatientsWABWHOCD4 ST &#xA;ON PB.PatientID = ST.PatientID and PB.PatientPK=ST.PatientPK and PB.SiteCode=ST.SiteCode&#xA;WHERE PB.PatientID is NULL&#xA;go&#xA;&#xA;PRINT ('Dropping Duplicated Seed Records')&#xA;go&#xA;DELETE M &#xA;FROM PatientBaselines M&#xA;INNER JOIN &#xA;(&#xA;SELECT ROW_NUMBER() OVER (PARTITION BY  PatientID, FacilityID, SiteCode,PatientPK ORDER BY  PatientID, FacilityID, SiteCode,PatientPK ASC) AS NUM,  &#xA;PatientID, FacilityID, SiteCode,PatientPK, Ident&#xA;FROM PatientBaselines ) B&#xA;ON  M.Ident = B.Ident WHERE B.NUM &gt; 1&#xA;go&#xA;&#xA; &#xA;Print ('UPDATING CD4 Baseline Data. This will take some time.....')&#xA;go&#xA;&#xA;----CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollment=TestResult,CD4atEnrollment_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA;----% CD4 @Enrollments&#xA;UPDATE W SET CD4atEnrollmentPercent=cast(TestResult as float),CD4atEnrollmentPercent_Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE p.RegistrationAtCCC is not null and  DATEDIFF(dd,C.OrderedbyDate,P.RegistrationAtCCC) BETWEEN -30 AND 14&#xA;go&#xA;&#xA; -----Last CD4 AfterART Start&#xA;--UPDATE CW &#xA;--SET CW.LastCD4AfterARTStart = D.TestResult, CW.LastCD4AfterARTStart_Date=d.OrderedbyDate&#xA;--FROM &#xA;--(&#xA;--SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;--INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;--INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;--inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;--GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;--) C&#xA;--INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;--inner join  vw_GetCD4Counts D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;--go&#xA;&#xA;&#xA;---Last CD4 Percent AfterART Start&#xA;UPDATE CW &#xA;SET CW.LastCD4AfterARTStartPercent = D.TestResult, CW.LastCD4AfterARTStartPercent_Date=d.OrderedbyDate&#xA;FROM &#xA;(&#xA;SELECT  C.PatientID , C.PatientPK,  C.SiteCode, MAX(Num) AS Num FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;GROUP BY C.PatientID , C.PatientPK,  C.SiteCode&#xA;&#xA; &#xA;&#xA;) C&#xA;INNER JOIN PatientBaselines CW ON C.PatientID = CW.PatientID and C.PatientPK=CW.PatientPK and C.SiteCode=CW.SiteCode&#xA;inner join  vw_GetCD4Percent D ON C.PatientID = D.PatientID and C.PatientPK=D.PatientPK and C.SiteCode=D.SiteCode AND C.Num=D.Num&#xA;&#xA; &#xA;&#xA;go&#xA;&#xA;---6month cd4&#xA;UPDATE W SET  W.[6MonthCD4]=TestResult, w.[6MonthCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA;&#xA;---6month cd4Percent&#xA;UPDATE W SET  W.[6MonthCD4Percent]=TestResult, w.[6MonthCD4Percent_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Percent c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 5 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;--12month cd4&#xA;UPDATE W SET W.[12MonthCD4]= TestResult,W.[12MonthCD4_Date]= OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 11 AND 13&#xA;go&#xA;&#xA; &#xA;&#xA;&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.eCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;----CD4 beforARTSTart&#xA;UPDATE W SET W.bCD4=TestResult,W.bCD4Date=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -14 AND 7&#xA;go&#xA;&#xA; &#xA;&#xA;----LStickCD4 beforARTSTart&#xA;UPDATE W SET W.[LstickBaselineCD4]=TestResult,W.[LstickBaselineCD4_Date]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  vw_GetCD4Counts c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(dd,C.OrderedbyDate,A.StartARTDate) BETWEEN -122 AND 92&#xA;go&#xA;&#xA;--Update by MM 17th March 2021 for inclusion of non numeric true VL results (Undetectable/NotDetected/LDL)&#xA;--Update by MM 17th March 2021: Changed the period to +-2 from +-3 as advised by Dr Muthoka&#xA;&#xA;--- 6m Viral Load&#xA;UPDATE W SET W.[6MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[6MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 4 AND 8&#xA;go&#xA;&#xA; &#xA;&#xA;--- 12m Viral Load&#xA;UPDATE W SET W.[12MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[12MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 10 AND 14&#xA;&#xA; GO&#xA;&#xA;--- 18mViral Load&#xA;UPDATE W SET &#xA;W.[18MonthVL]= CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[18MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 16 AND 20&#xA;&#xA;&#xA;go&#xA;--- 24mViral Load&#xA;UPDATE W SET W.[24MonthVL]=CASE WHEN ISNUMERIC([TestResult]) = 1 THEN TestResult&#xA;&#x9;&#x9;&#x9;&#x9;ELSE &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;CASE WHEN [TestResult]  IN ('undetectable','NOT DETECTED','0 copies/ml','LDL','Less than Low Detectable Level') &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;THEN TestResult  &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ELSE NULL END  &#xA;&#x9;&#x9;&#x9;END,&#xA;&#xA;--CASE WHEN ISNUMERIC(TestResult)=1 THEN TestResult ELSE NULL END,&#xA;W.[24MonthVlDate]=OrderedbyDate FROM  PatientBaselines W&#xA;INNER JOIN stg_ARTPatients A ON A.PatientID = W.PatientID and A.PatientPK=W.PatientPK and A.SiteCode=W.SiteCode&#xA;INNER JOIN stg_Patients P ON A.PatientID = P.PatientID and A.PatientPK=P.PatientPK and A.SiteCode=P.SiteCode&#xA;inner join  [vw_GetBaslineViralLoads] c ON C.PatientID = W.PatientID and C.PatientPK=W.PatientPK and C.SiteCode=W.SiteCode&#xA;WHERE DATEDIFF(mm,A.StartARTDate,C.OrderedbyDate) BETWEEN 22 AND 26" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Reclaim HDD Space"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EEAD90ED-F344-4194-8E6D-DD3D8F5B72FE}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Reclaim HDD Space"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="USE [All_Staging_2016_2]&#xA;GO&#xA;DBCC SHRINKFILE (N'All_Staging_log' , 0, TRUNCATEONLY)&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Run Cohort Analysis"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FD74A412-AAAF-4A2F-9CDC-BA2B757A0B6F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Run Cohort Analysis"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="EXECUTE  [dbo].[pr_ExecuteCohort2015_16] &#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{CDB25D61-8BCE-4BE2-B1E0-3466A03DFFAE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Mapping Queries - ART Patients"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3A9F78C9-3B0C-4BD5-9C61-032ED9817E7F}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Mapping Queries - ART Patients"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+              SQLTask:SqlStatementSource="UPDATE M &#xA; SET M.[PatientSource]=T.[Target_PatientSource]  FROM [dbo].stg_ARTPatients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_PatientSourceMapping] T ON M.[PatientSource] = T.[Source_PatientSource]&#xA;--WHERE  M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.Gender= T.Target_Gender FROM [dbo].stg_ARTPatients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_Gender] T ON M.Gender = T.Source_Gender&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA; UPDATE P&#xA; SET  P.StartRegimen=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenMap]  M&#xA; ON P.StartRegimen = M.Source_Regimen&#xA;&#xA; GO&#xA; &#xA; UPDATE P&#xA; SET  P.LastRegimen=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenMap]  M&#xA; ON P.LastRegimen = M.Source_Regimen&#xA;&#xA; GO &#xA;&#xA; UPDATE P&#xA; SET  P.LastRegimenLine=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenLineMap]  M&#xA; ON P.LastRegimenLine = M.Source_Regimen&#xA;&#xA; GO &#xA;&#xA; &#xA; UPDATE P&#xA; SET  P.StartRegimenLine=M.Target_Regimen FROM stg_ARTPatients P  INNER  JOIN [dbo].[lkp_RegimenLineMap]  M&#xA; ON P.StartRegimenLine = M.Source_Regimen&#xA;&#xA; GO &#xA; UPDATE P&#xA; SET  P.PatientSource=M.Target_PatientSource  FROM stg_ArtPatients P  INNER  JOIN  [dbo].[lkp_PatientSourceMapping] M&#xA; ON P.PatientSource = M.Source_PatientSource&#xA;&#xA; GO &#xA;-----UPDATE Sex DOB in ARTPatients Table &#xA;UPDATE ART &#xA;SET ART.Gender = P.Gender, ART.DOB=P.DOB FROM stg_ARTPatients ART &#xA;INNER JOIN &#xA;stg_Patients P ON P.PatientID = ART.PatientID AND P.PatientPk=ART.PatientPK AND P.SiteCode=ART.SiteCode AND P.Emr=ART.EMR&#xA;&#xA;GO " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Mapping Queries - Patient Baselines"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{046C980D-688E-4D04-95CB-7FABA84EF301}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Mapping Queries - Patient Baselines"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+              SQLTask:SqlStatementSource="UPDATE M SET  M.eWHO= T.Target_WHOStage FROM [dbo].PatientBaselines M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.eWHO = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[bWHO]= T.Target_WHOStage FROM [dbo].PatientBaselines M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[bWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[lastWHO]= T.Target_WHOStage FROM [dbo].PatientBaselines M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[lastWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Mapping Queries - Patient Status"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{ACB007D0-5F5F-4E84-918D-71A12174E993}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Mapping Queries - Patient Status"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+              SQLTask:SqlStatementSource="&#xA;UPDATE M SET  M.ExitReason= T.Target_ExitReason FROM [dbo].stg_PatientStatus M&#xA;LEFT JOIN [All_Staging_2016_2].[dbo].[lkp_ExitReasonMapping] T ON M.ExitReason = T.Source_ExitReason&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;&#xA;DELETE stg_PatientStatus WHERE ExitReason IS NULL OR ExitDate IS NULL &#xA;GO&#xA;&#xA;&#xA; UPDATE stg_PatientLabs SET TestResult = REPLACE(TestResult,',','') WHERE RIGHT(TestResult,1)=','&#xA; GO &#xA;&#xA;UPDATE stg_PatientLabs SET TestResult = REPLACE(TestResult,CHAR(13),'') where   CAST(ASCII(RIGHT(TestResult,1)) AS INT)=13&#xA;GO &#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Mapping Queries - Patients"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BF3641CB-E8E6-4EE3-9E26-AB36CD15BCFB}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Mapping Queries - Patients"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+              SQLTask:SqlStatementSource="&#xA;&#xA;UPDATE M &#xA; SET M.[PatientSource]=T.[Target_PatientSource]  FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_PatientSourceMapping] T ON M.[PatientSource] = T.[Source_PatientSource]&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;--------------------&#xA;&#xA;UPDATE M SET MaritalStatus = T.Target_MaritalStatus&#xA;from All_Staging_2016_2.dbo.stg_Patients M&#xA;inner JOIN All_Staging_2016_2.[dbo].lkp_MaritalStatus T&#xA;on M.MaritalStatus = T.Source_MaritalStatus&#xA;&#xA;GO&#xA;&#xA;UPDATE M SET  M.Gender= T.Target_Gender FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_Gender] T ON M.Gender = T.Source_Gender&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO &#xA;&#xA;---Education Level&#xA;UPDATE M SET M.EducationLevel=T.TargetEducationLevel FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[Lkp_EducationLevel] T ON M.EducationLevel = T.SourceEducationLevel&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;---Contact Relation &#xA;UPDATE M SET M.ContactRelation=T.TargetContactRelation FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].Lkp_ContactRelation T ON M.ContactRelation = T.SourceContactRelation&#xA;GO &#xA;&#xA;&#xA; UPDATE P&#xA; SET  P.PatientSource=M.Target_PatientSource  FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[lkp_PatientSourceMapping] M  ON P.PatientSource = M.Source_PatientSource&#xA;&#xA; GO&#xA; &#xA; UPDATE P&#xA; SET  P.EducationLevel=M.[TargetEducationLevel] FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[Lkp_EducationLevel] M  ON P.EducationLevel = M.[SourceEducationLevel]&#xA; &#xA;GO&#xA;&#xA;  UPDATE&#xA;    [All_Staging_2016_2].dbo.stg_Patients&#xA;SET&#xA;    [All_Staging_2016_2].dbo.stg_Patients.MPIPKV = ran.MPIPKV&#xA;FROM&#xA;   [All_Staging_2016_2].dbo.stg_Patients SI&#xA;INNER JOIN&#xA;    ( SELECT distinct p.PKV as 'PatientPKV', a.sxdmPKValueDoB as MPIPKV, p.Gender, p.PatientPK, p.SiteCode, p.DOB &#xA;  FROM [All_Staging_2016_2].dbo.stg_Patients p &#xA;  left join [CBSCentral].[dbo].[MasterPatientIndices] a on a.PatientPk = p.PatientPK and a.SiteCode=p.SiteCode &#xA;  where a.sxdmPKValueDoB is not null) ran&#xA;ON &#xA;    SI.PatientPk = ran.PatientPK and si.SiteCode=ran.SiteCode &#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Mapping Queries - WABWHO"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3992051F-1409-43E5-B6E1-BB18196ADDB9}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Mapping Queries - WABWHO"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+              SQLTask:SqlStatementSource="--------------------&#xA;UPDATE M SET  M.eWHO= T.Target_WHOStage FROM [dbo].[stg_PatientsWABWHOCD4] M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.eWHO = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[bWHO]= T.Target_WHOStage FROM [dbo].[stg_PatientsWABWHOCD4] M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[bWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;UPDATE M SET  M.[lastWHO]= T.Target_WHOStage FROM [dbo].[stg_PatientsWABWHOCD4] M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_WHOStage] T ON M.[lastWHO] = T.Source_WHOStage&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\VL Lookup"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{774EB4FD-C600-46F4-94B1-017224AAA076}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="VL Lookup"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{ABAE7D36-4FF5-4269-8930-EF7724F6CC6C}"
+              SQLTask:SqlStatementSource="UPDATE per&#xA;   SET  per.[TestResult] = Addr.[Target_ViralLoad]&#xA;FROM  [All_Staging_2016_2].[dbo].[stg_PatientLabs] Per&#xA;INNER JOIN   [All_Staging_2016_2].[dbo].[lkp_ViralLoadMapping] Addr&#xA;ON Per.[TestResult] = Addr.[Source_ViralLoad]     &#xA;WHERE Per.TestName in ('VL',&#xA;'ViralLoadCount',&#xA;'ViralLoad Undetectable',&#xA;'ViralLoad',&#xA;'Viral Load Test',&#xA;'Viral Load', 'Hiv Viral Load Count', 'HIV VIRAL LOAD, QUALITATIVE','ViralLoad Undetectable','HIV VIRAL LOAD')&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{F7FB8C31-152E-4DA3-A215-05EE27808ED6}"
+          DTS:From="Package\Sequence Container\Mapping Queries - Patient Baselines"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\Mapping Queries - Patient Status" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{1110FC1D-41F5-4414-87B8-15129495BF62}"
+          DTS:From="Package\Sequence Container\Mapping Queries - Patient Status"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Sequence Container\Mapping Queries - Patients" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{8E031C83-CB2D-4B91-BE06-845D74CBF941}"
+          DTS:From="Package\Sequence Container\Mapping Queries - Patients"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Sequence Container\Mapping Queries - ART Patients" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{94E28B6C-10A9-474B-A655-B2E17A627441}"
+          DTS:From="Package\Sequence Container\Mapping Queries - ART Patients"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Sequence Container\VL Lookup" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{BAFEA8C4-F835-468C-9A50-0E8292C83A0C}"
+          DTS:From="Package\Sequence Container\VL Lookup"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Sequence Container\Mapping Queries - WABWHO" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Shrink Database Files"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{275DC35E-17DD-46BE-9F38-83E77EE9ADDA}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Shrink Database Files"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="USE [All_Staging_2016_2]&#xA;GO&#xA;DBCC SHRINKFILE (N'All_Staging_log' , 0, TRUNCATEONLY)&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{30BEC7E9-7656-4BA5-9D22-1B43CFF3CA8E}"
+      DTS:From="Package\Patient PKV_UID"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Cleanup- Stg_PatientStatus" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{27D06CB3-CCD3-4117-97F8-AF77E77CE0F9}"
+      DTS:From="Package\Cleanup- Stg_PatientStatus"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Reclaim HDD Space" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{A821829E-FF1E-4C25-A3B0-1589E9E5C6AA}"
+      DTS:From="Package\Compute Newly Enrolled"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Back Up Database Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{B071B2A9-0B29-414A-BFB1-590485A98590}"
+      DTS:From="Package\Back Up Database Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Shrink Database Files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{ED634FC4-E199-4141-BB17-8B5867B99142}"
+      DTS:From="Package\Reclaim HDD Space"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\CorrectSiteAbstractionDates" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{16A366F7-BE9C-4CE7-87A6-EF69F1CA4522}"
+      DTS:From="Package\CorrectSiteAbstractionDates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Re-Compute Baslines" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{CD303EDB-2298-4603-859B-6EAC4C81CC9E}"
+      DTS:From="Package\Re-Compute Baslines"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{D58C8730-B471-4902-9417-F9903F021CF6}"
+      DTS:From="Package\Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Build ART Visits Matrix" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{B4E5ACB7-E84E-42FD-9277-E649E5FDFC5E}"
+      DTS:From="Package\Build ART Visits Matrix"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Build Pre-ART Visits Matrix" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{AC1E894F-9AB4-41AA-8F0C-13C805CC378B}"
+      DTS:From="Package\Build Pre-ART Visits Matrix"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Run Cohort Analysis" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{BF62490C-6219-4441-8619-4A046D1CA945}"
+      DTS:From="Package\Run Cohort Analysis"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Get latest FP status" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{CF849B60-29B2-4641-B8D8-4D3F88683D1A}"
+      DTS:From="Package\Get latest FP status"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
+      DTS:To="Package\Compute Newly Enrolled" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Patient PKV_UID"
+          TopLeft="353,24" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Cleanup- Stg_PatientStatus"
+          TopLeft="329,106" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="432,66">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Reclaim HDD Space"
+          TopLeft="352,186" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="435.25,148">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="210,42"
+          Id="Package\CorrectSiteAbstractionDates"
+          TopLeft="334,271" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="438.5,228">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Re-Compute Baslines"
+          TopLeft="353,350" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="440.5,313">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Sequence Container\Mapping Queries - Patient Baselines"
+          TopLeft="38,13" />
+        <NodeLayout
+          Size="234,42"
+          Id="Package\Sequence Container\Mapping Queries - Patient Status"
+          TopLeft="332,14" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="286,34.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="46,0"
+              Start="0,0"
+              End="38.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="38.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Sequence Container\Mapping Queries - Patients"
+          TopLeft="690,16" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="566,36">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="124,0"
+              Start="0,0"
+              End="116.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="116.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="228,42"
+          Id="Package\Sequence Container\Mapping Queries - ART Patients"
+          TopLeft="668,111" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="793,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-11,53"
+              Start="0,0"
+              End="-11,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="-4,26.5" />
+                  <mssgle:LineSegment
+                    End="-7,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7,26.5"
+                    Point2="-11,26.5"
+                    Point3="-11,30.5" />
+                  <mssgle:LineSegment
+                    End="-11,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="128,42"
+          Id="Package\Sequence Container\VL Lookup"
+          TopLeft="391,113" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="668,133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-149,0"
+              Start="0,0"
+              End="-141.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-141.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Sequence Container\Mapping Queries - WABWHO"
+          TopLeft="72,110" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="391,132.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-104,0"
+              Start="0,0"
+              End="-96.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-96.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="899,223"
+          Size="899,266"
+          Id="Package\Sequence Container"
+          TopLeft="55,443" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="442,392">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="62.5,51"
+              Start="0,0"
+              End="62.5,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.5"
+                    Point2="0,25.5"
+                    Point3="4,25.5" />
+                  <mssgle:LineSegment
+                    End="58.5,25.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="58.5,25.5"
+                    Point2="62.5,25.5"
+                    Point3="62.5,29.5" />
+                  <mssgle:LineSegment
+                    End="62.5,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Build Pre-ART Visits Matrix"
+          TopLeft="409,877" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Build ART Visits Matrix"
+          TopLeft="414,780" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="505.5,709">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="508.75,822">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,55"
+              Start="0,0"
+              End="0,47.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Get latest FP status"
+          TopLeft="423,1050" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Run Cohort Analysis"
+          TopLeft="426,968" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Compute Newly Enrolled"
+          TopLeft="418,1135" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="511.75,919">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="510.25,1010">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="511.5,1092">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Back Up Database Task"
+          TopLeft="424,1216" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="517,1177">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Shrink Database Files"
+          TopLeft="425,1307" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="517,1258">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
