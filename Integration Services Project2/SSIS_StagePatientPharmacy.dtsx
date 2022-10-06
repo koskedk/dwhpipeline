@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientPharmacy"
   DTS:PackageType="5"
-  DTS:VersionBuild="71"
-  DTS:VersionGUID="{572258BA-D905-435D-A42B-1FDE35825149}">
+  DTS:VersionBuild="73"
+  DTS:VersionGUID="{01738EEC-E9D3-45FA-AAD9-76D6465F78B7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -11730,6 +11730,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       DTS:refId="Package\Delete Complete Uploads"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{e83bdb61-943e-4090-a7bc-c791b1dd64ed}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -11808,10 +11809,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="173.333333333334,42"
-          Id="Package\Data Flow Task\Sort Regimen Order"
-          TopLeft="23.5000000000001,412.611111111111" />
-        <NodeLayout
           Size="172,42"
           Id="Package\Data Flow Task\Failed Lookup Maps"
           TopLeft="170.722222222222,717.944444444445" />
@@ -11828,13 +11825,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Id="Package\Data Flow Task\stg_Pharmacy destination"
           TopLeft="10.1666666666668,921.5" />
         <NodeLayout
-          Size="158,42"
-          Id="Package\Data Flow Task\Data Conversion"
-          TopLeft="30.6111111111111,107.277777777778" />
-        <NodeLayout
           Size="162,42"
           Id="Package\Data Flow Task\lkp_Regimen Map"
           TopLeft="170.833333333333,616.166666666667" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="30.6111111111111,107.277777777778" />
         <NodeLayout
           Size="121.333333333334,42"
           Id="Package\Data Flow Task\Union All"
@@ -11844,9 +11841,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Id="Package\Data Flow Task\Flag Duplicate Drug Orders"
           TopLeft="5.50000000000003,209.055555555556" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\Data Flow Task\Conditional Split"
-          TopLeft="31.7222222222223,310.833333333333" />
+          Size="173.333333333334,42"
+          Id="Package\Data Flow Task\Sort Regimen Order"
+          TopLeft="23.5000000000001,412.611111111111" />
         <NodeLayout
           Size="150.666666666667,42.6666666666667"
           Id="Package\Data Flow Task\OLE DB Source"
@@ -11855,6 +11852,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Size="180,42"
           Id="Package\Data Flow Task\Flat File Destination 1"
           TopLeft="506.759249045525,73.8065123092484" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Data Flow Task\Conditional Split"
+          TopLeft="31.7222222222223,310.833333333333" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Union All Output 1]"
           TopLeft="109.722222222222,861.5">
@@ -12207,14 +12208,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\stg_Pharmacy destination">
     <Properties>
       <Property>
@@ -12224,6 +12217,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

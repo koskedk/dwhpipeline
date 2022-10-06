@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientExtract"
   DTS:PackageType="5"
-  DTS:VersionBuild="56"
-  DTS:VersionGUID="{D3599939-78CE-4F62-8966-49204A22736C}">
+  DTS:VersionBuild="59"
+  DTS:VersionGUID="{FC33FBED-F283-4FBB-8B21-EE5CA816AE7E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -141,11 +141,12 @@ P.[Id]
 	P.PatientResidentVillage,
 	P.TransferInDate, 
                   P.Occupation,
-	0 as knockout
-  FROM [dbo].[PatientExtract](NoLock) P 
-INNER JOIN [dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0 
-INNER JOIN FacilityManifest_MaxDateRecieved(NoLock) a ON F.Code = a.SiteCode
-WHERE P.Voided=0 and P.[Gender] is NOT NULL and p.gender!='Unknown' and a.[End] is not null and a.[Session] is not null and SiteCode &gt;0 
+	0 as knockout,
+	P.NUPI
+  FROM [DWAPICentral].[dbo].[PatientExtract](NoLock) P 
+INNER JOIN [DWAPICentral].[dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0 
+---INNER JOIN FacilityManifest_MaxDateRecieved(NoLock) a ON F.Code = a.SiteCode
+WHERE P.Voided=0 and P.[Gender] is NOT NULL and p.gender!='Unknown' --and a.[End] is not null and a.[Session] is not null and SiteCode &gt;0 
 ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                 <property
                   dataType="System.Int32"
@@ -626,6 +627,16 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[knockout]"
                       name="knockout"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NUPI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NUPI]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NUPI]"
+                      name="NUPI"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -847,6 +858,11 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[knockout]"
                       dataType="i4"
                       name="knockout" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NUPI]"
+                      dataType="wstr"
+                      length="150"
+                      name="NUPI" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1117,6 +1133,12 @@ ORDER BY F.Code,P.[PatientCccNumber], P.[PatientPID]</property>
                       dataType="i4"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[knockout]"
                       name="knockout" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NUPI]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NUPI]"
+                      name="NUPI" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -2885,12 +2907,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                     </outputColumn>
                     <outputColumn
                       refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_DOB]"
-                      dataType="dbTime2"
+                      dataType="date"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_DOB]"
                       name="_DOB"
-                      scale="7"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -4225,11 +4246,17 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Occupation]" />
                     <inputColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[_DOB]"
-                      cachedDataType="dbTime2"
+                      cachedDataType="date"
                       cachedName="_DOB"
-                      cachedScale="7"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DOB]"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_DOB]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NUPI]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NUPI"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NUPI]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NUPI]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -4265,10 +4292,9 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       name="Gender" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DOB]"
-                      codePage="1252"
-                      dataType="str"
-                      length="50"
-                      name="DOB" />
+                      dataType="dbTimeStamp2"
+                      name="DOB"
+                      scale="7" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RegistrationDate]"
                       dataType="dbDate"
@@ -4460,6 +4486,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       dataType="wstr"
                       length="150"
                       name="Occupation" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NUPI]"
+                      dataType="wstr"
+                      length="50"
+                      name="NUPI" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -4781,6 +4812,7 @@ where [refTable].[PKV] = ?</property>
       DTS:refId="Package\Delete Complete Uploads"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{21B40E02-7634-4062-9FDC-819330467CBF}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -4855,33 +4887,33 @@ where [refTable].[PKV] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="154.666666666667,42"
-          Id="Package\Data Flow Task\NewPatientUIDs"
-          TopLeft="51.9444444444445,514.388888888889" />
-        <NodeLayout
           Size="248,42"
           Id="Package\Data Flow Task\Check for Duplicate PKVs in Pipeline"
           TopLeft="5.50000000000003,107.277777777778" />
-        <NodeLayout
-          Size="170.666666666667,42"
-          Id="Package\Data Flow Task\OLE DB Destination"
-          TopLeft="43.9444444444445,616.166666666667" />
         <NodeLayout
           Size="156,42"
           Id="Package\Data Flow Task\Data Conversion"
           TopLeft="51.5,310.833333333333" />
         <NodeLayout
-          Size="160,42"
-          Id="Package\Data Flow Task\PatientUID Exists"
-          TopLeft="49.5000000000001,412.611111111111" />
+          Size="158,42"
+          Id="Package\Data Flow Task\ADO NET Source"
+          TopLeft="50.3888888888889,5.50000000000002" />
         <NodeLayout
           Size="190,42"
           Id="Package\Data Flow Task\Remove Duplicate PKVs"
           TopLeft="34.3888888888889,209.055555555556" />
         <NodeLayout
-          Size="158,42"
-          Id="Package\Data Flow Task\ADO NET Source"
-          TopLeft="50.3888888888889,5.50000000000002" />
+          Size="160,42"
+          Id="Package\Data Flow Task\PatientUID Exists"
+          TopLeft="49.5000000000001,412.611111111111" />
+        <NodeLayout
+          Size="154.666666666667,42"
+          Id="Package\Data Flow Task\NewPatientUIDs"
+          TopLeft="51.9444444444445,514.388888888889" />
+        <NodeLayout
+          Size="170.666666666667,42"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="43.9444444444445,616.166666666667" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Output 01]"
           TopLeft="129.444444444445,556.388888888889">
@@ -5022,15 +5054,10 @@ where [refTable].[PKV] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Data Flow Task\ADO NET Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -5058,10 +5085,15 @@ where [refTable].[PKV] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\ADO NET Source">
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

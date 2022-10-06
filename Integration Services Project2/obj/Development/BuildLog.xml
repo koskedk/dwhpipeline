@@ -2,48 +2,48 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>src-Bi-StageDWAPICentral</Name>
-    <LastWriteTime>2022-07-19T11:12:03.9085948Z</LastWriteTime>
+    <LastWriteTime>2022-10-04T09:41:16.9695722Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>SSIS_StagePatientExtract.dtsx</Name>
-      <LastWriteTime>2022-07-20T14:18:59.02225Z</LastWriteTime>
+      <LastWriteTime>2022-09-17T06:53:34.16342Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StagePatientARTExtract.dtsx</Name>
-      <LastWriteTime>2022-04-14T06:18:52.2617794Z</LastWriteTime>
+      <LastWriteTime>2022-08-31T11:23:31.5706846Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StagePatientBaselinesWHOCD4WAB.dtsx</Name>
-      <LastWriteTime>2022-04-14T06:30:09.9070084Z</LastWriteTime>
+      <LastWriteTime>2022-08-31T11:25:40.2674401Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StagePatientLaboratory.dtsx</Name>
-      <LastWriteTime>2022-04-14T06:38:11.0015043Z</LastWriteTime>
+      <LastWriteTime>2022-09-01T12:32:50.8464709Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StagePatientPharmacy.dtsx</Name>
-      <LastWriteTime>2022-07-20T10:41:14.1719881Z</LastWriteTime>
+      <LastWriteTime>2022-09-17T06:54:18.4697158Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StagePatientVisits.dtsx</Name>
-      <LastWriteTime>2022-07-17T21:13:04.7985204Z</LastWriteTime>
+      <LastWriteTime>2022-09-01T10:17:01.8960336Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StagePatientStatus.dtsx</Name>
-      <LastWriteTime>2022-07-16T13:55:43.6346493Z</LastWriteTime>
+      <LastWriteTime>2022-09-01T14:19:28.6545532Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>MasterStageDWAPI Central.dtsx</Name>
-      <LastWriteTime>2022-07-17T21:11:40.3726867Z</LastWriteTime>
+      <LastWriteTime>2022-10-04T11:54:26.8224229Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -58,7 +58,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StageAdverseEvents.dtsx</Name>
-      <LastWriteTime>2022-04-13T11:07:21.7489974Z</LastWriteTime>
+      <LastWriteTime>2022-08-31T11:25:07.4044958Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -68,7 +68,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SSIS_StageHTSAndCBR.dtsx</Name>
-      <LastWriteTime>2022-05-10T14:08:49.3348714Z</LastWriteTime>
+      <LastWriteTime>2022-09-20T14:46:18.7546969Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -98,7 +98,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Populate_OtherModules_DWH.dtsx</Name>
-      <LastWriteTime>2022-07-17T21:05:52.9617724Z</LastWriteTime>
+      <LastWriteTime>2022-08-31T14:35:36.528155Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -113,7 +113,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>RunPostImportScripts.dtsx</Name>
-      <LastWriteTime>2022-07-14T18:33:43.8920461Z</LastWriteTime>
+      <LastWriteTime>2022-10-03T11:31:00.3162823Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>

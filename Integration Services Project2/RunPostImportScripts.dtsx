@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="RunPostImportScripts"
   DTS:PackageType="5"
-  DTS:VersionBuild="47"
-  DTS:VersionGUID="{1EE26D30-6568-4F47-9937-3B31F39525F6}">
+  DTS:VersionBuild="51"
+  DTS:VersionGUID="{ACE2CB03-535B-4234-8528-E1AD6130DB57}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -162,6 +162,22 @@
         <SQLTask:SqlTaskData
           SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
           SQLTask:SqlStatementSource="&#x9;/*&#xA;&#x9;Assumptions:&#xA;&#x9;1. We shall use the Maximum last encounter date as the site abstration date. &#xA;&#x9;2. If the Site's visit / pgharmacy file did not arrive completely we use the MAX(stg_patient.LastVisitDate) in the stg_patient File  &#xA;&#x9;&#xA;&#x9;*/&#xA;&#x9;&#xA;&#x9;IF OBJECT_ID('lkp_SiteAbstractionDate') IS NOT NULL &#xA;&#x9;DROP TABLE lkp_SiteAbstractionDate&#xA;&#x9;GO &#xA;&#xA;&#x9;--1 &#xA;&#x9;SELECT * INTO lkp_SiteAbstractionDate FROM vw_SiteAbstractionDates2&#xA;&#x9;go &#xA;&#x9;-- Index Table SiteCode&#xA;&#x9;CREATE INDEX IX_lkp_SiteAbstractionDate_SiteCode ON lkp_SiteAbstractionDate (SiteCode)&#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;---2 Correct stg_Patients Last Visit&#xA;&#xA;&#x9;&#xA;&#x9;UPDATE X SET X.LastVisit = &#xA;&#x9;CASE WHEN AB.LastVisit &lt; AB.LE THEN AB.LE ELSE AB.LastVisit END &#xA;&#xA;&#x9;FROM stg_Patients X&#xA;&#x9;INNER JOIN &#xA;&#xA;&#x9;(SELECT P.PatientID, P.PatientPK, P.Emr, P.SiteCode, LE, LastVisit, PE FROM Stg_Patients P&#xA;&#x9;LEFT JOIN &#xA;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode)  V&#xA;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode)  Ph&#xA;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;WHERE LastVisit &lt;&gt; LE)&#xA;&#x9;AB&#xA;&#x9; &#xA;&#x9;ON  x.PatientID = AB.PatientID AND  X.PatientPK =AB.PatientPK AND X.Emr = AB.Emr AND  X.SiteCode=AB.SiteCode&#xA;&#x9;GO&#xA;&#xA;&#x9;---Find Facilities with no Abstraction dates and use the last patient's most recent visit&#xA;&#x9;---SELECT * FROM lkp_SiteAbstractionDate&#xA;&#x9;INSERT lkp_SiteAbstractionDate (SiteCode,EMR,Project,VisitAbstractionDate,PharmacyAbstractionDate)&#xA;&#x9;&#xA;&#x9;SELECT X.SiteCode, EMR, Project, &#xA;&#x9;CASE WHEN LE IS NULL THEN LastVisit ELSE LE END AS LE,&#xA;&#x9;CASE WHEN PE  IS NULL THEN LastVisit ELSE PE END AS PE&#xA;&#x9;&#xA;&#x9;    FROM &#xA;&#x9;&#x9;(SELECT M.SiteCode, M.Project FROM&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;(SELECT Sitecode, Project from stg_Patients M group by SiteCode, Project) M&#xA;&#x9;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;&#x9;lkp_SiteAbstractionDate lk ON lk.SiteCode = m.SiteCode &#xA;&#x9;&#x9;&#x9;WHERE lk.SiteCode IS NULL &#xA;&#x9;&#x9;&#x9;) AS X&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;INNER JOIN &#xA;&#x9;( SELECT * FROM &#xA;&#x9;&#x9;(SELECT  P.Emr, P.SiteCode, MAX(LE) AS LE, MAX(LastVisit) AS LastVisit, MAX(PE) AS PE FROM Stg_Patients P&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project, MAX(VisitDate) as LE FROM stg_PatientVisits GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  V&#xA;&#x9;&#x9;ON  p.PatientID = v.PatientID AND  P.PatientPK = V.PatientPK AND P.Emr = v.Emr AND  P.SiteCode=V.SiteCode&#xA;&#x9;&#x9;LEFT JOIN &#xA;&#x9;&#x9;&#x9;(Select  PatientID, PatientPK, Emr, SiteCode, Project,MAX(DispenseDate) as PE FROM stg_PatientPharmacy GROUP BY PatientID, PatientPK, Emr, SiteCode, Project)  Ph&#xA;&#x9;&#x9;ON  p.PatientID = Ph.PatientID AND  P.PatientPK = Ph.PatientPK AND P.Emr = Ph.Emr AND  P.SiteCode=Ph.SiteCode&#xA;&#x9;&#x9;----WHERE LastVisit &lt;&gt; LE&#xA;&#x9;&#x9;GROUP BY P.Emr, P.SiteCode &#xA;&#x9;&#x9;) AS A &#xA;&#x9;&#x9;where le is null or Pe is null&#xA;&#x9;) AS B &#xA;&#x9;ON X.SiteCode=B.SiteCode&#xA;&#xA;&#x9;GO &#xA;&#x9;UPDATE  lkp_SiteAbstractionDate SET &#xA;&#x9;&#x9;SiteAbstractionDate = CASE WHEN PharmacyAbstractionDate &gt; VisitAbstractionDate THEN PharmacyAbstractionDate ELSE  VisitAbstractionDate END &#xA;&#x9;WHERE SiteAbstractionDate IS NULL &#xA;&#xA;&#x9;GO &#xA;&#xA;&#x9;DELETE lkp_SiteAbstractionDate WHERE SiteCode IS NULL&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Cleaning Task"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{de9750e6-55e0-4111-b709-042efe0cd127}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Cleaning Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
+          SQLTask:SqlStatementSource="exec DataCleanUPAndstandardardization" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -315,7 +331,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
-              SQLTask:SqlStatementSource="&#xA;&#xA;UPDATE M &#xA; SET M.[PatientSource]=T.[Target_PatientSource]  FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_PatientSourceMapping] T ON M.[PatientSource] = T.[Source_PatientSource]&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;--------------------&#xA;&#xA;UPDATE M SET MaritalStatus = T.Target_MaritalStatus&#xA;from All_Staging_2016_2.dbo.stg_Patients M&#xA;inner JOIN All_Staging_2016_2.[dbo].lkp_MaritalStatus T&#xA;on M.MaritalStatus = T.Source_MaritalStatus&#xA;&#xA;GO&#xA;&#xA;UPDATE M SET  M.Gender= T.Target_Gender FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_Gender] T ON M.Gender = T.Source_Gender&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO &#xA;&#xA;---Education Level&#xA;UPDATE M SET M.EducationLevel=T.TargetEducationLevel FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[Lkp_EducationLevel] T ON M.EducationLevel = T.SourceEducationLevel&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;---Contact Relation &#xA;UPDATE M SET M.ContactRelation=T.TargetContactRelation FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].Lkp_ContactRelation T ON M.ContactRelation = T.SourceContactRelation&#xA;GO &#xA;&#xA;&#xA; UPDATE P&#xA; SET  P.PatientSource=M.Target_PatientSource  FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[lkp_PatientSourceMapping] M  ON P.PatientSource = M.Source_PatientSource&#xA;&#xA; GO&#xA; &#xA; UPDATE P&#xA; SET  P.EducationLevel=M.[TargetEducationLevel] FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[Lkp_EducationLevel] M  ON P.EducationLevel = M.[SourceEducationLevel]&#xA; &#xA;GO&#xA;&#xA;  UPDATE&#xA;    [All_Staging_2016_2].dbo.stg_Patients&#xA;SET&#xA;    [All_Staging_2016_2].dbo.stg_Patients.MPIPKV = ran.MPIPKV&#xA;FROM&#xA;   [All_Staging_2016_2].dbo.stg_Patients SI&#xA;INNER JOIN&#xA;    ( SELECT distinct p.PKV as 'PatientPKV', a.sxdmPKValueDoB as MPIPKV, p.Gender, p.PatientPK, p.SiteCode, p.DOB &#xA;  FROM [All_Staging_2016_2].dbo.stg_Patients p &#xA;  left join [CBSCentral].[dbo].[MasterPatientIndices] a on a.PatientPk = p.PatientPK and a.SiteCode=p.SiteCode &#xA;  where a.sxdmPKValueDoB is not null) ran&#xA;ON &#xA;    SI.PatientPk = ran.PatientPK and si.SiteCode=ran.SiteCode &#xA;&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="&#xA;&#xA;UPDATE M &#xA; SET M.[PatientSource]=T.[Target_PatientSource]  FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_PatientSourceMapping] T ON M.[PatientSource] = T.[Source_PatientSource]&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;--------------------&#xA;&#xA;UPDATE M SET MaritalStatus = T.Target_MaritalStatus&#xA;from All_Staging_2016_2.dbo.stg_Patients M&#xA;inner JOIN All_Staging_2016_2.[dbo].lkp_MaritalStatus T&#xA;on M.MaritalStatus = T.Source_MaritalStatus&#xA;&#xA;GO&#xA;&#xA;UPDATE M SET  M.Gender= T.Target_Gender FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[lkp_Gender] T ON M.Gender = T.Source_Gender&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO &#xA;&#xA;---Education Level&#xA;UPDATE M SET M.EducationLevel=T.TargetEducationLevel FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].[Lkp_EducationLevel] T ON M.EducationLevel = T.SourceEducationLevel&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;---Contact Relation &#xA;UPDATE M SET M.ContactRelation=T.TargetContactRelation FROM [dbo].stg_Patients M&#xA;INNER  JOIN [All_Staging_2016_2].[dbo].Lkp_ContactRelation T ON M.ContactRelation = T.SourceContactRelation&#xA;GO &#xA;&#xA;&#xA; UPDATE P&#xA; SET  P.PatientSource=M.Target_PatientSource  FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[lkp_PatientSourceMapping] M  ON P.PatientSource = M.Source_PatientSource&#xA;&#xA; GO&#xA; &#xA; UPDATE P&#xA; SET  P.EducationLevel=M.[TargetEducationLevel] FROM stg_Patients P&#xA; INNER  JOIN  [dbo].[Lkp_EducationLevel] M  ON P.EducationLevel = M.[SourceEducationLevel]&#xA; &#xA;GO&#xA;&#xA;  UPDATE&#xA;    [All_Staging_2016_2].dbo.stg_Patients&#xA;SET&#xA;    [All_Staging_2016_2].dbo.stg_Patients.MPIPKV = ran.MPIPKV&#xA;FROM&#xA;   [All_Staging_2016_2].dbo.stg_Patients SI&#xA;INNER JOIN&#xA;    ( SELECT distinct p.PKV as 'PatientPKV', a.sxdmPKValueDoB as MPIPKV, p.Gender, p.PatientPK, p.SiteCode, p.DOB &#xA;  FROM [All_Staging_2016_2].dbo.stg_Patients p &#xA;  left join [CBSCentral].[dbo].[MasterPatientIndices] a on a.PatientPk = p.PatientPK and a.SiteCode=p.SiteCode &#xA;  where a.sxdmPKValueDoB is not null) ran&#xA;ON &#xA;    SI.PatientPk = ran.PatientPK and si.SiteCode=ran.SiteCode &#xA;&#xA;GO&#xA;&#xA;Update [All_Staging_2016_2].[dbo].[stg_Patients]&#xA;SET RegistrationYear = YEAR(RegistrationDate)&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -445,6 +461,14 @@
       DTS:ObjectName="Constraint 11"
       DTS:To="Package\Shrink Database Files" />
     <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
+      DTS:CreationName=""
+      DTS:DTSID="{7FC7488B-0B54-44C5-918B-CED28CCFA36B}"
+      DTS:From="Package\Data Cleaning Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 12"
+      DTS:To="Package\Patient PKV_UID" />
+    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{ED634FC4-E199-4141-BB17-8B5867B99142}"
@@ -524,47 +548,51 @@
         <NodeLayout
           Size="190,42"
           Id="Package\Back Up Database Task"
-          TopLeft="424,1216" />
+          TopLeft="424,1267.34999908179" />
         <NodeLayout
           Size="185.333333333334,42"
           Id="Package\Build ART Visits Matrix"
-          TopLeft="414,780" />
+          TopLeft="414,831.34999908179" />
         <NodeLayout
           Size="204,42"
           Id="Package\Build Pre-ART Visits Matrix"
-          TopLeft="409,877" />
+          TopLeft="409,928.34999908179" />
         <NodeLayout
           Size="206.666666666667,42"
           Id="Package\Cleanup- Stg_PatientStatus"
-          TopLeft="329,106" />
+          TopLeft="329,157.34999908179" />
         <NodeLayout
           Size="194,42"
           Id="Package\Compute Newly Enrolled"
-          TopLeft="418,1135" />
+          TopLeft="418,1186.34999908179" />
         <NodeLayout
           Size="210,42"
           Id="Package\CorrectSiteAbstractionDates"
-          TopLeft="334,271" />
+          TopLeft="334,322.34999908179" />
+        <NodeLayout
+          Size="170.666666666667,42.6666666666667"
+          Id="Package\Data Cleaning Task"
+          TopLeft="348.124995632097,0.53335392912194" />
         <NodeLayout
           Size="170,42"
           Id="Package\Get latest FP status"
-          TopLeft="423,1050" />
+          TopLeft="423,1101.34999908179" />
         <NodeLayout
           Size="157.333333333334,42"
           Id="Package\Patient PKV_UID"
-          TopLeft="353,24" />
+          TopLeft="353,75.3499990817904" />
         <NodeLayout
           Size="172,42"
           Id="Package\Reclaim HDD Space"
-          TopLeft="352,186" />
+          TopLeft="352,237.34999908179" />
         <NodeLayout
           Size="178,42"
           Id="Package\Re-Compute Baslines"
-          TopLeft="353,350" />
+          TopLeft="353,401.34999908179" />
         <NodeLayout
           Size="173.333333333334,42"
           Id="Package\Run Cohort Analysis"
-          TopLeft="426,968" />
+          TopLeft="426,1019.34999908179" />
         <NodeLayout
           Size="228,42"
           Id="Package\Sequence Container\Mapping Queries - ART Patients"
@@ -717,14 +745,14 @@
           PanelSize="898.666666666667,222.666666666667"
           Size="898.666666666667,266"
           Id="Package\Sequence Container"
-          TopLeft="55,443" />
+          TopLeft="55,494.34999908179" />
         <NodeLayout
           Size="180,42"
           Id="Package\Shrink Database Files"
-          TopLeft="425,1307" />
+          TopLeft="425,1358.34999908179" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="432,66">
+          TopLeft="432,117.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -746,7 +774,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="435.25,148">
+          TopLeft="435.25,199.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -768,7 +796,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 10]"
-          TopLeft="517,1177">
+          TopLeft="517,1228.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -790,7 +818,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 11]"
-          TopLeft="517,1258">
+          TopLeft="517,1309.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -811,8 +839,30 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="432.562497816048,43.2000205957886">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.1499784860018"
+              Start="0,0"
+              End="0,24.6499784860018">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.6499784860018" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="438.5,228">
+          TopLeft="438.5,279.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -834,7 +884,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="440.5,313">
+          TopLeft="440.5,364.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -856,7 +906,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="442,392">
+          TopLeft="442,443.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -890,7 +940,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="505.5,709">
+          TopLeft="505.5,760.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -912,7 +962,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="508.75,822">
+          TopLeft="508.75,873.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -934,7 +984,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="511.75,919">
+          TopLeft="511.75,970.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -956,7 +1006,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="510.25,1010">
+          TopLeft="510.25,1061.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -978,7 +1028,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 9]"
-          TopLeft="511.5,1092">
+          TopLeft="511.5,1143.34999908179">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

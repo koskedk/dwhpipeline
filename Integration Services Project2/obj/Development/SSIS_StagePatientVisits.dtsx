@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientVisits"
   DTS:PackageType="5"
-  DTS:VersionBuild="97"
-  DTS:VersionGUID="{1B60C18D-3158-476B-8BD0-82684B8A4A6F}">
+  DTS:VersionBuild="103"
+  DTS:VersionGUID="{F143E995-EF13-42F9-9F1A-FEB1B431AFD2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -73,7 +73,7 @@
 	  P.[PatientPID] AS PatientPK,
 	  F.Name AS FacilityName, 
 	  F.Code AS SiteCode
-,PV.[VisitId]
+	 ,PV.[VisitId]
       ,PV.[VisitDate]
       ,PV.[Service]
       ,PV.[VisitType]
@@ -125,15 +125,32 @@ NULL AS PatientUID
       ,[Abdomen]
       ,[CNS]
       ,[Genitourinary]
-
-FROM [dbo].[PatientExtract](NoLock) P 
-LEFT JOIN [dbo].[PatientArtExtract](NoLock) PA ON PA.[PatientId]= P.ID
-INNER JOIN [dbo].[PatientVisitExtract](NoLock) PV ON PV.[PatientId]= P.ID AND PV.Voided=0
-INNER JOIN [dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0
-INNER JOIN [DWAPICentral].[dbo].[FacilityManifest_MaxDateRecieved](NoLock) a ON F.Code = a.SiteCode
+	  -----Missing columns Added later by Dennis
+	  ,PV.VisitBy 
+	  ,PV.Temp  
+	  ,PV.PulseRate 
+	  ,PV.RespiratoryRate  
+	  ,PV.OxygenSaturation  
+	  ,PV.Muac   
+	  ,PV.NutritionalStatus  
+	  ,PV.EverHadMenses  
+	  ,PV.Menopausal 
+	  ,PV.Breastfeeding
+	  ,PV.NoFPReason
+	  ,PV.ProphylaxisUsed
+	  ,PV.CTXAdherence
+	  ,PV.CurrentRegimen
+	  ,PV.HCWConcern
+	  ,PV.TCAReason
+	  ,PV.ClinicalNotes
+FROM [DWAPICentral].[dbo].[PatientExtract](NoLock) P 
+LEFT JOIN [DWAPICentral].[dbo].[PatientArtExtract](NoLock) PA ON PA.[PatientId]= P.ID
+INNER JOIN [DWAPICentral].[dbo].[PatientVisitExtract](NoLock) PV ON PV.[PatientId]= P.ID AND PV.Voided=0
+INNER JOIN [DWAPICentral].[dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0
+---INNER JOIN [DWAPICentral].[dbo].[FacilityManifest_MaxDateRecieved](NoLock) a ON F.Code = a.SiteCode
 ----LEFT JOIN All_Staging_2016_2.dbo.stg_Patients TPat ON TPat.PKV=LTRIM(RTRIM(STR(F.Code)))+'-'+LTRIM(RTRIM(P.[PatientCccNumber]))+'-'+LTRIM(RTRIM(STR(P.[PatientPID])))
 --ORDER BY F.Id, PV.[PatientId],PV.[VisitDate],PV.[VisitId]
-WHERE p.gender!='Unknown'  and a.[End] is not null and a.[Session] is not null</property>
+WHERE p.gender!='Unknown'  --and a.[End] is not null and a.[Session] is not null</property>
                 <property
                   dataType="System.Int32"
                   description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
@@ -684,6 +701,175 @@ WHERE p.gender!='Unknown'  and a.[End] is not null and a.[Session] is not null</
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Genitourinary]"
                       name="Genitourinary"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[VisitBy]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitBy]"
+                      name="VisitBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Temp]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Temp]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Temp]"
+                      name="Temp"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PulseRate]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PulseRate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PulseRate]"
+                      name="PulseRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RespiratoryRate]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RespiratoryRate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RespiratoryRate]"
+                      name="RespiratoryRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OxygenSaturation]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OxygenSaturation]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OxygenSaturation]"
+                      name="OxygenSaturation"
+                      precision="18"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Muac]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Muac]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Muac]"
+                      name="Muac"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NutritionalStatus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NutritionalStatus]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NutritionalStatus]"
+                      name="NutritionalStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EverHadMenses]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EverHadMenses]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EverHadMenses]"
+                      name="EverHadMenses"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Menopausal]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Menopausal]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Menopausal]"
+                      name="Menopausal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Breastfeeding]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Breastfeeding]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Breastfeeding]"
+                      name="Breastfeeding"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NoFPReason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NoFPReason]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NoFPReason]"
+                      name="NoFPReason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ProphylaxisUsed]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProphylaxisUsed]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ProphylaxisUsed]"
+                      name="ProphylaxisUsed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CTXAdherence]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CTXAdherence]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CTXAdherence]"
+                      name="CTXAdherence"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CurrentRegimen]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CurrentRegimen]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CurrentRegimen]"
+                      name="CurrentRegimen"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[HCWConcern]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[HCWConcern]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[HCWConcern]"
+                      name="HCWConcern"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TCAReason]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TCAReason]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TCAReason]"
+                      name="TCAReason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ClinicalNotes]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ClinicalNotes]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ClinicalNotes]"
+                      name="ClinicalNotes"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -941,6 +1127,90 @@ WHERE p.gender!='Unknown'  and a.[End] is not null and a.[Session] is not null</
                       dataType="wstr"
                       length="150"
                       name="Genitourinary" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[VisitBy]"
+                      dataType="wstr"
+                      length="150"
+                      name="VisitBy" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Temp]"
+                      dataType="numeric"
+                      name="Temp"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[PulseRate]"
+                      dataType="i4"
+                      name="PulseRate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[RespiratoryRate]"
+                      dataType="i4"
+                      name="RespiratoryRate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OxygenSaturation]"
+                      dataType="numeric"
+                      name="OxygenSaturation"
+                      precision="18"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Muac]"
+                      dataType="i4"
+                      name="Muac" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NutritionalStatus]"
+                      dataType="wstr"
+                      length="150"
+                      name="NutritionalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EverHadMenses]"
+                      dataType="wstr"
+                      length="150"
+                      name="EverHadMenses" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Menopausal]"
+                      dataType="wstr"
+                      length="150"
+                      name="Menopausal" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Breastfeeding]"
+                      dataType="wstr"
+                      length="150"
+                      name="Breastfeeding" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NoFPReason]"
+                      dataType="wstr"
+                      length="150"
+                      name="NoFPReason" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ProphylaxisUsed]"
+                      dataType="wstr"
+                      length="150"
+                      name="ProphylaxisUsed" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CTXAdherence]"
+                      dataType="wstr"
+                      length="150"
+                      name="CTXAdherence" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[CurrentRegimen]"
+                      dataType="wstr"
+                      length="150"
+                      name="CurrentRegimen" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[HCWConcern]"
+                      dataType="wstr"
+                      length="150"
+                      name="HCWConcern" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TCAReason]"
+                      dataType="wstr"
+                      length="150"
+                      name="TCAReason" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ClinicalNotes]"
+                      dataType="wstr"
+                      length="150"
+                      name="ClinicalNotes" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1254,6 +1524,107 @@ WHERE p.gender!='Unknown'  and a.[End] is not null and a.[Session] is not null</
                       length="150"
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Genitourinary]"
                       name="Genitourinary" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[VisitBy]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[VisitBy]"
+                      name="VisitBy" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Temp]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Temp]"
+                      name="Temp"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PulseRate]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[PulseRate]"
+                      name="PulseRate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RespiratoryRate]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[RespiratoryRate]"
+                      name="RespiratoryRate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OxygenSaturation]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OxygenSaturation]"
+                      name="OxygenSaturation"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Muac]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Muac]"
+                      name="Muac" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NutritionalStatus]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NutritionalStatus]"
+                      name="NutritionalStatus" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EverHadMenses]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EverHadMenses]"
+                      name="EverHadMenses" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Menopausal]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Menopausal]"
+                      name="Menopausal" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Breastfeeding]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Breastfeeding]"
+                      name="Breastfeeding" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NoFPReason]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NoFPReason]"
+                      name="NoFPReason" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProphylaxisUsed]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ProphylaxisUsed]"
+                      name="ProphylaxisUsed" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CTXAdherence]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CTXAdherence]"
+                      name="CTXAdherence" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CurrentRegimen]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[CurrentRegimen]"
+                      name="CurrentRegimen" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[HCWConcern]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[HCWConcern]"
+                      name="HCWConcern" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TCAReason]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TCAReason]"
+                      name="TCAReason" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ClinicalNotes]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ClinicalNotes]"
+                      name="ClinicalNotes" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -4387,6 +4758,124 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       cachedName="Genitourinary"
                       externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Genitourinary]"
                       lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Genitourinary]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[VisitBy]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="VisitBy"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[VisitBy]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[VisitBy]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Temp]"
+                      cachedDataType="numeric"
+                      cachedName="Temp"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Temp]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Temp]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[PulseRate]"
+                      cachedDataType="i4"
+                      cachedName="PulseRate"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[PulseRate]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[PulseRate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[RespiratoryRate]"
+                      cachedDataType="i4"
+                      cachedName="RespiratoryRate"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[RespiratoryRate]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[RespiratoryRate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Muac]"
+                      cachedDataType="i4"
+                      cachedName="Muac"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Muac]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Muac]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[OxygenSaturation]"
+                      cachedDataType="numeric"
+                      cachedName="OxygenSaturation"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[OxygenSaturation]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[OxygenSaturation]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[NutritionalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NutritionalStatus"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NutritionalStatus]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NutritionalStatus]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[EverHadMenses]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="EverHadMenses"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EverHadMenses]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[EverHadMenses]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Menopausal]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Menopausal"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Menopausal]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Menopausal]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Breastfeeding]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Breastfeeding"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Breastfeeding]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Breastfeeding]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[NoFPReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NoFPReason"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[NoFPReason]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NoFPReason]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ProphylaxisUsed]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ProphylaxisUsed"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ProphylaxisUsed]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ProphylaxisUsed]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[CTXAdherence]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CTXAdherence"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CTXAdherence]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CTXAdherence]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[CurrentRegimen]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CurrentRegimen"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CurrentRegimen]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CurrentRegimen]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[HCWConcern]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="HCWConcern"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[HCWConcern]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[HCWConcern]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[TCAReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="TCAReason"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[TCAReason]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[TCAReason]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ClinicalNotes]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ClinicalNotes"
+                      externalMetadataColumnId="Package\Data Flow Task\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ClinicalNotes]"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ClinicalNotes]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -5438,6 +5927,243 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Genitourinary]}</property>
                       </properties>
                     </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[VisitBy]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="VisitBy"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[VisitBy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[VisitBy]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[Temp]"
+                      cachedDataType="numeric"
+                      cachedName="Temp"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Temp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Temp]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[PulseRate]"
+                      cachedDataType="i4"
+                      cachedName="PulseRate"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[PulseRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[PulseRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[RespiratoryRate]"
+                      cachedDataType="i4"
+                      cachedName="RespiratoryRate"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[RespiratoryRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[RespiratoryRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[Muac]"
+                      cachedDataType="i4"
+                      cachedName="Muac"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Muac]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Muac]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[OxygenSaturation]"
+                      cachedDataType="numeric"
+                      cachedName="OxygenSaturation"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[OxygenSaturation]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[OxygenSaturation]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[NutritionalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NutritionalStatus"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NutritionalStatus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NutritionalStatus]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[EverHadMenses]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="EverHadMenses"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[EverHadMenses]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[EverHadMenses]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[Menopausal]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Menopausal"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Menopausal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Menopausal]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[Breastfeeding]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Breastfeeding"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Breastfeeding]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Breastfeeding]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[NoFPReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NoFPReason"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NoFPReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NoFPReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[ProphylaxisUsed]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ProphylaxisUsed"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ProphylaxisUsed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ProphylaxisUsed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[CTXAdherence]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CTXAdherence"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CTXAdherence]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CTXAdherence]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[CurrentRegimen]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CurrentRegimen"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CurrentRegimen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CurrentRegimen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[HCWConcern]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="HCWConcern"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[HCWConcern]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[HCWConcern]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[TCAReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="TCAReason"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[TCAReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[TCAReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 1].Columns[ClinicalNotes]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ClinicalNotes"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ClinicalNotes]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ClinicalNotes]}</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -6101,6 +6827,243 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Genitourinary]}</property>
                       </properties>
                     </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[VisitBy]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="VisitBy"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[VisitBy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[VisitBy]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[Temp]"
+                      cachedDataType="numeric"
+                      cachedName="Temp"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Temp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Temp]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[PulseRate]"
+                      cachedDataType="i4"
+                      cachedName="PulseRate"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[PulseRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[PulseRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[RespiratoryRate]"
+                      cachedDataType="i4"
+                      cachedName="RespiratoryRate"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[RespiratoryRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[RespiratoryRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[Muac]"
+                      cachedDataType="i4"
+                      cachedName="Muac"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Muac]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Muac]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[OxygenSaturation]"
+                      cachedDataType="numeric"
+                      cachedName="OxygenSaturation"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[OxygenSaturation]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[OxygenSaturation]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[NutritionalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NutritionalStatus"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NutritionalStatus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NutritionalStatus]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[EverHadMenses]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="EverHadMenses"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[EverHadMenses]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[EverHadMenses]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[Menopausal]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Menopausal"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Menopausal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Menopausal]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[Breastfeeding]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Breastfeeding"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Breastfeeding]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Breastfeeding]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[NoFPReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NoFPReason"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NoFPReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NoFPReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[ProphylaxisUsed]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ProphylaxisUsed"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ProphylaxisUsed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ProphylaxisUsed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[CTXAdherence]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CTXAdherence"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CTXAdherence]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CTXAdherence]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[CurrentRegimen]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CurrentRegimen"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CurrentRegimen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CurrentRegimen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[HCWConcern]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="HCWConcern"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[HCWConcern]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[HCWConcern]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[TCAReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="TCAReason"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[TCAReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[TCAReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Inputs[Union All Input 2].Columns[ClinicalNotes]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ClinicalNotes"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ClinicalNotes]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ClinicalNotes]}</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -6419,6 +7382,107 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       length="150"
                       lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Genitourinary]"
                       name="Genitourinary" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[VisitBy]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[VisitBy]"
+                      name="VisitBy" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Temp]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Temp]"
+                      name="Temp"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[PulseRate]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[PulseRate]"
+                      name="PulseRate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[RespiratoryRate]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[RespiratoryRate]"
+                      name="RespiratoryRate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Muac]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Muac]"
+                      name="Muac" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[OxygenSaturation]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[OxygenSaturation]"
+                      name="OxygenSaturation"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NutritionalStatus]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NutritionalStatus]"
+                      name="NutritionalStatus" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[EverHadMenses]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[EverHadMenses]"
+                      name="EverHadMenses" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Menopausal]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Menopausal]"
+                      name="Menopausal" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Breastfeeding]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[Breastfeeding]"
+                      name="Breastfeeding" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NoFPReason]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[NoFPReason]"
+                      name="NoFPReason" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ProphylaxisUsed]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ProphylaxisUsed]"
+                      name="ProphylaxisUsed" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CTXAdherence]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CTXAdherence]"
+                      name="CTXAdherence" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CurrentRegimen]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[CurrentRegimen]"
+                      name="CurrentRegimen" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[HCWConcern]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[HCWConcern]"
+                      name="HCWConcern" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[TCAReason]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[TCAReason]"
+                      name="TCAReason" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ClinicalNotes]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All - After WHO Stage.Outputs[Union All Output 1].Columns[ClinicalNotes]"
+                      name="ClinicalNotes" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -7075,6 +8139,243 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           dataType="System.Int32"
                           description="Output column lineage ID"
                           name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Genitourinary]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[VisitBy]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="VisitBy"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitBy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[VisitBy]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[Temp]"
+                      cachedDataType="numeric"
+                      cachedName="Temp"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Temp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Temp]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[PulseRate]"
+                      cachedDataType="i4"
+                      cachedName="PulseRate"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PulseRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[PulseRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[RespiratoryRate]"
+                      cachedDataType="i4"
+                      cachedName="RespiratoryRate"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RespiratoryRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[RespiratoryRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[Muac]"
+                      cachedDataType="i4"
+                      cachedName="Muac"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Muac]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Muac]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[OxygenSaturation]"
+                      cachedDataType="numeric"
+                      cachedName="OxygenSaturation"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OxygenSaturation]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[OxygenSaturation]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[NutritionalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NutritionalStatus"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NutritionalStatus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NutritionalStatus]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[EverHadMenses]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="EverHadMenses"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EverHadMenses]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[EverHadMenses]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[Menopausal]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Menopausal"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Menopausal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Menopausal]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[Breastfeeding]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Breastfeeding"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Breastfeeding]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Breastfeeding]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[NoFPReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NoFPReason"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NoFPReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NoFPReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[ProphylaxisUsed]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ProphylaxisUsed"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ProphylaxisUsed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ProphylaxisUsed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[CTXAdherence]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CTXAdherence"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CTXAdherence]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CTXAdherence]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[CurrentRegimen]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CurrentRegimen"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CurrentRegimen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CurrentRegimen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[HCWConcern]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="HCWConcern"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[HCWConcern]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[HCWConcern]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[TCAReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="TCAReason"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TCAReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[TCAReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 3].Columns[ClinicalNotes]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ClinicalNotes"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ClinicalNotes]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ClinicalNotes]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
@@ -7740,6 +9041,243 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                           name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Genitourinary]}</property>
                       </properties>
                     </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[VisitBy]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="VisitBy"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[VisitBy]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[VisitBy]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[Temp]"
+                      cachedDataType="numeric"
+                      cachedName="Temp"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Temp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Temp]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[PulseRate]"
+                      cachedDataType="i4"
+                      cachedName="PulseRate"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[PulseRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[PulseRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[RespiratoryRate]"
+                      cachedDataType="i4"
+                      cachedName="RespiratoryRate"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[RespiratoryRate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[RespiratoryRate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[Muac]"
+                      cachedDataType="i4"
+                      cachedName="Muac"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Muac]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Muac]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[OxygenSaturation]"
+                      cachedDataType="numeric"
+                      cachedName="OxygenSaturation"
+                      cachedPrecision="18"
+                      cachedScale="2"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[OxygenSaturation]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[OxygenSaturation]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[NutritionalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NutritionalStatus"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NutritionalStatus]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NutritionalStatus]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[EverHadMenses]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="EverHadMenses"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[EverHadMenses]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[EverHadMenses]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[Menopausal]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Menopausal"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Menopausal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Menopausal]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[Breastfeeding]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="Breastfeeding"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Breastfeeding]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Breastfeeding]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[NoFPReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="NoFPReason"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[NoFPReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NoFPReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[ProphylaxisUsed]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ProphylaxisUsed"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ProphylaxisUsed]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ProphylaxisUsed]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[CTXAdherence]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CTXAdherence"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CTXAdherence]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CTXAdherence]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[CurrentRegimen]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CurrentRegimen"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[CurrentRegimen]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CurrentRegimen]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[HCWConcern]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="HCWConcern"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[HCWConcern]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[HCWConcern]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[TCAReason]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="TCAReason"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TCAReason]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[TCAReason]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Inputs[Union All Input 2].Columns[ClinicalNotes]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="ClinicalNotes"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ClinicalNotes]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ClinicalNotes]}</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -8051,6 +9589,107 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                       length="150"
                       lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Genitourinary]"
                       name="Genitourinary" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[VisitBy]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[VisitBy]"
+                      name="VisitBy" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Temp]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Temp]"
+                      name="Temp"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[PulseRate]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[PulseRate]"
+                      name="PulseRate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[RespiratoryRate]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[RespiratoryRate]"
+                      name="RespiratoryRate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Muac]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Muac]"
+                      name="Muac" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[OxygenSaturation]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[OxygenSaturation]"
+                      name="OxygenSaturation"
+                      precision="18"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NutritionalStatus]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NutritionalStatus]"
+                      name="NutritionalStatus" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[EverHadMenses]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[EverHadMenses]"
+                      name="EverHadMenses" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Menopausal]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Menopausal]"
+                      name="Menopausal" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Breastfeeding]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[Breastfeeding]"
+                      name="Breastfeeding" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NoFPReason]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[NoFPReason]"
+                      name="NoFPReason" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ProphylaxisUsed]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ProphylaxisUsed]"
+                      name="ProphylaxisUsed" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CTXAdherence]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CTXAdherence]"
+                      name="CTXAdherence" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CurrentRegimen]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[CurrentRegimen]"
+                      name="CurrentRegimen" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[HCWConcern]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[HCWConcern]"
+                      name="HCWConcern" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[TCAReason]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[TCAReason]"
+                      name="TCAReason" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ClinicalNotes]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Union All- After Adherence.Outputs[Union All Output 1].Columns[ClinicalNotes]"
+                      name="ClinicalNotes" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -16229,6 +17868,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       DTS:refId="Package\Delete Complete Uploads"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{1596660F-7689-4E67-8901-D48DA74873F7}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -16319,7 +17959,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Id="Package\Data Flow Task\Data Conversion"
           TopLeft="410.166666666667,310.833333333333" />
         <NodeLayout
-          Size="188,42"
+          Size="188,42.6666666666667"
           Id="Package\Data Flow Task\SQL Server Destination"
           TopLeft="166.611111111111,1125.05555555556" />
         <NodeLayout
@@ -16331,7 +17971,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Id="Package\Data Flow Task\Derived Column - Shorten Some Columns"
           TopLeft="183.5,1023.27777777778" />
         <NodeLayout
-          Size="204,42"
+          Size="204,42.6666666666667"
           Id="Package\Data Flow Task\Union All- After Adherence"
           TopLeft="158.388888888889,616.166666666667" />
         <NodeLayout
@@ -16347,7 +17987,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
           Id="Package\Data Flow Task\Split-Check Adherence"
           TopLeft="168.166666666667,412.611111111111" />
         <NodeLayout
-          Size="158,42"
+          Size="158.666666666667,42.6666666666667"
           Id="Package\Data Flow Task\ADO NET Source"
           TopLeft="408.611111111111,5.50000000000002" />
         <NodeLayout
@@ -16454,18 +18094,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Union All Output 1]"
-          TopLeft="260.277777777778,658.166666666667">
+          TopLeft="260.277777777778,658.833333333334">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.7777777777781"
+              EndConnector="0,59.1111111111114"
               Start="0,0"
-              End="0,52.2777777777781">
+              End="0,51.6111111111114">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.2777777777781" />
+                    End="0,51.6111111111114" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -16498,13 +18138,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Lookup Match Output1]"
-          TopLeft="102,556.388888888889">
+          TopLeft="102.166666666667,556.388888888889">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="125.722222222222,59.7777777777779"
+              EndConnector="125.555555555556,59.7777777777779"
               Start="0,0"
-              End="125.722222222222,52.2777777777779">
+              End="125.555555555556,52.2777777777779">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -16515,20 +18155,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
                     Point2="0,35.5875486381324"
                     Point3="4,35.5875486381324" />
                   <mssgle:LineSegment
-                    End="121.722222222222,35.5875486381324" />
+                    End="121.555555555556,35.5875486381324" />
                   <mssgle:CubicBezierSegment
-                    Point1="121.722222222222,35.5875486381324"
-                    Point2="125.722222222222,35.5875486381324"
-                    Point3="125.722222222222,39.5875486381324" />
+                    Point1="121.555555555556,35.5875486381324"
+                    Point2="125.555555555556,35.5875486381324"
+                    Point3="125.555555555556,39.5875486381324" />
                   <mssgle:LineSegment
-                    End="125.722222222222,52.2777777777779" />
+                    End="125.555555555556,52.2777777777779" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="14.669724392361,40.5875486381324,96.3827734375,11.609375"
+              BoundingBox="14.5863910590278,40.5875486381324,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -16594,30 +18234,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="320.642857142857,1065.56349206349">
+          TopLeft="320.5,1065.27777777778">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-60.0317460317461,59.4920634920657"
+              EndConnector="-59.888888888889,59.7777777777799"
               Start="0,0"
-              End="-60.0317460317461,51.9920634920657">
+              End="-59.888888888889,52.2777777777799">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,25.7460317460328" />
+                    End="0,25.8888888888899" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,25.7460317460328"
-                    Point2="0,29.7460317460328"
-                    Point3="-4,29.7460317460328" />
+                    Point1="0,25.8888888888899"
+                    Point2="0,29.8888888888899"
+                    Point3="-4,29.8888888888899" />
                   <mssgle:LineSegment
-                    End="-56.0317460317461,29.7460317460328" />
+                    End="-55.888888888889,29.8888888888899" />
                   <mssgle:CubicBezierSegment
-                    Point1="-56.0317460317461,29.7460317460328"
-                    Point2="-60.0317460317461,29.7460317460328"
-                    Point3="-60.0317460317461,33.7460317460328" />
+                    Point1="-55.888888888889,29.8888888888899"
+                    Point2="-59.888888888889,29.8888888888899"
+                    Point3="-59.888888888889,33.8888888888899" />
                   <mssgle:LineSegment
-                    End="-60.0317460317461,51.9920634920657" />
+                    End="-59.888888888889,52.2777777777799" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -16698,18 +18338,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
-          TopLeft="487.888888888889,47.5">
+          TopLeft="488.055555555556,48.1666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59.777777777778"
+              EndConnector="0,59.1111111111113"
               Start="0,0"
-              End="0,52.277777777778">
+              End="0,51.6111111111113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.277777777778" />
+                    End="0,51.6111111111113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -16781,6 +18421,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]]></arrayElement>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\ADO NET Source">
     <Properties>

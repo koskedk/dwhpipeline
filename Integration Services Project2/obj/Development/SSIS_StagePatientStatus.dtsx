@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SSIS_StagePatientStatus"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{371113DC-A1A3-4F6D-8E4E-A6AE0C6F31D7}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{8E30FE71-1A4F-4BAA-9DA8-D6AD23D3B041}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -92,13 +92,14 @@ NULL AS PatientUID,
 [ReasonForDeath],
 [SpecificDeathReason],
 Cast([DeathDate] as Date)[DeathDate],
-EffectiveDiscontinuationDate
-FROM 
-
-[dbo].[PatientExtract](NoLock) P 
-INNER JOIN[dbo].[PatientStatusExtract](NoLock) PS ON PS.[PatientId]= P.ID AND PS.Voided=0
-INNER JOIN [dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0
-INNER JOIN FacilityManifest_MaxDateRecieved(NoLock) a ON F.Code = a.SiteCode and a.[End] is not null and a.[Session] is not null
+EffectiveDiscontinuationDate,
+PS.TOVerified,
+PS.TOVerifiedDate,
+PS.ReEnrollmentDate
+FROM [DWAPICentral].[dbo].[PatientExtract](NoLock) P 
+INNER JOIN [DWAPICentral].[dbo].[PatientStatusExtract](NoLock) PS ON PS.[PatientId]= P.ID AND PS.Voided=0
+INNER JOIN [DWAPICentral].[dbo].[Facility](NoLock) F ON P.[FacilityId] = F.Id AND F.Voided=0
+---INNER JOIN FacilityManifest_MaxDateRecieved(NoLock) a ON F.Code = a.SiteCode and a.[End] is not null and a.[Session] is not null
 WHERE p.gender!='Unknown'</property>
                 <property
                   dataType="System.Int32"
@@ -309,6 +310,34 @@ WHERE p.gender!='Unknown'</property>
                       name="EffectiveDiscontinuationDate"
                       scale="7"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TOVerified]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TOVerified]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TOVerified]"
+                      name="TOVerified"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TOVerifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TOVerifiedDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TOVerifiedDate]"
+                      name="TOVerifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ReEnrollmentDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ReEnrollmentDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ReEnrollmentDate]"
+                      name="ReEnrollmentDate"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -395,6 +424,19 @@ WHERE p.gender!='Unknown'</property>
                       dataType="dbTimeStamp2"
                       name="EffectiveDiscontinuationDate"
                       scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TOVerified]"
+                      dataType="wstr"
+                      length="150"
+                      name="TOVerified" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[TOVerifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="TOVerifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[ReEnrollmentDate]"
+                      dataType="dbTimeStamp"
+                      name="ReEnrollmentDate" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -503,6 +545,22 @@ WHERE p.gender!='Unknown'</property>
                       lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EffectiveDiscontinuationDate]"
                       name="EffectiveDiscontinuationDate"
                       scale="7" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TOVerified]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TOVerified]"
+                      name="TOVerified" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TOVerifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[TOVerifiedDate]"
+                      name="TOVerifiedDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ReEnrollmentDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ReEnrollmentDate]"
+                      name="ReEnrollmentDate" />
                     <outputColumn
                       refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -998,6 +1056,25 @@ WHERE p.gender!='Unknown'</property>
                       cachedName="_ReasonForDeath"
                       externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReasonForDeath]"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[_ReasonForDeath]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TOVerified]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="TOVerified"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TOVerified]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TOVerified]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ReEnrollmentDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ReEnrollmentDate"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReEnrollmentDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[ReEnrollmentDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TOVerifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="TOVerifiedDate"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TOVerifiedDate]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[TOVerifiedDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2127,6 +2204,7 @@ WHERE p.gender!='Unknown'</property>
       DTS:refId="Package\Delete Complete Uploads"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{AFAB47DE-8A79-4141-B31F-6E0CB1407A59}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2163,15 +2241,15 @@ WHERE p.gender!='Unknown'</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="152,43"
+          Size="152,42.6666666666667"
           Id="Package\Data Flow Task"
           TopLeft="255.124996408022,124.170592036186" />
         <NodeLayout
-          Size="172,43"
+          Size="172,42.6666666666667"
           Id="Package\Data Flow Task_old"
           TopLeft="44.499999546579,124.22059021139" />
         <NodeLayout
-          Size="199,43"
+          Size="198.666666666667,42.6666666666667"
           Id="Package\Delete Complete Uploads"
           TopLeft="239.999996423721,17.5499996861816" />
         <EdgeLayout
@@ -2221,11 +2299,11 @@ WHERE p.gender!='Unknown'</property>
           Id="Package\Data Flow Task\Data Conversion"
           TopLeft="13.0555555555556,107.277777777778" />
         <NodeLayout
-          Size="171,42"
+          Size="170.666666666667,42"
           Id="Package\Data Flow Task\OLE DB Destination"
           TopLeft="5.50000000000003,209.055555555556" />
         <NodeLayout
-          Size="159,42"
+          Size="158.666666666667,42.6666666666667"
           Id="Package\Data Flow Task\ADO NET Source"
           TopLeft="11.5,5.50000000000002" />
         <EdgeLayout
@@ -2252,18 +2330,18 @@ WHERE p.gender!='Unknown'</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
-          TopLeft="91.0555555555556,47.2777777777778">
+          TopLeft="90.9444444444445,48.1666666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.0000000000001"
+              EndConnector="0,59.1111111111113"
               Start="0,0"
-              End="0,52.5000000000001">
+              End="0,51.6111111111113">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5000000000001" />
+                    End="0,51.6111111111113" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
