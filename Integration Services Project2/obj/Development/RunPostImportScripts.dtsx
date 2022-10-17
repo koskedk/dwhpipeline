@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="RunPostImportScripts"
   DTS:PackageType="5"
-  DTS:VersionBuild="51"
-  DTS:VersionGUID="{ACE2CB03-535B-4234-8528-E1AD6130DB57}">
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{B104E8AC-DE3D-4ACD-9A22-8D35EFC6CE2A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -165,22 +165,6 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Data Cleaning Task"
-      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{de9750e6-55e0-4111-b709-042efe0cd127}"
-      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Data Cleaning Task"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
-          SQLTask:SqlStatementSource="exec DataCleanUPAndstandardardization" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
       DTS:refId="Package\Get latest FP status"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
@@ -315,7 +299,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{AC18861B-2B48-4AB7-BE40-2E0DA8FAFE08}"
-              SQLTask:SqlStatementSource="&#xA;UPDATE M SET  M.ExitReason= T.Target_ExitReason FROM [dbo].stg_PatientStatus M&#xA;LEFT JOIN [All_Staging_2016_2].[dbo].[lkp_ExitReasonMapping] T ON M.ExitReason = T.Source_ExitReason&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;----Added by Dennis to account for exit reason which have no exit dates before deleting them&#xA;&#xA;IF (SELECT COUNT(1) FROM[All_Staging_2016_2].[DBO].[stg_PatientStatus](NoLock) WHERE ExitReason IS NOT NULL AND ExitDate IS NULL ) &gt; 1&#xA;&#x9;BEGIN&#xA;&#x9;&#x9;INSERT INTO PatientStatusExitDateAnormally(PatientID,SiteCode,PatientPK,FacilityName,ExitReason,ExitDate,Emr,Createdon)&#xA;&#x9;&#x9;SELECT PatientID,SiteCode,PatientPK,FacilityName,ExitReason,ExitDate,Emr,GETDATE()&#xA;&#x9;&#x9;FROM [All_Staging_2016_2].[DBO].[stg_PatientStatus]&#xA;&#x9;&#x9;WHERE ExitReason IS NOT NULL AND ExitDate IS NULL&#xA;&#x9;END&#xA;GO&#xA;&#xA;DELETE stg_PatientStatus WHERE ExitReason IS NULL OR ExitDate IS NULL &#xA;GO&#xA;&#xA;&#xA; UPDATE stg_PatientLabs SET TestResult = REPLACE(TestResult,',','') WHERE RIGHT(TestResult,1)=','&#xA; GO &#xA;&#xA;UPDATE stg_PatientLabs SET TestResult = REPLACE(TestResult,CHAR(13),'') where   CAST(ASCII(RIGHT(TestResult,1)) AS INT)=13&#xA;GO &#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="&#xA;UPDATE M SET  M.ExitReason= T.Target_ExitReason FROM [dbo].stg_PatientStatus M&#xA;LEFT JOIN [All_Staging_2016_2].[dbo].[lkp_ExitReasonMapping] T ON M.ExitReason = T.Source_ExitReason&#xA;--WHERE M.DateImported = CAST(GETDATE() AS DATE) OR M.DateImported = CAST(GETDATE()-1 AS DATE)&#xA;GO&#xA;&#xA;----Added by Dennis to account for exit reason which have no exit dates before deleting them&#xA;&#xA;IF (SELECT COUNT(1) FROM [All_Staging_2016_2].[DBO].[stg_PatientStatus](NoLock) WHERE ExitReason IS NOT NULL AND ExitDate IS NULL ) &gt; 0&#xA;&#x9;BEGIN&#xA;&#x9;&#x9;INSERT INTO PatientStatusExitDateAnormally(PatientID,SiteCode,PatientPK,FacilityName,ExitReason,ExitDate,Emr,Createdon)&#xA;&#x9;&#x9;SELECT PatientID,SiteCode,PatientPK,FacilityName,ExitReason,ExitDate,Emr,GETDATE()&#xA;&#x9;&#x9;FROM [All_Staging_2016_2].[DBO].[stg_PatientStatus]&#xA;&#x9;&#x9;WHERE ExitReason IS NOT NULL AND ExitDate IS NULL&#xA;&#x9;END&#xA;GO&#xA;&#xA;DELETE stg_PatientStatus WHERE ExitReason IS NULL OR ExitDate IS NULL &#xA;GO&#xA;&#xA;&#xA; UPDATE stg_PatientLabs SET TestResult = REPLACE(TestResult,',','') WHERE RIGHT(TestResult,1)=','&#xA; GO &#xA;&#xA;UPDATE stg_PatientLabs SET TestResult = REPLACE(TestResult,CHAR(13),'') where   CAST(ASCII(RIGHT(TestResult,1)) AS INT)=13&#xA;GO &#xA;&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -461,14 +445,6 @@
       DTS:ObjectName="Constraint 11"
       DTS:To="Package\Shrink Database Files" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
-      DTS:CreationName=""
-      DTS:DTSID="{7FC7488B-0B54-44C5-918B-CED28CCFA36B}"
-      DTS:From="Package\Data Cleaning Task"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 12"
-      DTS:To="Package\Patient PKV_UID" />
-    <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
       DTS:DTSID="{ED634FC4-E199-4141-BB17-8B5867B99142}"
@@ -569,10 +545,6 @@
           Size="210,42"
           Id="Package\CorrectSiteAbstractionDates"
           TopLeft="334,322.34999908179" />
-        <NodeLayout
-          Size="170.666666666667,42.6666666666667"
-          Id="Package\Data Cleaning Task"
-          TopLeft="348.124995632097,0.53335392912194" />
         <NodeLayout
           Size="170,42"
           Id="Package\Get latest FP status"
@@ -830,28 +802,6 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,41.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 12]"
-          TopLeft="432.562497816048,43.2000205957886">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,32.1499784860018"
-              Start="0,0"
-              End="0,24.6499784860018">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,24.6499784860018" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

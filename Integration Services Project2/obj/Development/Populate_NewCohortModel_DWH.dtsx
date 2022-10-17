@@ -11,20 +11,20 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Populate_NewCohortModel_DWH"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{999FB065-28BB-46F6-995C-13181AB58000}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{81F1108A-6DDC-4823-A781-BA89AE597F6E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
+      DTS:refId="Package\New Cohort Monthly"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
       DTS:DTSID="{53534328-FA77-446E-9636-E12E60033F92}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
+      DTS:ObjectName="New Cohort Monthly"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -48,7 +48,7 @@
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
           Size="162.666666666667,42"
-          Id="Package\Execute SQL Task"
+          Id="Package\New Cohort Monthly"
           TopLeft="188,86" />
       </GraphLayout>
     </LayoutInfo>

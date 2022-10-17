@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterStageDWAPI Central"
   DTS:PackageType="5"
-  DTS:VersionBuild="373"
-  DTS:VersionGUID="{E5C0B63C-69F3-47D4-8B1B-69C90F0EB885}">
+  DTS:VersionBuild="379"
+  DTS:VersionGUID="{33C36D54-4F98-4BC5-9E1D-9AA1CBC167DE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -93,6 +93,7 @@
       DTS:refId="Package\COVID"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
+      DTS:Disabled="True"
       DTS:DTSID="{64668A1D-A51B-4868-B793-47B151A8CA16}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -1626,7 +1627,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="COVID Table_old"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -2503,7 +2504,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Defaulter Tracing_old"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -2574,9 +2575,27 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Data Cleaning Task(C&amp;T)"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{f29463f0-3682-40da-aabc-1d395f8bd93b}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Cleaning Task(C&amp;T)"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{15B88D83-F697-4C55-92F1-F68930278958}"
+          SQLTask:SqlStatementSource="exec DataCleanUPAndstandardardization" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Disable Constraints"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{ef23a3bb-6f77-4763-b1b0-438f3521ca1c}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2594,6 +2613,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Enable Constraints"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{FEAA3DE3-0AFE-4169-AD68-A1F558FDA821}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2611,6 +2631,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package AllStagingStgNumbers Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
       DTS:DTSID="{8D19C308-EBA7-4747-B677-D04CB1D3228B}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2628,7 +2649,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package CBS Run After Other Models Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{F9DB9AD2-AB93-40ED-9083-193122E36D75}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2646,6 +2666,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package DataAnalyticsLogs Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
       DTS:DTSID="{42031CE7-C284-4BB6-ADA8-073BE2969835}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2663,6 +2684,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package DTGStudyLinelist Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
       DTS:DTSID="{C6948E52-3418-477D-B78D-E684834F709C}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2750,6 +2772,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Fix ECARE PID issues"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{140C451D-4C36-4B5F-908A-F91E25FFE09C}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2767,6 +2790,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\HTS and CBR"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
       DTS:DTSID="{2DDB65E2-ABD5-4477-86C3-58EEAED3EE5D}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2784,6 +2808,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\MNCH"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Holds MNCH tables"
+      DTS:Disabled="True"
       DTS:DTSID="{8D34D48D-3A98-4E4F-BC16-8092BF450362}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -3054,6 +3079,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\OVC_OTZ"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
+      DTS:Disabled="True"
       DTS:DTSID="{63b32631-d005-49ed-b72b-95f7c680f46a}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -4241,7 +4267,7 @@ WHERE P.gender != 'Unknown' --and a.[End] is not null and a.[Session] is not nul
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="allergies_old"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5260,7 +5286,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:LocaleID="-1"
           DTS:ObjectName="contact_listing_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5277,7 +5303,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for  Depression"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5294,7 +5320,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for allergies"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5311,7 +5337,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for contact_listing"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5328,7 +5354,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for drug_alcohol"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5345,7 +5371,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for enhanced_adherence"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5362,7 +5388,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for gbv"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5379,7 +5405,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for ipt"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5396,7 +5422,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for otz"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5413,7 +5439,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for ovc"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6461,7 +6487,7 @@ WHERE P.gender != 'Unknown' --and a.[End] is not null and a.[Session] is not nul
           DTS:LocaleID="-1"
           DTS:ObjectName="depression_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -7243,7 +7269,7 @@ WHERE P.gender != 'Unknown'  --and a.[End] is not null and a.[Session] is not nu
           DTS:LocaleID="-1"
           DTS:ObjectName="drug_alcohol_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -13534,6 +13560,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Patient PKV_UID"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{ce14600e-a93d-4ae3-9ffc-643ac9615a7d}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13550,6 +13577,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Populate ALL_EMRSites"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{1694C3C9-AC77-4E4D-951E-4219DC04985A}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13566,6 +13594,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\POPULATE FacilityManifest_MaxDateRecieved"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{E76FF0AA-1764-47AA-9640-F7368AEEBEF7}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13582,6 +13611,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Populate Palantir"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{0fd2488a-698c-4291-86ec-b379f3d3880d}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13647,6 +13677,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Populate UCSF"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{810044a1-3e56-4d0a-b43d-130860c4eaa7}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13663,6 +13694,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Post Import Scripts"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
       DTS:DTSID="{26DF339B-996A-4AEB-80CA-729D149A52F6}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -13680,6 +13712,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\PrEP"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
+      DTS:Disabled="True"
       DTS:DTSID="{8A84DB5E-D4A7-4BCB-9FD7-01CABDC8921D}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -26670,6 +26703,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Reclaim HDD Space"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Shring DB log file to re-claim space"
+      DTS:Disabled="True"
       DTS:DTSID="{88b7dcb6-9d15-4df1-9d2d-27511207efbe}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -26686,6 +26720,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Sequence -"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
+      DTS:Disabled="True"
       DTS:DTSID="{82a5c64e-b014-4fcd-bfcf-62ba4efce477}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -26864,6 +26899,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
+      DTS:Disabled="True"
       DTS:DTSID="{BD9A076D-55FF-4D39-BDA1-E36ACC7A2233}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -26968,6 +27004,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Stage Patient Extract"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
       DTS:DTSID="{4AC6D224-35F9-4C9C-A2F3-6037B99199B2}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -26985,6 +27022,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Truncate tables"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{E8D2646B-4625-4143-A7F8-730953DDA812}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -27012,13 +27050,30 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{D154BFA9-4C69-4BE6-80FC-824EDA5E9097}"
-          SQLTask:SqlStatementSource="&#xA;--ALTER TABLE [PortalDev].dbo.Fact_Trans_New_Cohort ADD uniqueId INT IDENTITY (1,1)&#xA;--GO&#xA;--Delete Duplicates&#xA;&#xA;DELETE&#xA;A&#xA;FROM PortalDev.dbo.Fact_Trans_New_Cohort A INNER JOIN&#xA;(&#xA;SELECT ROW_NUMBER () OVER (PARTITION BY PatientPk,PatientID, MFLCode, Gender,DoB,[FileName]&#xA;      ,[fprovider] ORDER BY UniqueId DESC ) AS Num,&#xA;PatientPk,PatientID, Mflcode, Gender,DoB, UniqueId,[FileName]&#xA;      ,[fprovider]&#xA;from [PortalDev].dbo.Fact_Trans_New_Cohort&#xA;) X ON A.UniqueId= X.UniqueId AND Num&gt;1&#xA;&#xA;GO&#xA;&#xA;--------For guys missing enrollment date but have Start ART Date replace accordingly  &#xA;&#xA;UPDATE PortalDev.dbo.Fact_Trans_New_Cohort  SET EnrollmentDate=StartARTDate WHERE EnrollmentDate IS NULL AND StartARTDate IS NOT NULL&#xA;--Recalc Age At Enroll: Start Art Date is Proxy &#xA;UPDATE PortalDev.dbo.Fact_Trans_New_Cohort    SET ageARTstart =DATEDIFF(yy,DOB,EnrollmentDate)&#xA;&#xA;GO&#xA;-----Delete Any records that have no business being in this table (bring all the data my ass... we should reject at source :( ) &#xA;DELETE PortalDev.dbo.Fact_Trans_New_Cohort  WHERE ISDATE(CAST(EnrollmentDate AS VARCHAR(50)))=0 AND EnrollmentDate IS NOT NULL&#xA;&#xA;GO&#xA;&#xA;------For the guys without visits in stg_patientVisits, we compute ARTOutcome from the LastVisit column in stg_ARTPatients&#xA;------ Update the missing dtLastVisit &amp; NextAppointmentDate with the LastVisit/ExpectedReturn from stg_ARTPatients&#xA;--------- 2nd March 2021 This affects all data models &#xA;UPDATE V SET&#xA;dtLastVisit = P.LastVisit , NextAppointmentDate=P.ExpectedReturn&#xA;FROM PortalDev.[dbo].Fact_Trans_New_Cohort V&#xA;INNER JOIN All_Staging_2016_2.dbo.stg_ARTPatients P ON V.PatientID = P.PatientID&#xA;AND P.PatientPK = V.PatientPK AND P.SiteCode= V.MFLCode&#xA;WHERE dtLastVisit IS NULL AND P.LastVisit IS NOT NULL&#xA;&#xA;GO&#xA;&#xA;----Recalc Age At Last Visit after making the above Changes.&#xA;UPDATE PortalDev.dbo.Fact_Trans_New_Cohort SET ageLV =DATEDIFF(yy,DOB,dtLastVisit)&#xA;GO&#xA;&#xA;--Added by MM - March 23 - Update 'No Partner'where CTPartner is NULL&#xA;UPDATE PortalDev.dbo.Fact_Trans_New_Cohort SET CTPartner ='No Partner' where CTPartner IS NULL&#xA;GO&#xA;&#xA;--Added by MM - March 23 - Update 'No Agency'where CTAgency is NULL&#xA;UPDATE PortalDev.dbo.Fact_Trans_New_Cohort SET CTAgency ='No Agency' where CTAgency IS NULL&#xA;GO&#xA;&#xA;--Added by MM - March 22 - Alter Table statement to change the column Types for LatestFPMethod and LatestPregnancy from int to varchar(250)&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ALTER COLUMN [LatestPregnancy] varchar(250)&#xA;GO&#xA;&#xA;&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ALTER COLUMN [LatestFPMethod] varchar(250)&#xA;GO&#xA;&#xA;---- Add Latest Pregnancy and FP Method&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="&#xA;ALTER TABLE [PortalDev].dbo.Fact_Trans_New_Cohort ADD uniqueId INT IDENTITY (1,1)&#xA;GO&#xA;&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD   ModulesPreviouslyCovered nvarchar(150) NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_Orientation varchar(3) NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD   [OTZ_Participation] varchar(3) NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_Leadership varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_MakingDecisions varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD   OTZ_Transition varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_TreatmentLiteracy varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_SRH varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_Beyond varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  SupportGroupInvolvement nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  Remarks nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  TransitionAttritionReason nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OutcomeDate datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [OTZEnrollmentDate] datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [TransferInStatus] varchar(3)NULL&#xA;GO&#xA;&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD [OVCEnrollmentDate] datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [RelationshipToClient]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [EnrolledinCPIMS]  nvarchar(15)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [CPIMSUniqueIdentifier]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [PartnerOfferingOVCServices]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [OVCExitReason]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD [ExitDate] datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  VaccinationStatus varchar(250)&#xA;GO&#xA;ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  DategivenFirstDose date&#xA;&#xA;&#xA;&#x9;&#xA;--Delete Duplicates&#xA;&#xA;--DELETE&#xA;--A&#xA;--FROM PortalDev.dbo.Fact_Trans_New_Cohort A INNER JOIN&#xA;--(&#xA;--SELECT ROW_NUMBER () OVER (PARTITION BY PatientPk,PatientID, MFLCode, Gender,DoB,[FileName]&#xA;--      ,[fprovider] ORDER BY UniqueId DESC ) AS Num,&#xA;--PatientPk,PatientID, Mflcode, Gender,DoB, UniqueId,[FileName]&#xA;--      ,[fprovider]&#xA;--from [PortalDev].dbo.Fact_Trans_New_Cohort&#xA;--) X ON A.UniqueId= X.UniqueId AND Num&gt;1&#xA;&#xA;--GO&#xA;&#xA;----------For guys missing enrollment date but have Start ART Date replace accordingly  &#xA;&#xA;--UPDATE PortalDev.dbo.Fact_Trans_New_Cohort  SET EnrollmentDate=StartARTDate WHERE EnrollmentDate IS NULL AND StartARTDate IS NOT NULL&#xA;----Recalc Age At Enroll: Start Art Date is Proxy &#xA;--UPDATE PortalDev.dbo.Fact_Trans_New_Cohort    SET ageARTstart =DATEDIFF(yy,DOB,EnrollmentDate)&#xA;&#xA;--GO&#xA;-------Delete Any records that have no business being in this table (bring all the data my ass... we should reject at source :( ) &#xA;--DELETE PortalDev.dbo.Fact_Trans_New_Cohort  WHERE ISDATE(CAST(EnrollmentDate AS VARCHAR(50)))=0 AND EnrollmentDate IS NOT NULL&#xA;&#xA;--GO&#xA;&#xA;--------For the guys without visits in stg_patientVisits, we compute ARTOutcome from the LastVisit column in stg_ARTPatients&#xA;-------- Update the missing dtLastVisit &amp; NextAppointmentDate with the LastVisit/ExpectedReturn from stg_ARTPatients&#xA;----------- 2nd March 2021 This affects all data models &#xA;--UPDATE V SET&#xA;--dtLastVisit = P.LastVisit , NextAppointmentDate=P.ExpectedReturn&#xA;--FROM PortalDev.[dbo].Fact_Trans_New_Cohort V&#xA;--INNER JOIN All_Staging_2016_2.dbo.stg_ARTPatients P ON V.PatientID = P.PatientID&#xA;--AND P.PatientPK = V.PatientPK AND P.SiteCode= V.MFLCode&#xA;--WHERE dtLastVisit IS NULL AND P.LastVisit IS NOT NULL&#xA;&#xA;--GO&#xA;&#xA;------Recalc Age At Last Visit after making the above Changes.&#xA;--UPDATE PortalDev.dbo.Fact_Trans_New_Cohort SET ageLV =DATEDIFF(yy,DOB,dtLastVisit)&#xA;--GO&#xA;&#xA;----Added by MM - March 23 - Update 'No Partner'where CTPartner is NULL&#xA;--UPDATE PortalDev.dbo.Fact_Trans_New_Cohort SET CTPartner ='No Partner' where CTPartner IS NULL&#xA;--GO&#xA;&#xA;----Added by MM - March 23 - Update 'No Agency'where CTAgency is NULL&#xA;--UPDATE PortalDev.dbo.Fact_Trans_New_Cohort SET CTAgency ='No Agency' where CTAgency IS NULL&#xA;--GO&#xA;&#xA;--Added by MM - March 22 - Alter Table statement to change the column Types for LatestFPMethod and LatestPregnancy from int to varchar(250)&#xA;--ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;--ALTER COLUMN [LatestPregnancy] varchar(250)&#xA;--GO&#xA;&#xA;&#xA;--ALTER TABLE [PortalDev].[dbo].[Fact_Trans_New_Cohort] &#xA;--ALTER COLUMN [LatestFPMethod] varchar(250)&#xA;--GO&#xA;&#xA;------ Add Latest Pregnancy and FP Method&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UPDATE TABLE Fact_Trans_New_Cohort - Weekly"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7BC24508-C526-4889-8E5E-D8972F35C6A4}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UPDATE TABLE Fact_Trans_New_Cohort - Weekly"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{3D035C9E-6994-4C02-A771-710F54194694}"
+          SQLTask:SqlStatementSource="&#xA;ALTER TABLE [PortalDevTest].dbo.Fact_Trans_New_Cohort ADD uniqueId INT IDENTITY (1,1)&#xA;GO&#xA;&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD   ModulesPreviouslyCovered nvarchar(150) NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_Orientation varchar(3) NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD   [OTZ_Participation] varchar(3) NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_Leadership varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_MakingDecisions varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD   OTZ_Transition varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_TreatmentLiteracy varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_SRH varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OTZ_Beyond varchar(3)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  SupportGroupInvolvement nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  Remarks nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  TransitionAttritionReason nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  OutcomeDate datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [OTZEnrollmentDate] datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [TransferInStatus] varchar(3)NULL&#xA;GO&#xA;&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD [OVCEnrollmentDate] datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [RelationshipToClient]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [EnrolledinCPIMS]  nvarchar(15)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [CPIMSUniqueIdentifier]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [PartnerOfferingOVCServices]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  [OVCExitReason]  nvarchar(150)NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD [ExitDate] datetime NULL&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  VaccinationStatus varchar(250)&#xA;GO&#xA;ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;ADD  DategivenFirstDose date&#xA;&#xA;&#xA;&#x9;&#xA;--Delete Duplicates&#xA;&#xA;--DELETE&#xA;--A&#xA;--FROM PortalDevTest.dbo.Fact_Trans_New_Cohort A INNER JOIN&#xA;--(&#xA;--SELECT ROW_NUMBER () OVER (PARTITION BY PatientPk,PatientID, MFLCode, Gender,DoB,[FileName]&#xA;--      ,[fprovider] ORDER BY UniqueId DESC ) AS Num,&#xA;--PatientPk,PatientID, Mflcode, Gender,DoB, UniqueId,[FileName]&#xA;--      ,[fprovider]&#xA;--from [PortalDevTest].dbo.Fact_Trans_New_Cohort&#xA;--) X ON A.UniqueId= X.UniqueId AND Num&gt;1&#xA;&#xA;--GO&#xA;&#xA;----------For guys missing enrollment date but have Start ART Date replace accordingly  &#xA;&#xA;--UPDATE PortalDevTest.dbo.Fact_Trans_New_Cohort  SET EnrollmentDate=StartARTDate WHERE EnrollmentDate IS NULL AND StartARTDate IS NOT NULL&#xA;----Recalc Age At Enroll: Start Art Date is Proxy &#xA;--UPDATE PortalDevTest.dbo.Fact_Trans_New_Cohort    SET ageARTstart =DATEDIFF(yy,DOB,EnrollmentDate)&#xA;&#xA;--GO&#xA;-------Delete Any records that have no business being in this table (bring all the data my ass... we should reject at source :( ) &#xA;--DELETE PortalDevTest.dbo.Fact_Trans_New_Cohort  WHERE ISDATE(CAST(EnrollmentDate AS VARCHAR(50)))=0 AND EnrollmentDate IS NOT NULL&#xA;&#xA;--GO&#xA;&#xA;--------For the guys without visits in stg_patientVisits, we compute ARTOutcome from the LastVisit column in stg_ARTPatients&#xA;-------- Update the missing dtLastVisit &amp; NextAppointmentDate with the LastVisit/ExpectedReturn from stg_ARTPatients&#xA;----------- 2nd March 2021 This affects all data models &#xA;--UPDATE V SET&#xA;--dtLastVisit = P.LastVisit , NextAppointmentDate=P.ExpectedReturn&#xA;--FROM PortalDevTest.[dbo].Fact_Trans_New_Cohort V&#xA;--INNER JOIN All_Staging_2016_2.dbo.stg_ARTPatients P ON V.PatientID = P.PatientID&#xA;--AND P.PatientPK = V.PatientPK AND P.SiteCode= V.MFLCode&#xA;--WHERE dtLastVisit IS NULL AND P.LastVisit IS NOT NULL&#xA;&#xA;--GO&#xA;&#xA;------Recalc Age At Last Visit after making the above Changes.&#xA;--UPDATE PortalDevTest.dbo.Fact_Trans_New_Cohort SET ageLV =DATEDIFF(yy,DOB,dtLastVisit)&#xA;--GO&#xA;&#xA;----Added by MM - March 23 - Update 'No Partner'where CTPartner is NULL&#xA;--UPDATE PortalDevTest.dbo.Fact_Trans_New_Cohort SET CTPartner ='No Partner' where CTPartner IS NULL&#xA;--GO&#xA;&#xA;----Added by MM - March 23 - Update 'No Agency'where CTAgency is NULL&#xA;--UPDATE PortalDevTest.dbo.Fact_Trans_New_Cohort SET CTAgency ='No Agency' where CTAgency IS NULL&#xA;--GO&#xA;&#xA;--Added by MM - March 22 - Alter Table statement to change the column Types for LatestFPMethod and LatestPregnancy from int to varchar(250)&#xA;--ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;--ALTER COLUMN [LatestPregnancy] varchar(250)&#xA;--GO&#xA;&#xA;&#xA;--ALTER TABLE [PortalDevTest].[dbo].[Fact_Trans_New_Cohort] &#xA;--ALTER COLUMN [LatestFPMethod] varchar(250)&#xA;--GO&#xA;&#xA;------ Add Latest Pregnancy and FP Method&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Visits"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
+      DTS:Disabled="True"
       DTS:DTSID="{c3390fbb-b03f-446d-ba9c-54ad5da7c3f3}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -27107,11 +27162,11 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
       DTS:CreationName=""
-      DTS:DTSID="{B94D2E89-21A2-4C78-8464-103BF1F62F47}"
+      DTS:DTSID="{E65A711E-012E-438E-BA8C-8F35A5AA7CC7}"
       DTS:From="Package\COVID"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 12"
-      DTS:To="Package\PrEP" />
+      DTS:To="Package\Data Cleaning Task(C&amp;T)" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 13]"
       DTS:CreationName=""
@@ -27251,11 +27306,11 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 29]"
       DTS:CreationName=""
-      DTS:DTSID="{30D9CC48-F358-4779-BE5E-41AC182CDB4C}"
+      DTS:DTSID="{6122DF5A-16DF-455F-81A9-5919DB1533FB}"
       DTS:From="Package\Execute Package New Cohort Test Model Task - Weekly"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 29"
-      DTS:To="Package\populate Portal Adhoc Test Task - Weekly" />
+      DTS:To="Package\UPDATE TABLE Fact_Trans_New_Cohort - Weekly" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
@@ -27272,6 +27327,22 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 30"
       DTS:To="Package\Execute Package CBS Run After Other Models Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 31]"
+      DTS:CreationName=""
+      DTS:DTSID="{F0BD301E-5C35-4098-9C04-1AE1E80D39EF}"
+      DTS:From="Package\Data Cleaning Task(C&amp;T)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 31"
+      DTS:To="Package\PrEP" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 32]"
+      DTS:CreationName=""
+      DTS:DTSID="{9C632DFA-BA17-4134-84C2-C28619A9E3BD}"
+      DTS:From="Package\UPDATE TABLE Fact_Trans_New_Cohort - Weekly"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 32"
+      DTS:To="Package\populate Portal Adhoc Test Task - Weekly" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
@@ -27455,6 +27526,10 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           Id="Package\COVID"
           TopLeft="1437.24999990687,2256.04999933749" />
         <NodeLayout
+          Size="198.666666666667,42.6666666666667"
+          Id="Package\Data Cleaning Task(C&amp;T)"
+          TopLeft="1071.4999884516,2571.81667909156" />
+        <NodeLayout
           Size="169.333333333334,42"
           Id="Package\Disable Constraints"
           TopLeft="702.388888814383,157.055556485388" />
@@ -27485,7 +27560,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
         <NodeLayout
           Size="341.333333333334,42.6666666666667"
           Id="Package\Execute Package New Cohort Test Model Task - Weekly"
-          TopLeft="1447.74998284504,3975.08332757999" />
+          TopLeft="1446.49998286367,3944.53332812627" />
         <NodeLayout
           Size="360,42.6666666666667"
           Id="Package\Execute Package Other Modules Task - PortalDev - Monthly"
@@ -29108,6 +29183,10 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           Id="Package\UPDATE TABLE Fact_Trans_New_Cohort - Monthly"
           TopLeft="1477.87498402782,3695.46666025082" />
         <NodeLayout
+          Size="314.666666666667,42.6666666666667"
+          Id="Package\UPDATE TABLE Fact_Trans_New_Cohort - Weekly"
+          TopLeft="1282.41666556771,3996.96666036705" />
+        <NodeLayout
           Size="185.333333333334,42.6666666666667"
           Id="Package\Visits\Patient Visits PKV_UID"
           TopLeft="42.5416636584948,89.2833309738835" />
@@ -29282,30 +29361,30 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 12]"
-          TopLeft="1723.24999990687,2600.04999933749">
+          TopLeft="1437.24999990687,2428.38333267082">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-789.24999990687,72.9500006625099"
+              EndConnector="-167.083344788603,164.766679754065"
               Start="0,0"
-              End="-789.24999990687,65.4500006625099">
+              End="-159.583344788603,164.766679754065">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.4750003312549" />
+                    End="-79.5416723943017,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,32.4750003312549"
-                    Point2="0,36.4750003312549"
-                    Point3="-4,36.4750003312549" />
+                    Point1="-79.5416723943017,0"
+                    Point2="-83.5416723943017,0"
+                    Point3="-83.5416723943017,4" />
                   <mssgle:LineSegment
-                    End="-785.24999990687,36.4750003312549" />
+                    End="-83.5416723943017,160.766679754065" />
                   <mssgle:CubicBezierSegment
-                    Point1="-785.24999990687,36.4750003312549"
-                    Point2="-789.24999990687,36.4750003312549"
-                    Point3="-789.24999990687,40.4750003312549" />
+                    Point1="-83.5416723943017,160.766679754065"
+                    Point2="-83.5416723943017,164.766679754065"
+                    Point3="-87.5416723943017,164.766679754065" />
                   <mssgle:LineSegment
-                    End="-789.24999990687,65.4500006625099" />
+                    End="-159.583344788603,164.766679754065" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -29464,26 +29543,26 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="9.83334234853714,39.0833353673406"
+              EndConnector="9.83334234853692,39.0833353673434"
               Start="0,0"
-              End="9.83334234853714,31.5833353673406">
+              End="9.83334234853692,31.5833353673434">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.5416676836703" />
+                    End="0,15.5416676836717" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,15.5416676836703"
-                    Point2="0,19.5416676836703"
-                    Point3="4,19.5416676836703" />
+                    Point1="0,15.5416676836717"
+                    Point2="0,19.5416676836717"
+                    Point3="4,19.5416676836717" />
                   <mssgle:LineSegment
-                    End="5.83334234853714,19.5416676836703" />
+                    End="5.83334234853692,19.5416676836717" />
                   <mssgle:CubicBezierSegment
-                    Point1="5.83334234853714,19.5416676836703"
-                    Point2="9.83334234853714,19.5416676836703"
-                    Point3="9.83334234853714,23.5416676836703" />
+                    Point1="5.83334234853692,19.5416676836717"
+                    Point2="9.83334234853692,19.5416676836717"
+                    Point3="9.83334234853692,23.5416676836717" />
                   <mssgle:LineSegment
-                    End="9.83334234853714,31.5833353673406" />
+                    End="9.83334234853692,31.5833353673434" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -29754,30 +29833,30 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 27]"
-          TopLeft="1607.33332230647,3907.48332925369">
+          TopLeft="1607.33332230647,3907.4833292537">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="11.0833272052312,67.5999983262986"
+              EndConnector="9.8333272238599,37.0499988725701"
               Start="0,0"
-              End="11.0833272052312,60.0999983262986">
+              End="9.8333272238599,29.5499988725701">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.7999991631493" />
+                    End="0,14.524999436285" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,29.7999991631493"
-                    Point2="0,33.7999991631493"
-                    Point3="4,33.7999991631493" />
+                    Point1="0,14.524999436285"
+                    Point2="0,18.524999436285"
+                    Point3="4,18.524999436285" />
                   <mssgle:LineSegment
-                    End="7.08332720523117,33.7999991631493" />
+                    End="5.8333272238599,18.524999436285" />
                   <mssgle:CubicBezierSegment
-                    Point1="7.08332720523117,33.7999991631493"
-                    Point2="11.0833272052312,33.7999991631493"
-                    Point3="11.0833272052312,37.7999991631493" />
+                    Point1="5.8333272238599,18.524999436285"
+                    Point2="9.8333272238599,18.524999436285"
+                    Point3="9.8333272238599,22.524999436285" />
                   <mssgle:LineSegment
-                    End="11.0833272052312,60.0999983262986" />
+                    End="9.8333272238599,29.5499988725701" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -29810,30 +29889,24 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 29]"
-          TopLeft="1618.41664951171,4017.74999424666">
+          TopLeft="1446.49998286367,3965.8666614596">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-11.4999912828268,35.9499849715935"
+              EndConnector="-6.74998396262708,31.0999989074512"
               Start="0,0"
-              End="-11.4999912828268,28.4499849715935">
+              End="-6.74998396262708,23.5999989074512">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.9749924857967" />
+                    End="-2.74998396262708,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.9749924857967"
-                    Point2="0,17.9749924857967"
-                    Point3="-4,17.9749924857967" />
+                    Point1="-2.74998396262708,0"
+                    Point2="-6.74998396262708,0"
+                    Point3="-6.74998396262708,4" />
                   <mssgle:LineSegment
-                    End="-7.49999128282684,17.9749924857967" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-7.49999128282684,17.9749924857967"
-                    Point2="-11.4999912828268,17.9749924857967"
-                    Point3="-11.4999912828268,21.9749924857967" />
-                  <mssgle:LineSegment
-                    End="-11.4999912828268,28.4499849715935" />
+                    End="-6.74998396262708,23.5999989074512" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -29878,6 +29951,68 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,32.0833279286826" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 31]"
+          TopLeft="1170.83332178493,2614.48334575822">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-236.833321784933,58.5166542417783"
+              Start="0,0"
+              End="-236.833321784933,51.0166542417783">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.2583271208891" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.2583271208891"
+                    Point2="0,29.2583271208891"
+                    Point3="-4,29.2583271208891" />
+                  <mssgle:LineSegment
+                    End="-232.833321784933,29.2583271208891" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-232.833321784933,29.2583271208891"
+                    Point2="-236.833321784933,29.2583271208891"
+                    Point3="-236.833321784933,33.2583271208891" />
+                  <mssgle:LineSegment
+                    End="-236.833321784933,51.0166542417783" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 32]"
+          TopLeft="1597.08333223437,4018.29999370038">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.83332599450705,35.3999855178654"
+              Start="0,0"
+              End="9.83332599450705,27.8999855178654">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="5.83332599450705,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.83332599450705,0"
+                    Point2="9.83332599450705,0"
+                    Point3="9.83332599450705,4" />
+                  <mssgle:LineSegment
+                    End="9.83332599450705,27.8999855178654" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
