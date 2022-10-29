@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MasterStageDWAPI Central"
   DTS:PackageType="5"
-  DTS:VersionBuild="379"
-  DTS:VersionGUID="{33C36D54-4F98-4BC5-9E1D-9AA1CBC167DE}">
+  DTS:VersionBuild="384"
+  DTS:VersionGUID="{BBD2406F-A83E-4B54-9789-F3E885C3B158}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -93,7 +93,6 @@
       DTS:refId="Package\COVID"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
       DTS:DTSID="{64668A1D-A51B-4868-B793-47B151A8CA16}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -1627,7 +1626,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="COVID Table_old"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -2504,7 +2503,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Defaulter Tracing_old"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -2578,7 +2577,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Data Cleaning Task(C&amp;T)"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{f29463f0-3682-40da-aabc-1d395f8bd93b}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2595,7 +2593,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Disable Constraints"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{ef23a3bb-6f77-4763-b1b0-438f3521ca1c}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2613,7 +2610,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Enable Constraints"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{FEAA3DE3-0AFE-4169-AD68-A1F558FDA821}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2631,7 +2627,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package AllStagingStgNumbers Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{8D19C308-EBA7-4747-B677-D04CB1D3228B}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2666,7 +2661,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package DataAnalyticsLogs Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{42031CE7-C284-4BB6-ADA8-073BE2969835}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2684,7 +2678,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package DTGStudyLinelist Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{C6948E52-3418-477D-B78D-E684834F709C}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2754,7 +2747,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Execute Package PalantirAnalytics Task"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{CEC4A36D-F2A2-4706-B95F-CDAF438EA881}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2772,7 +2764,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Fix ECARE PID issues"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{140C451D-4C36-4B5F-908A-F91E25FFE09C}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -2790,7 +2781,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\HTS and CBR"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{2DDB65E2-ABD5-4477-86C3-58EEAED3EE5D}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -2808,7 +2798,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\MNCH"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Holds MNCH tables"
-      DTS:Disabled="True"
       DTS:DTSID="{8D34D48D-3A98-4E4F-BC16-8092BF450362}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -3079,7 +3068,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\OVC_OTZ"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
       DTS:DTSID="{63b32631-d005-49ed-b72b-95f7c680f46a}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -4267,7 +4255,7 @@ WHERE P.gender != 'Unknown' --and a.[End] is not null and a.[Session] is not nul
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="allergies_old"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="8">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5286,7 +5274,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:LocaleID="-1"
           DTS:ObjectName="contact_listing_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="9">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5303,7 +5291,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for  Depression"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5320,7 +5308,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for allergies"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5337,7 +5325,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for contact_listing"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5354,7 +5342,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for drug_alcohol"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5371,7 +5359,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for enhanced_adherence"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5388,7 +5376,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for gbv"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5405,7 +5393,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for ipt"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5422,7 +5410,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for otz"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -5439,7 +5427,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Delete Complete Uploads for ovc"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -6487,7 +6475,7 @@ WHERE P.gender != 'Unknown' --and a.[End] is not null and a.[Session] is not nul
           DTS:LocaleID="-1"
           DTS:ObjectName="depression_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="3">
+          DTS:ThreadHint="4">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -7269,7 +7257,7 @@ WHERE P.gender != 'Unknown'  --and a.[End] is not null and a.[Session] is not nu
           DTS:LocaleID="-1"
           DTS:ObjectName="drug_alcohol_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="4">
+          DTS:ThreadHint="5">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -9366,7 +9354,7 @@ WHERE P.gender != 'Unknown'  --and a.[End] is not null and a.[Session] is not nu
           DTS:LocaleID="-1"
           DTS:ObjectName="enhanced_adherence_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="5">
+          DTS:ThreadHint="6">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -10215,7 +10203,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           DTS:LocaleID="-1"
           DTS:ObjectName="gbv_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="6">
+          DTS:ThreadHint="7">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -11540,7 +11528,7 @@ WHERE P.gender != 'Unknown'-- and a.[End] is not null and a.[Session] is not nul
           DTS:LocaleID="-1"
           DTS:ObjectName="ipt_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="7">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -12491,7 +12479,7 @@ WHERE P.gender != 'Unknown' ---and a.[End] is not null and a.[Session] is not nu
           DTS:LocaleID="-1"
           DTS:ObjectName="otz_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="8">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -13408,7 +13396,7 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           DTS:LocaleID="-1"
           DTS:ObjectName="ovc_old"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="9">
+          DTS:ThreadHint="3">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -13560,7 +13548,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Patient PKV_UID"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{ce14600e-a93d-4ae3-9ffc-643ac9615a7d}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13577,7 +13564,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Populate ALL_EMRSites"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{1694C3C9-AC77-4E4D-951E-4219DC04985A}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13594,7 +13580,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\POPULATE FacilityManifest_MaxDateRecieved"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{E76FF0AA-1764-47AA-9640-F7368AEEBEF7}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13611,7 +13596,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Populate Palantir"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{0fd2488a-698c-4291-86ec-b379f3d3880d}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13677,7 +13661,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Populate UCSF"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{810044a1-3e56-4d0a-b43d-130860c4eaa7}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -13694,7 +13677,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Post Import Scripts"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{26DF339B-996A-4AEB-80CA-729D149A52F6}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -13712,7 +13694,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\PrEP"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
       DTS:DTSID="{8A84DB5E-D4A7-4BCB-9FD7-01CABDC8921D}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -26703,7 +26684,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Reclaim HDD Space"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Shring DB log file to re-claim space"
-      DTS:Disabled="True"
       DTS:DTSID="{88b7dcb6-9d15-4df1-9d2d-27511207efbe}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -26720,7 +26700,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Sequence -"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
       DTS:DTSID="{82a5c64e-b014-4fcd-bfcf-62ba4efce477}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -26899,7 +26878,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Sequence Container"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
       DTS:DTSID="{BD9A076D-55FF-4D39-BDA1-E36ACC7A2233}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -27004,7 +26982,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Stage Patient Extract"
       DTS:CreationName="SSIS.ExecutePackageTask.3"
       DTS:Description="Execute Package Task"
-      DTS:Disabled="True"
       DTS:DTSID="{4AC6D224-35F9-4C9C-A2F3-6037B99199B2}"
       DTS:ExecutableType="SSIS.ExecutePackageTask.3"
       DTS:LocaleID="-1"
@@ -27022,7 +26999,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Truncate tables"
       DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{E8D2646B-4625-4143-A7F8-730953DDA812}"
       DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
       DTS:LocaleID="-1"
@@ -27073,7 +27049,6 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
       DTS:refId="Package\Visits"
       DTS:CreationName="STOCK:SEQUENCE"
       DTS:Description="Sequence Container"
-      DTS:Disabled="True"
       DTS:DTSID="{c3390fbb-b03f-446d-ba9c-54ad5da7c3f3}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
@@ -29297,26 +29272,26 @@ WHERE P.gender != 'Unknown'  ---and a.[End] is not null and a.[Session] is not n
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="75.583333240201,99.3833326708277"
+              EndConnector="75.5833332402033,99.3833326708236"
               Start="0,0"
-              End="75.583333240201,91.8833326708277">
+              End="75.5833332402033,91.8833326708236">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.6916663354139" />
+                    End="0,45.6916663354118" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,45.6916663354139"
-                    Point2="0,49.6916663354139"
-                    Point3="4,49.6916663354139" />
+                    Point1="0,45.6916663354118"
+                    Point2="0,49.6916663354118"
+                    Point3="4,49.6916663354118" />
                   <mssgle:LineSegment
-                    End="71.583333240201,49.6916663354139" />
+                    End="71.5833332402033,49.6916663354118" />
                   <mssgle:CubicBezierSegment
-                    Point1="71.583333240201,49.6916663354139"
-                    Point2="75.583333240201,49.6916663354139"
-                    Point3="75.583333240201,53.6916663354139" />
+                    Point1="71.5833332402033,49.6916663354118"
+                    Point2="75.5833332402033,49.6916663354118"
+                    Point3="75.5833332402033,53.6916663354118" />
                   <mssgle:LineSegment
-                    End="75.583333240201,91.8833326708277" />
+                    End="75.5833332402033,91.8833326708236" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
